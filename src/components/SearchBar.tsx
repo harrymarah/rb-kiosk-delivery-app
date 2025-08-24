@@ -1,135 +1,113 @@
-import { useState, useEffect, useRef } from "react";
-import { Search, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
+import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { useNavigate } from "react-router-dom";
+import { useProducts } from "./ProductSection";
 
-interface Product {
-  id: string;
-  name: string;
-  price: string;
-  offer?: string;
-  image: string;
-  category: string;
-}
-
-interface SearchBarProps {
-  products: Product[];
-  onProductSelect?: (product: Product) => void;
-}
-
-const SearchBar = ({ products, onProductSelect }: SearchBarProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+const SearchBar = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState<Product[]>([]);
-  const searchRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const { allProducts, categories } = useProducts();
+  const [filteredSuggestions, setFilteredSuggestions] = useState<any[]>([]);
 
   useEffect(() => {
-    if (searchTerm.length > 0) {
-      const filtered = products.filter(product =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setSuggestions(filtered.slice(0, 6)); // Limit to 6 suggestions
+    if (searchTerm.length > 0 && allProducts && categories) {
+      // Filter products
+      const productMatches = allProducts
+        .filter((product: any) =>
+          product.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .slice(0, 4)
+        .map((product: any) => ({ ...product, type: 'product' }));
+
+      // Filter categories
+      const categoryMatches = categories
+        .filter((category: any) =>
+          category.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          category.description.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .slice(0, 2)
+        .map((category: any) => ({ ...category, type: 'category' }));
+
+      setFilteredSuggestions([...productMatches, ...categoryMatches]);
+      setShowSuggestions(true);
     } else {
-      setSuggestions([]);
+      setFilteredSuggestions([]);
+      setShowSuggestions(false);
     }
-  }, [searchTerm, products]);
+  }, [searchTerm, allProducts, categories]);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-    setIsOpen(true);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
+      setShowSuggestions(false);
+      setSearchTerm("");
+    }
   };
 
-  const handleProductSelect = (product: Product) => {
-    setSearchTerm(product.name);
-    setIsOpen(false);
-    onProductSelect?.(product);
-  };
-
-  const clearSearch = () => {
+  const handleSuggestionClick = (suggestion: any) => {
+    if (suggestion.type === 'product') {
+      navigate(`/product/${suggestion.id}`);
+    } else if (suggestion.type === 'category') {
+      navigate(`/?category=${suggestion.name.toLowerCase()}&tab=explore`);
+    }
+    setShowSuggestions(false);
     setSearchTerm("");
-    setSuggestions([]);
-    setIsOpen(false);
-    inputRef.current?.focus();
-  };
-
-  const openSearch = () => {
-    setIsOpen(true);
-    inputRef.current?.focus();
   };
 
   return (
-    <div ref={searchRef} className="relative">
-      {!isOpen ? (
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          className="text-primary-foreground hover:bg-white/10"
-          onClick={openSearch}
-        >
-          <Search className="h-6 w-6" />
-        </Button>
-      ) : (
-        <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 min-w-[300px]">
-          <Search className="h-5 w-5 text-white/60 mr-2" />
+    <div className="relative">
+      <form onSubmit={handleSubmit} className="relative">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            ref={inputRef}
             type="text"
-            placeholder="Search products..."
+            placeholder="Search products and categories..."
             value={searchTerm}
-            onChange={handleSearchChange}
-            className="bg-transparent border-none text-white placeholder:text-white/60 focus-visible:ring-0 focus-visible:ring-offset-0 p-0"
-            autoFocus
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onFocus={() => searchTerm && setShowSuggestions(true)}
+            onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+            className="pl-9 pr-4 w-full"
           />
-          {searchTerm && (
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-5 w-5 p-0 text-white/60 hover:text-white ml-2"
-              onClick={clearSearch}
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          )}
         </div>
-      )}
+      </form>
 
-      {isOpen && suggestions.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-lg shadow-lg z-[9999] max-h-80 overflow-y-auto">
-          {suggestions.map((product) => (
-            <button
-              key={product.id}
-              onClick={() => handleProductSelect(product)}
-              className="w-full flex items-center gap-3 p-3 hover:bg-accent text-left transition-colors"
+      {showSuggestions && filteredSuggestions.length > 0 && (
+        <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-lg shadow-lg z-[9999] max-h-80 overflow-y-auto">
+          {filteredSuggestions.map((suggestion, index) => (
+            <div
+              key={`${suggestion.type}-${suggestion.id}`}
+              className="flex items-center gap-3 p-3 hover:bg-accent cursor-pointer border-b border-border last:border-0"
+              onClick={() => handleSuggestionClick(suggestion)}
             >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-10 h-10 object-cover rounded"
-              />
-              <div className="flex-1">
-                <div className="font-medium text-foreground">{product.name}</div>
-                <div className="text-sm text-muted-foreground">
-                  {product.price}
-                  {product.offer && (
-                    <span className="ml-2 text-success">• {product.offer}</span>
-                  )}
+              {suggestion.image && (
+                <img
+                  src={suggestion.image}
+                  alt={suggestion.name}
+                  className="w-10 h-10 object-cover rounded"
+                />
+              )}
+              <div className="flex-1 min-w-0">
+                <p className="font-medium text-foreground truncate">{suggestion.name}</p>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <span className="capitalize">{suggestion.type}</span>
+                  {suggestion.price && <span>• {suggestion.price}</span>}
+                  {suggestion.offer && <span className="text-destructive">• {suggestion.offer}</span>}
                 </div>
               </div>
-              <Search className="h-4 w-4 text-muted-foreground" />
-            </button>
+            </div>
           ))}
+          {searchTerm && (
+            <div
+              className="flex items-center gap-3 p-3 hover:bg-accent cursor-pointer border-t border-border text-primary"
+              onClick={() => handleSubmit(new Event('submit') as any)}
+            >
+              <Search className="h-4 w-4" />
+              <span className="font-medium">Search for "{searchTerm}"</span>
+            </div>
+          )}
         </div>
       )}
     </div>

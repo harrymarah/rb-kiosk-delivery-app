@@ -25,10 +25,7 @@ const Header = () => {
       <div className="relative z-10 container mx-auto px-6 py-8">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
-            <SearchBar 
-              products={allProducts}
-              onProductSelect={handleProductSelect}
-            />
+            <SearchBar />
           </div>
           
           <div className="flex items-center gap-4">

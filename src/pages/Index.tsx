@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import WelcomeSection from "@/components/WelcomeSection";
 import TabNavigation from "@/components/TabNavigation";
@@ -6,10 +7,24 @@ import ProductSection, { useProducts } from "@/components/ProductSection";
 import ProductCard from "@/components/ProductCard";
 
 const Index = () => {
+  const [searchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState("explore");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const { products, categories, allProducts } = useProducts();
+
+  // Handle URL params for category selection
+  useEffect(() => {
+    const categoryParam = searchParams.get("category");
+    const tabParam = searchParams.get("tab");
+    
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+    }
+    if (tabParam) {
+      setActiveTab(tabParam);
+    }
+  }, [searchParams]);
 
   const toggleFavorite = (productId: string) => {
     setFavorites(prev => {
