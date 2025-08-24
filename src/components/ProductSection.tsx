@@ -11,9 +11,11 @@ interface ProductSectionProps {
     offer?: string;
     image: string;
   }>;
+  favorites?: Set<string>;
+  onToggleFavorite?: (productId: string) => void;
 }
 
-const ProductSection = ({ title, products }: ProductSectionProps) => {
+const ProductSection = ({ title, products, favorites = new Set(), onToggleFavorite }: ProductSectionProps) => {
   return (
     <section className="px-6 py-6">
       <div className="container mx-auto max-w-4xl">
@@ -28,6 +30,8 @@ const ProductSection = ({ title, products }: ProductSectionProps) => {
               price={product.price}
               originalPrice={product.originalPrice}
               offer={product.offer}
+              isFavorite={favorites.has(product.id)}
+              onToggleFavorite={() => onToggleFavorite?.(product.id)}
               onAddToCart={() => console.log(`Added ${product.name} to cart`)}
             />
           ))}
@@ -41,6 +45,7 @@ const ProductSection = ({ title, products }: ProductSectionProps) => {
 export const useProducts = () => {
   const [products, setProducts] = useState<any>(null);
   const [categories, setCategories] = useState<any[]>([]);
+  const [allProducts, setAllProducts] = useState<any[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -49,6 +54,17 @@ export const useProducts = () => {
         const data = await response.json();
         setProducts(data.products);
         setCategories(data.categories);
+        
+        // Flatten all products into a single array
+        const flatProducts = [
+          ...data.products.shopNew,
+          ...data.products.breakfast,
+          ...data.products.lunch,
+          ...data.products.meals,
+          ...data.products.snacks,
+          ...data.products.beverages
+        ];
+        setAllProducts(flatProducts);
       } catch (error) {
         console.error('Failed to load products:', error);
       }
@@ -57,7 +73,7 @@ export const useProducts = () => {
     loadData();
   }, []);
 
-  return { products, categories };
+  return { products, categories, allProducts };
 };
 
 export default ProductSection;

@@ -8,6 +8,8 @@ interface ProductCardProps {
   price: string;
   originalPrice?: string;
   offer?: string;
+  isFavorite?: boolean;
+  onToggleFavorite?: () => void;
   onAddToCart?: () => void;
 }
 
@@ -17,6 +19,8 @@ const ProductCard = ({
   price, 
   originalPrice, 
   offer,
+  isFavorite = false,
+  onToggleFavorite,
   onAddToCart 
 }: ProductCardProps) => {
   return (
@@ -34,8 +38,12 @@ const ProductCard = ({
             variant="ghost"
             size="icon"
             className="absolute top-2 right-2 h-8 w-8 bg-background/80 hover:bg-background"
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleFavorite?.();
+            }}
           >
-            <Heart className="h-4 w-4" />
+            <Heart className={`h-4 w-4 ${isFavorite ? 'fill-destructive text-destructive' : ''}`} />
           </Button>
         </div>
         
