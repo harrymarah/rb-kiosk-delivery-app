@@ -2,10 +2,11 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import WelcomeSection from "@/components/WelcomeSection";
 import TabNavigation from "@/components/TabNavigation";
-import ProductSection, { shopNewProducts, breakfastProducts } from "@/components/ProductSection";
+import ProductSection, { useProducts } from "@/components/ProductSection";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("explore");
+  const { products, categories } = useProducts();
 
   return (
     <div className="min-h-screen bg-background">
@@ -13,10 +14,10 @@ const Index = () => {
       <WelcomeSection />
       <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
       
-      {activeTab === "explore" && (
+      {activeTab === "explore" && products && (
         <div className="space-y-8">
-          <ProductSection title="Shop new" products={shopNewProducts} />
-          <ProductSection title="Breakfast" products={breakfastProducts} />
+          <ProductSection title="Shop new" products={products.shopNew} />
+          <ProductSection title="Breakfast" products={products.breakfast} />
         </div>
       )}
       

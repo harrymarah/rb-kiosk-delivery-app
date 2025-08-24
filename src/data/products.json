@@ -1,0 +1,86 @@
+{
+  "categories": [
+    {
+      "id": "energy-drinks",
+      "name": "Energy Drinks",
+      "description": "Premium energy drinks for every occasion"
+    },
+    {
+      "id": "breakfast",
+      "name": "Breakfast",
+      "description": "Fresh breakfast items and morning essentials"
+    },
+    {
+      "id": "snacks",
+      "name": "Snacks",
+      "description": "Quick bites and treats"
+    }
+  ],
+  "products": {
+    "shopNew": [
+      {
+        "id": "1",
+        "name": "Red Bull Original",
+        "price": "£2.55",
+        "offer": "2 for £4.00",
+        "image": "/src/assets/red-bull-original.jpg",
+        "category": "energy-drinks"
+      },
+      {
+        "id": "2", 
+        "name": "Red Bull Sugar Free",
+        "price": "£2.55",
+        "offer": "2 for £4.00",
+        "image": "/src/assets/red-bull-sugar-free.jpg",
+        "category": "energy-drinks"
+      },
+      {
+        "id": "3",
+        "name": "Red Bull Tropical",
+        "price": "£2.55", 
+        "offer": "2 for £4.00",
+        "image": "/src/assets/red-bull-tropical.jpg",
+        "category": "energy-drinks"
+      },
+      {
+        "id": "4",
+        "name": "Red Bull Blue Edition",
+        "price": "£2.55",
+        "offer": "2 for £4.00", 
+        "image": "/src/assets/red-bull-original.jpg",
+        "category": "energy-drinks"
+      }
+    ],
+    "breakfast": [
+      {
+        "id": "5",
+        "name": "Fresh Croissants",
+        "price": "£3.99",
+        "image": "/src/assets/breakfast-items.jpg",
+        "category": "breakfast"
+      },
+      {
+        "id": "6",
+        "name": "Breakfast Muffins",
+        "price": "£4.50",
+        "offer": "Buy 2 Get 1 Free",
+        "image": "/src/assets/breakfast-items.jpg",
+        "category": "breakfast"
+      },
+      {
+        "id": "7", 
+        "name": "Orange Juice",
+        "price": "£2.85",
+        "image": "/src/assets/breakfast-items.jpg",
+        "category": "breakfast"
+      },
+      {
+        "id": "8",
+        "name": "Coffee Beans",
+        "price": "£5.99",
+        "image": "/src/assets/breakfast-items.jpg",
+        "category": "breakfast"
+      }
+    ]
+  }
+}

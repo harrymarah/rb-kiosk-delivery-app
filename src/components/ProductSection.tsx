@@ -1,8 +1,5 @@
 import ProductCard from "./ProductCard";
-import redBullOriginal from "@/assets/red-bull-original.jpg";
-import redBullSugarFree from "@/assets/red-bull-sugar-free.jpg";
-import redBullTropical from "@/assets/red-bull-tropical.jpg";
-import breakfastItems from "@/assets/breakfast-items.jpg";
+import { useEffect, useState } from "react";
 
 interface ProductSectionProps {
   title: string;
@@ -40,64 +37,27 @@ const ProductSection = ({ title, products }: ProductSectionProps) => {
   );
 };
 
-// Mock data for products
-export const shopNewProducts = [
-  {
-    id: "1",
-    name: "Red Bull Original",
-    price: "£2.55",
-    offer: "2 for £4.00",
-    image: redBullOriginal
-  },
-  {
-    id: "2", 
-    name: "Red Bull Sugar Free",
-    price: "£2.55",
-    offer: "2 for £4.00",
-    image: redBullSugarFree
-  },
-  {
-    id: "3",
-    name: "Red Bull Tropical",
-    price: "£2.55", 
-    offer: "2 for £4.00",
-    image: redBullTropical
-  },
-  {
-    id: "4",
-    name: "Red Bull Blue Edition",
-    price: "£2.55",
-    offer: "2 for £4.00", 
-    image: redBullOriginal
-  }
-];
+// Hook to load products from JSON
+export const useProducts = () => {
+  const [products, setProducts] = useState<any>(null);
+  const [categories, setCategories] = useState<any[]>([]);
 
-export const breakfastProducts = [
-  {
-    id: "5",
-    name: "Fresh Croissants",
-    price: "£3.99",
-    image: breakfastItems
-  },
-  {
-    id: "6",
-    name: "Breakfast Muffins",
-    price: "£4.50",
-    offer: "Buy 2 Get 1 Free",
-    image: breakfastItems
-  },
-  {
-    id: "7", 
-    name: "Orange Juice",
-    price: "£2.85",
-    image: breakfastItems
-  },
-  {
-    id: "8",
-    name: "Coffee Beans",
-    price: "£5.99",
-    image: breakfastItems
-  }
-];
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const response = await fetch('/src/data/products.json');
+        const data = await response.json();
+        setProducts(data.products);
+        setCategories(data.categories);
+      } catch (error) {
+        console.error('Failed to load products:', error);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  return { products, categories };
+};
 
 export default ProductSection;
