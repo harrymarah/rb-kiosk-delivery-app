@@ -1,7 +1,22 @@
-import { Search, Heart, User } from "lucide-react";
+import { Heart, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SearchBar from "./SearchBar";
+import { useProducts } from "./ProductSection";
 
 const Header = () => {
+  const { products } = useProducts();
+  
+  // Flatten all products for search
+  const allProducts = products ? [
+    ...(products.shopNew || []),
+    ...(products.breakfast || [])
+  ] : [];
+
+  const handleProductSelect = (product: any) => {
+    console.log('Selected product:', product);
+    // You can add navigation logic here
+  };
+
   return (
     <header className="min-h-[200px] relative overflow-hidden bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/src/assets/header-bg.jpg')" }}>
       {/* Overlay for better text readability */}
@@ -10,9 +25,10 @@ const Header = () => {
       <div className="relative z-10 container mx-auto px-6 py-8">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10">
-              <Search className="h-6 w-6" />
-            </Button>
+            <SearchBar 
+              products={allProducts}
+              onProductSelect={handleProductSelect}
+            />
           </div>
           
           <div className="flex items-center gap-4">
