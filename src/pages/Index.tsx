@@ -21,11 +21,21 @@ const Index = () => {
         </div>
       )}
       
-      {activeTab === "categories" && (
+      {activeTab === "categories" && categories && (
         <div className="px-6 py-8">
-          <div className="container mx-auto max-w-4xl text-center">
-            <h2 className="text-2xl font-bold text-foreground mb-4">Categories</h2>
-            <p className="text-muted-foreground">Browse products by category</p>
+          <div className="container mx-auto max-w-4xl">
+            <h2 className="text-2xl font-bold text-foreground mb-8 text-center">Browse Categories</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {categories.map((category) => (
+                <div
+                  key={category.id}
+                  className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow cursor-pointer"
+                >
+                  <h3 className="text-xl font-semibold text-foreground mb-2">{category.name}</h3>
+                  <p className="text-muted-foreground">{category.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
