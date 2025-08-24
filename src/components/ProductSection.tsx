@@ -45,7 +45,7 @@ export const useProducts = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await fetch('/src/data/products.json');
+        const response = await fetch('/data/products.json');
         const data = await response.json();
         setProducts(data.products);
         setCategories(data.categories);
