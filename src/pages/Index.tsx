@@ -75,6 +75,7 @@ const Index = () => {
                   isFavorite={favorites.has(product.id)}
                   onToggleFavorite={() => toggleFavorite(product.id)}
                   onAddToCart={() => console.log(`Added ${product.name} to cart`)}
+                  productId={product.id}
                 />
               ))}
             </div>
@@ -122,6 +123,7 @@ const Index = () => {
                     isFavorite={true}
                     onToggleFavorite={() => toggleFavorite(product.id)}
                     onAddToCart={() => console.log(`Added ${product.name} to cart`)}
+                    productId={product.id}
                   />
                 ))}
               </div>

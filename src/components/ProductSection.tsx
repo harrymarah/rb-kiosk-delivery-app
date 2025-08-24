@@ -33,6 +33,7 @@ const ProductSection = ({ title, products, favorites = new Set(), onToggleFavori
               isFavorite={favorites.has(product.id)}
               onToggleFavorite={() => onToggleFavorite?.(product.id)}
               onAddToCart={() => console.log(`Added ${product.name} to cart`)}
+              productId={product.id}
             />
           ))}
         </div>

@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   image: string;
@@ -11,6 +12,7 @@ interface ProductCardProps {
   isFavorite?: boolean;
   onToggleFavorite?: () => void;
   onAddToCart?: () => void;
+  productId?: string;
 }
 
 const ProductCard = ({ 
@@ -21,10 +23,18 @@ const ProductCard = ({
   offer,
   isFavorite = false,
   onToggleFavorite,
-  onAddToCart 
+  onAddToCart,
+  productId
 }: ProductCardProps) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    if (productId) {
+      navigate(`/product/${productId}`);
+    }
+  };
   return (
-    <Card className="group cursor-pointer hover:shadow-lg transition-all duration-200 border border-border">
+    <Card className="group cursor-pointer hover:shadow-lg transition-all duration-200 border border-border" onClick={handleCardClick}>
       <CardContent className="p-4">
         <div className="relative mb-4">
           <div className="aspect-square bg-muted rounded-lg overflow-hidden">
