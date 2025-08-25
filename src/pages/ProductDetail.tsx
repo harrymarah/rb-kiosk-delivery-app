@@ -21,7 +21,7 @@ interface Product {
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { allProducts } = useProducts();
+  const { allProducts, isLoading } = useProducts();
   const [product, setProduct] = useState<Product | null>(null);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [quantity, setQuantity] = useState(1);
@@ -50,6 +50,24 @@ const ProductDetail = () => {
     // Here you would typically update cart state
   };
 
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container mx-auto max-w-4xl px-6 py-8">
+          <div className="text-center py-12">
+            <div className="inline-flex items-center gap-2">
+              <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+              <span className="text-muted-foreground">Loading product...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Product not found
   if (!product) {
     return (
       <div className="min-h-screen bg-background">
