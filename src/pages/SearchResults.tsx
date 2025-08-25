@@ -28,7 +28,7 @@ const SearchResults = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const query = searchParams.get("q") || "";
-  const { allProducts, categories } = useProducts();
+  const { allProducts, categories, isLoading } = useProducts();
   const [matchingProducts, setMatchingProducts] = useState<Product[]>([]);
   const [matchingCategories, setMatchingCategories] = useState<Category[]>([]);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
@@ -146,8 +146,18 @@ const SearchResults = () => {
           </section>
         )}
 
+        {/* Loading state */}
+        {isLoading && (
+          <div className="text-center py-12">
+            <div className="inline-flex items-center gap-2">
+              <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+              <span className="text-muted-foreground">Searching...</span>
+            </div>
+          </div>
+        )}
+
         {/* No results */}
-        {matchingProducts.length === 0 && matchingCategories.length === 0 && (
+        {!isLoading && matchingProducts.length === 0 && matchingCategories.length === 0 && (
           <div className="text-center py-12">
             <h2 className="text-xl font-semibold text-foreground mb-2">No results found</h2>
             <p className="text-muted-foreground mb-6">

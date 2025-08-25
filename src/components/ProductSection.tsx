@@ -47,10 +47,12 @@ export const useProducts = () => {
   const [products, setProducts] = useState<any>(null);
   const [categories, setCategories] = useState<any[]>([]);
   const [allProducts, setAllProducts] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadData = async () => {
       try {
+        setIsLoading(true);
         const response = await fetch('/data/products.json');
         const data = await response.json();
         setProducts(data.products);
@@ -68,13 +70,15 @@ export const useProducts = () => {
         setAllProducts(flatProducts);
       } catch (error) {
         console.error('Failed to load products:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     loadData();
   }, []);
 
-  return { products, categories, allProducts };
+  return { products, categories, allProducts, isLoading };
 };
 
 export default ProductSection;
