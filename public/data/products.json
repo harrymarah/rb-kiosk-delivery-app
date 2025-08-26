@@ -41,7 +41,7 @@
         "id": "2", 
         "name": "Chicken Caesar Wrap",
         "price": "£4.75",
-        "image": "/src/assets/breakfast-items.jpg",
+        "image": "/src/assets/sandwich.jpg",
         "category": "lunch",
         "description": "Grilled chicken breast with romaine lettuce, parmesan cheese, and caesar dressing wrapped in a soft tortilla."
       },
@@ -50,7 +50,7 @@
         "name": "Thai Green Curry",
         "price": "£6.50", 
         "offer": "£1 off",
-        "image": "/src/assets/breakfast-items.jpg",
+        "image": "/src/assets/pasta.jpg",
         "category": "meals"
       },
       {
@@ -58,7 +58,7 @@
         "name": "Fresh Orange Juice",
         "price": "£2.85",
         "offer": "2 for £5.00", 
-        "image": "/src/assets/breakfast-items.jpg",
+        "image": "/src/assets/juice.jpg",
         "category": "beverages"
       }
     ],
@@ -67,7 +67,7 @@
         "id": "5",
         "name": "Fresh Croissants",
         "price": "£3.99",
-        "image": "/src/assets/breakfast-items.jpg",
+        "image": "/src/assets/croissants.jpg",
         "category": "breakfast",
         "description": "Buttery, flaky croissants baked fresh daily. Perfect with jam, butter, or your favorite filling."
       },
@@ -76,14 +76,7 @@
         "name": "Breakfast Muffins",
         "price": "£4.50",
         "offer": "Buy 2 Get 1 Free",
-        "image": "/src/assets/breakfast-items.jpg",
-        "category": "breakfast"
-      },
-      {
-        "id": "7", 
-        "name": "Greek Yogurt with Berries",
-        "price": "£3.25",
-        "image": "/src/assets/breakfast-items.jpg",
+        "image": "/src/assets/yogurt.jpg",
         "category": "breakfast"
       },
       {
@@ -143,7 +136,7 @@
         "id": "15",
         "name": "Club Sandwich",
         "price": "£6.50",
-        "image": "/src/assets/breakfast-items.jpg",
+        "image": "/src/assets/sandwich.jpg",
         "category": "lunch"
       },
       {
@@ -151,7 +144,7 @@
         "name": "Caesar Salad",
         "price": "£5.75",
         "offer": "Add chicken £2",
-        "image": "/src/assets/breakfast-items.jpg",
+        "image": "/src/assets/salad.jpg",
         "category": "lunch"
       },
       {
@@ -219,7 +212,7 @@
         "id": "25",
         "name": "Spaghetti Bolognese",
         "price": "£7.99",
-        "image": "/src/assets/breakfast-items.jpg",
+        "image": "/src/assets/pasta.jpg",
         "category": "meals",
         "description": "Classic Italian pasta with rich meat sauce, slow-cooked with tomatoes, herbs, and red wine. Serves 1-2 people."
       },
@@ -295,7 +288,7 @@
         "id": "35",
         "name": "Mixed Nuts",
         "price": "£3.25",
-        "image": "/src/assets/breakfast-items.jpg",
+        "image": "/src/assets/snacks.jpg",
         "category": "snacks"
       },
       {
@@ -303,7 +296,7 @@
         "name": "Chocolate Brownie",
         "price": "£2.95",
         "offer": "Fresh baked daily",
-        "image": "/src/assets/breakfast-items.jpg",
+        "image": "/src/assets/brownie.jpg",
         "category": "snacks"
       },
       {
@@ -401,7 +394,7 @@
         "name": "Energy Drink",
         "price": "£2.55",
         "offer": "2 for £4.50",
-        "image": "/src/assets/breakfast-items.jpg",
+        "image": "/src/assets/red-bull-original.jpg",
         "category": "beverages"
       },
       {
