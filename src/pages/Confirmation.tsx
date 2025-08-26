@@ -163,7 +163,7 @@ const Confirmation = () => {
                         src={product.image}
                         alt={product.name}
                         loading="lazy"
-                        onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/placeholder.svg'; }}
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).src = 'https://redbulldev.harrymarah.uk/placeholder.svg'; }}
                         className="w-full h-full object-cover"
                       />
                     </div>
