@@ -12,6 +12,7 @@ const Confirmation = () => {
   const { addItem } = useBasket();
   const [deliveryTime, setDeliveryTime] = useState<string>("");
   const [timeRemaining, setTimeRemaining] = useState<number>(0);
+  const [recommendedProducts, setRecommendedProducts] = useState<any[]>([]);
 
   useEffect(() => {
     // Calculate delivery time (30-45 minutes from now)
@@ -25,6 +26,12 @@ const Confirmation = () => {
     }));
     setTimeRemaining(deliveryMinutes * 60); // in seconds
 
+    // Set recommended products once
+    if (allProducts && allProducts.length > 0) {
+      const shuffled = [...allProducts].sort(() => Math.random() - 0.5);
+      setRecommendedProducts(shuffled.slice(0, 4));
+    }
+
     // Update countdown every second
     const interval = setInterval(() => {
       setTimeRemaining(prev => {
@@ -37,7 +44,7 @@ const Confirmation = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [allProducts]);
 
   const formatTimeRemaining = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
@@ -45,12 +52,6 @@ const Confirmation = () => {
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
-  const getRandomProducts = () => {
-    if (!allProducts) return [];
-    return allProducts
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 4);
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -143,7 +144,7 @@ const Confirmation = () => {
           </h2>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            {getRandomProducts().map((product, index) => (
+            {recommendedProducts.map((product, index) => (
               <Card 
                 key={product.id} 
                 className="cursor-pointer hover:shadow-lg transition-all duration-300 hover-scale"
