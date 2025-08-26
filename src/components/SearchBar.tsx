@@ -69,7 +69,7 @@ const SearchBar = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={() => searchTerm && setShowSuggestions(true)}
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-            className="pl-9 pr-4 w-20"
+            className="pl-9 pr-4 w-80"
           />
         </div>
       </form>
