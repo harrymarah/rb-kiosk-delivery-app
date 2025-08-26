@@ -122,6 +122,8 @@ const ProductDetail = () => {
               <img
                 src={product.image}
                 alt={product.name}
+                loading="lazy"
+                onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/placeholder.svg'; }}
                 className="w-full h-full object-cover"
               />
             </div>
