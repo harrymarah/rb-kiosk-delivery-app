@@ -171,7 +171,11 @@ const BasketDrawer = ({ children }: BasketDrawerProps) => {
               <span>Total:</span>
               <span>{formatPrice(getTotalPrice())}</span>
             </div>
-            <Button className="w-full mt-4" size="lg">
+            <Button 
+              className="w-full mt-4" 
+              size="lg"
+              onClick={() => navigate('/checkout')}
+            >
               Checkout
             </Button>
           </div>
