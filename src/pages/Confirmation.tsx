@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,28 +13,25 @@ const Confirmation = () => {
   const [deliveryTime, setDeliveryTime] = useState<string>("");
   const [timeRemaining, setTimeRemaining] = useState<number>(0);
   const [recommendedProducts, setRecommendedProducts] = useState<any[]>([]);
+  const didSetRecommendations = useRef(false);
 
   useEffect(() => {
     // Calculate delivery time (30-45 minutes from now)
     const now = new Date();
     const deliveryMinutes = Math.floor(Math.random() * 16) + 30; // 30-45 minutes
     const deliveryDate = new Date(now.getTime() + deliveryMinutes * 60000);
-    
-    setDeliveryTime(deliveryDate.toLocaleTimeString('en-GB', { 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    }));
+
+    setDeliveryTime(
+      deliveryDate.toLocaleTimeString('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    );
     setTimeRemaining(deliveryMinutes * 60); // in seconds
 
-    // Set recommended products once
-    if (allProducts && allProducts.length > 0) {
-      const shuffled = [...allProducts].sort(() => Math.random() - 0.5);
-      setRecommendedProducts(shuffled.slice(0, 4));
-    }
-
-    // Update countdown every second
+    // Update countdown every second (does not affect recommendations)
     const interval = setInterval(() => {
-      setTimeRemaining(prev => {
+      setTimeRemaining((prev) => {
         if (prev <= 0) {
           clearInterval(interval);
           return 0;
@@ -44,6 +41,15 @@ const Confirmation = () => {
     }, 1000);
 
     return () => clearInterval(interval);
+  }, []);
+
+  // Set recommended products only once when products first become available
+  useEffect(() => {
+    if (!didSetRecommendations.current && allProducts && allProducts.length > 0) {
+      const shuffled = [...allProducts].sort(() => Math.random() - 0.5);
+      setRecommendedProducts(shuffled.slice(0, 4));
+      didSetRecommendations.current = true;
+    }
   }, [allProducts]);
 
   const formatTimeRemaining = (seconds: number) => {
