@@ -1,10 +1,14 @@
-import { Heart, User } from "lucide-react";
+import { Heart, User, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import SearchBar from "./SearchBar";
 import { useProducts } from "./ProductSection";
+import { useBasket } from "@/contexts/BasketContext";
+import BasketDrawer from "./BasketDrawer";
 
 const Header = () => {
   const { products } = useProducts();
+  const { getTotalItems } = useBasket();
   
   // Flatten all products for search
   const allProducts = products ? [
@@ -32,6 +36,19 @@ const Header = () => {
             <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10">
               <Heart className="h-6 w-6" />
             </Button>
+            <BasketDrawer>
+              <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 relative">
+                <ShoppingCart className="h-6 w-6" />
+                {getTotalItems() > 0 && (
+                  <Badge 
+                    variant="destructive" 
+                    className="absolute -top-2 -right-2 h-5 w-5 p-0 flex items-center justify-center text-xs"
+                  >
+                    {getTotalItems()}
+                  </Badge>
+                )}
+              </Button>
+            </BasketDrawer>
             <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10">
               <User className="h-6 w-6" />
             </Button>

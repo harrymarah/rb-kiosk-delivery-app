@@ -6,6 +6,8 @@ import { Heart, ArrowLeft, Plus, Minus, ShoppingCart } from "lucide-react";
 import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
 import { useProducts } from "@/components/ProductSection";
+import { useBasket } from "@/contexts/BasketContext";
+import { useToast } from "@/components/ui/use-toast";
 
 interface Product {
   id: string;
@@ -22,6 +24,8 @@ const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { allProducts, isLoading } = useProducts();
+  const { addItem } = useBasket();
+  const { toast } = useToast();
   const [product, setProduct] = useState<Product | null>(null);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [quantity, setQuantity] = useState(1);
@@ -46,8 +50,19 @@ const ProductDetail = () => {
   const decrementQuantity = () => setQuantity(prev => Math.max(1, prev - 1));
 
   const handleAddToCart = () => {
-    console.log(`Added ${quantity} x ${product?.name} to cart`);
-    // Here you would typically update cart state
+    if (!product) return;
+    
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+    }, quantity);
+    
+    toast({
+      title: "Added to basket",
+      description: `${quantity} x ${product.name} added to your basket`,
+    });
   };
 
   // Loading state
