@@ -95,7 +95,7 @@ const ProductDetail = () => {
         </Button>
 
         {/* Product details */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
           {/* Product image */}
           <div className="space-y-4">
             <div className="aspect-square bg-muted rounded-lg overflow-hidden">
