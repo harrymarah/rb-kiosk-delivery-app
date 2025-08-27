@@ -47,8 +47,37 @@ const generateOffers = (product: Product, quantity: number): Offer[] => {
   
   const offers: Offer[] = [];
   
-  // Multi-buy offer - 15% off second item
-  if (quantity === 1) {
+  // Check if the product is a hot drink
+  const hotDrinkNames = ['Premium Coffee', 'Cappuccino', 'Latte', 'Earl Grey Tea', 'Chai Latte', 'Americano', 'Hot Chocolate'];
+  const isHotDrink = hotDrinkNames.some(name => product.name.includes(name));
+  
+  if (isHotDrink && quantity === 1) {
+    // Special "One for now, one for later" deal for hot drinks
+    const redBullPrice = 2.55;
+    const totalPrice = basePrice + redBullPrice;
+    const originalTotal = basePrice + 3.50; // Assuming normal combo would be £3.50 more
+    
+    offers.push({
+      id: 'hot-drink-redbull',
+      type: 'bundle',
+      title: 'One for Now, One for Later',
+      description: `Get your ${product.name} now + Red Bull Original for later`,
+      discount: 'ENERGY COMBO',
+      originalPrice: `£${originalTotal.toFixed(2)}`,
+      offerPrice: `£${totalPrice.toFixed(2)}`,
+      savings: `£${(originalTotal - totalPrice).toFixed(2)}`,
+      items: [
+        {
+          id: 'redbull-combo',
+          name: 'Red Bull Original',
+          price: '£2.55',
+          image: 'https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_original.png',
+          category: 'beverages'
+        }
+      ]
+    });
+  } else if (quantity === 1) {
+    // Regular multi-buy offer - 15% off second item
     const secondItemPrice = basePrice * 0.85; // 15% off second item
     const totalPrice = basePrice + secondItemPrice;
     const originalTotal = basePrice * 2;
@@ -65,50 +94,52 @@ const generateOffers = (product: Product, quantity: number): Offer[] => {
     });
   }
   
-  // Bundle offer - prioritize Red Bull for food items
-  const bundlePrice = basePrice + 2.99; // Add complementary item for £2.99
-  let bundleItem = '';
-  let bundleItemImage = '';
-  
-  // Check if the product is a food item (not beverages)
-  const isFoodItem = ['breakfast', 'lunch', 'meals', 'snacks'].includes(product.category);
-  
-  if (isFoodItem) {
-    // Prioritize Red Bull for all food items
-    bundleItem = 'Red Bull Original';
-    bundleItemImage = 'https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_original.png';
-  } else {
-    // For beverages, suggest food items
-    switch (product.category) {
-      case 'beverages':
-        bundleItem = 'Mixed Nuts';
-        bundleItemImage = 'https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/snacks.jpg';
-        break;
-      default:
-        bundleItem = 'Complementary item';
-        bundleItemImage = product.image;
-    }
-  }
-  
-  offers.push({
-    id: 'bundle-1',
-    type: 'bundle',
-    title: `${product.name} + ${bundleItem}`,
-    description: `Perfect combo! Add ${bundleItem} for just £2.99`,
-    discount: 'COMBO DEAL',
-    originalPrice: `£${(basePrice + 3.99).toFixed(2)}`,
-    offerPrice: `£${bundlePrice.toFixed(2)}`,
-    savings: '£1.00',
-    items: [
-      {
-        id: 'bundle-item',
-        name: bundleItem,
-        price: '£2.99',
-        image: bundleItemImage,
-        category: isFoodItem ? 'beverages' : 'snacks'
+  // Bundle offer - prioritize Red Bull for food items (but not hot drinks)
+  if (!isHotDrink) {
+    const bundlePrice = basePrice + 2.99; // Add complementary item for £2.99
+    let bundleItem = '';
+    let bundleItemImage = '';
+    
+    // Check if the product is a food item (not beverages)
+    const isFoodItem = ['breakfast', 'lunch', 'meals', 'snacks'].includes(product.category);
+    
+    if (isFoodItem) {
+      // Prioritize Red Bull for all food items
+      bundleItem = 'Red Bull Original';
+      bundleItemImage = 'https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_original.png';
+    } else {
+      // For beverages (non-hot drinks), suggest food items
+      switch (product.category) {
+        case 'beverages':
+          bundleItem = 'Mixed Nuts';
+          bundleItemImage = 'https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/snacks.jpg';
+          break;
+        default:
+          bundleItem = 'Complementary item';
+          bundleItemImage = product.image;
       }
-    ]
-  });
+    }
+    
+    offers.push({
+      id: 'bundle-1',
+      type: 'bundle',
+      title: `${product.name} + ${bundleItem}`,
+      description: `Perfect combo! Add ${bundleItem} for just £2.99`,
+      discount: 'COMBO DEAL',
+      originalPrice: `£${(basePrice + 3.99).toFixed(2)}`,
+      offerPrice: `£${bundlePrice.toFixed(2)}`,
+      savings: '£1.00',
+      items: [
+        {
+          id: 'bundle-item',
+          name: bundleItem,
+          price: '£2.99',
+          image: bundleItemImage,
+          category: isFoodItem ? 'beverages' : 'snacks'
+        }
+      ]
+    });
+  }
   
   return offers;
 };
@@ -164,12 +195,23 @@ export const OfferDrawer = ({
       // Add bundle item with correct image and details
       const bundleItem = offer.items?.[0];
       if (bundleItem) {
-        addItem({
-          id: `bundle-${product.id}`,
-          name: `${bundleItem.name} (Bundle Deal)`,
-          price: '£2.99',
-          image: bundleItem.image,
-        }, 1);
+        // Special handling for hot drink + Red Bull combo
+        if (offer.id === 'hot-drink-redbull') {
+          addItem({
+            id: `bundle-${product.id}`,
+            name: `${bundleItem.name} (Energy Combo)`,
+            price: bundleItem.price,
+            image: bundleItem.image,
+          }, 1);
+        } else {
+          // Regular bundle deal
+          addItem({
+            id: `bundle-${product.id}`,
+            name: `${bundleItem.name} (Bundle Deal)`,
+            price: '£2.99',
+            image: bundleItem.image,
+          }, 1);
+        }
       } else {
         // Fallback for legacy offers
         const bundleItemName = offer.title.split(' + ')[1];
