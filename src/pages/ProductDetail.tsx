@@ -100,11 +100,11 @@ const ProductDetail = () => {
         {/* Back button */}
         <Button
           variant="ghost"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate('/')}
           className="mb-6 text-primary hover:text-primary/80"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back
+          Back to Products
         </Button>
 
         {/* Product details */}
