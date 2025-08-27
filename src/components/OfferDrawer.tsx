@@ -65,21 +65,29 @@ const generateOffers = (product: Product, quantity: number): Offer[] => {
     });
   }
   
-  // Bundle offer (category-based)
+  // Bundle offer - prioritize Red Bull for food items
   const bundlePrice = basePrice + 2.99; // Add complementary item for £2.99
   let bundleItem = '';
-  switch (product.category) {
-    case 'drinks':
-      bundleItem = 'Crisps';
-      break;
-    case 'meals':
-      bundleItem = 'Drink';
-      break;
-    case 'snacks':
-      bundleItem = 'Juice';
-      break;
-    default:
-      bundleItem = 'Complementary item';
+  let bundleItemImage = '';
+  
+  // Check if the product is a food item (not beverages)
+  const isFoodItem = ['breakfast', 'lunch', 'meals', 'snacks'].includes(product.category);
+  
+  if (isFoodItem) {
+    // Prioritize Red Bull for all food items
+    bundleItem = 'Red Bull Original';
+    bundleItemImage = 'https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_original.png';
+  } else {
+    // For beverages, suggest food items
+    switch (product.category) {
+      case 'beverages':
+        bundleItem = 'Mixed Nuts';
+        bundleItemImage = 'https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/snacks.jpg';
+        break;
+      default:
+        bundleItem = 'Complementary item';
+        bundleItemImage = product.image;
+    }
   }
   
   offers.push({
@@ -91,6 +99,15 @@ const generateOffers = (product: Product, quantity: number): Offer[] => {
     originalPrice: `£${(basePrice + 3.99).toFixed(2)}`,
     offerPrice: `£${bundlePrice.toFixed(2)}`,
     savings: '£1.00',
+    items: [
+      {
+        id: 'bundle-item',
+        name: bundleItem,
+        price: '£2.99',
+        image: bundleItemImage,
+        category: isFoodItem ? 'beverages' : 'snacks'
+      }
+    ]
   });
   
   return offers;
@@ -144,14 +161,25 @@ export const OfferDrawer = ({
         image: product.image,
       }, quantity);
       
-      // Add bundle item at discounted price
-      const bundleItemName = offer.title.split(' + ')[1];
-      addItem({
-        id: `bundle-${product.id}`,
-        name: `${bundleItemName} (Bundle Deal)`,
-        price: '£2.99',
-        image: product.image,
-      }, 1);
+      // Add bundle item with correct image and details
+      const bundleItem = offer.items?.[0];
+      if (bundleItem) {
+        addItem({
+          id: `bundle-${product.id}`,
+          name: `${bundleItem.name} (Bundle Deal)`,
+          price: '£2.99',
+          image: bundleItem.image,
+        }, 1);
+      } else {
+        // Fallback for legacy offers
+        const bundleItemName = offer.title.split(' + ')[1];
+        addItem({
+          id: `bundle-${product.id}`,
+          name: `${bundleItemName} (Bundle Deal)`,
+          price: '£2.99',
+          image: product.image,
+        }, 1);
+      }
       
     } else {
       // Default: add original item
