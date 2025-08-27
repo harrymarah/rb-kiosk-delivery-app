@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/drawer";
 import { Plus, X, Percent, Package, ShoppingCart, Eye } from "lucide-react";
 import { useBasket } from "@/contexts/BasketContext";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 interface Product {
   id: string;
@@ -238,6 +238,16 @@ export const OfferDrawer = ({
     toast({
       title: "Offer accepted!",
       description: `${offer.title} added to your basket with savings of ${offer.savings}`,
+      action: (
+        <Button 
+          variant="outline" 
+          size="sm" 
+          onClick={() => navigate('/checkout')}
+          className="ml-auto"
+        >
+          View Basket
+        </Button>
+      ),
     });
     
     onClose();
@@ -257,6 +267,16 @@ export const OfferDrawer = ({
     toast({
       title: "Added to basket",
       description: `${quantity} x ${product.name} added to your basket`,
+      action: (
+        <Button 
+          variant="outline" 
+          size="sm" 
+          onClick={() => navigate('/checkout')}
+          className="ml-auto"
+        >
+          View Basket
+        </Button>
+      ),
     });
     
     onClose();
