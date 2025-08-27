@@ -49,8 +49,8 @@ const generateOffers = (product: Product, quantity: number): Offer[] => {
   const offers: Offer[] = [];
   
   // Check if the product is a hot drink
-  const hotDrinkNames = ['Premium Coffee', 'Cappuccino', 'Latte', 'Earl Grey Tea', 'Chai Latte', 'Americano', 'Hot Chocolate'];
-  const isHotDrink = hotDrinkNames.some(name => product.name.includes(name));
+  const hotDrinkNames = ['Premium Coffee', 'Cappuccino', 'Latte', 'Earl Grey Tea', 'English Breakfast Tea', 'Chai Latte', 'Americano', 'Hot Chocolate'];
+  const isHotDrink = hotDrinkNames.some(name => product.name.includes(name)) || hotDrinkNames.includes(product.name);
   
   if (isHotDrink && quantity === 1) {
     // Special "One for now, one for later" deal for hot drinks
