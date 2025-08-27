@@ -48,6 +48,11 @@ const ProductDetail = () => {
     }
   }, [allProducts, id]);
 
+  // Reset quantity when product changes
+  useEffect(() => {
+    setQuantity(1);
+  }, [id]);
+
   // Scroll to top when product changes
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -226,7 +231,10 @@ const ProductDetail = () => {
       {product && (
         <OfferDrawer
           isOpen={showOfferDrawer}
-          onClose={() => setShowOfferDrawer(false)}
+          onClose={() => {
+            setShowOfferDrawer(false);
+            setQuantity(1); // Reset quantity after drawer closes
+          }}
           product={product}
           quantity={quantity}
           onAcceptOffer={(offer) => {
