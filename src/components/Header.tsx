@@ -57,7 +57,7 @@ const Header = () => {
 
         <div className="text-center">
           <h1 className="text-5xl font-bold text-brand-yellow mb-4 tracking-wider">
-            QUICKMART
+            QuickMart
           </h1>
         </div>
       </div>
