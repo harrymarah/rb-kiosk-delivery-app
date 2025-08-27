@@ -110,35 +110,59 @@ export const OfferDrawer = ({
   const handleAcceptOffer = (offer: Offer) => {
     onAcceptOffer(offer);
     
-    // Add the base item
-    addItem({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image,
-    }, quantity);
-    
-    // Handle different offer types
+    // Handle different offer types with accurate pricing
     if (offer.type === 'multi-buy') {
+      // For multi-buy: add original item + discounted second item
+      const basePrice = parseFloat(product.price.replace('£', ''));
+      const discountedPrice = basePrice * 0.85; // 15% off the second item
+      
+      // Add original item at regular price
       addItem({
         id: product.id,
         name: product.name,
         price: product.price,
         image: product.image,
-      }, 1);
-    } else if (offer.type === 'bundle') {
-      // Add bundle item (simplified - in real app you'd have actual product data)
+      }, quantity);
+      
+      // Add second item at discounted price
       addItem({
-        id: 'bundle-item',
-        name: offer.title.split(' + ')[1],
-        price: '£2.99',
-        image: product.image, // Use same image for demo
+        id: `${product.id}-offer`,
+        name: `${product.name} (15% off)`,
+        price: `£${discountedPrice.toFixed(2)}`,
+        image: product.image,
       }, 1);
+      
+    } else if (offer.type === 'bundle') {
+      // For bundle: add original item + bundle item at offer price
+      addItem({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+      }, quantity);
+      
+      // Add bundle item at discounted price
+      const bundleItemName = offer.title.split(' + ')[1];
+      addItem({
+        id: `bundle-${product.id}`,
+        name: `${bundleItemName} (Bundle Deal)`,
+        price: '£2.99',
+        image: product.image,
+      }, 1);
+      
+    } else {
+      // Default: add original item
+      addItem({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+      }, quantity);
     }
     
     toast({
       title: "Offer accepted!",
-      description: `${offer.title} added to your basket`,
+      description: `${offer.title} added to your basket with savings of ${offer.savings}`,
     });
     
     onClose();
