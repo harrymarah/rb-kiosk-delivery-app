@@ -47,18 +47,21 @@ const generateOffers = (product: Product, quantity: number): Offer[] => {
   
   const offers: Offer[] = [];
   
-  // Multi-buy offer
+  // Multi-buy offer - 15% off second item
   if (quantity === 1) {
-    const multiBuyPrice = basePrice * 2 * 0.85; // 15% off when buying 2
+    const secondItemPrice = basePrice * 0.85; // 15% off second item
+    const totalPrice = basePrice + secondItemPrice;
+    const originalTotal = basePrice * 2;
+    
     offers.push({
       id: 'multi-buy-1',
       type: 'multi-buy',
-      title: 'Buy 2, Save 15%',
+      title: 'Buy 2, Get 15% Off 2nd Item',
       description: `Get another ${product.name} for 15% off`,
-      discount: '15% OFF',
-      originalPrice: `£${(basePrice * 2).toFixed(2)}`,
-      offerPrice: `£${multiBuyPrice.toFixed(2)}`,
-      savings: `£${(basePrice * 2 - multiBuyPrice).toFixed(2)}`,
+      discount: '15% OFF 2ND',
+      originalPrice: `£${originalTotal.toFixed(2)}`,
+      offerPrice: `£${totalPrice.toFixed(2)}`,
+      savings: `£${(originalTotal - totalPrice).toFixed(2)}`,
     });
   }
   
@@ -112,9 +115,9 @@ export const OfferDrawer = ({
     
     // Handle different offer types with accurate pricing
     if (offer.type === 'multi-buy') {
-      // For multi-buy: add original item + discounted second item
+      // For multi-buy: add original item + second item with 15% off
       const basePrice = parseFloat(product.price.replace('£', ''));
-      const discountedPrice = basePrice * 0.85; // 15% off the second item
+      const secondItemPrice = basePrice * 0.85; // 15% off the second item
       
       // Add original item at regular price
       addItem({
@@ -126,9 +129,9 @@ export const OfferDrawer = ({
       
       // Add second item at discounted price
       addItem({
-        id: `${product.id}-offer`,
+        id: `${product.id}-discount`,
         name: `${product.name} (15% off)`,
-        price: `£${discountedPrice.toFixed(2)}`,
+        price: `£${secondItemPrice.toFixed(2)}`,
         image: product.image,
       }, 1);
       
