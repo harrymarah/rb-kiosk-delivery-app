@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -9,7 +10,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import { Plus, X, Percent, Package, ShoppingCart } from "lucide-react";
+import { Plus, X, Percent, Package, ShoppingCart, Eye } from "lucide-react";
 import { useBasket } from "@/contexts/BasketContext";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -155,6 +156,7 @@ export const OfferDrawer = ({
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
   const { addItem } = useBasket();
   const { toast } = useToast();
+  const navigate = useNavigate();
   
   const offers = generateOffers(product, quantity);
   
@@ -260,6 +262,11 @@ export const OfferDrawer = ({
     onClose();
   };
 
+  const handleViewBasket = () => {
+    onClose();
+    navigate('/checkout');
+  };
+
   return (
     <Drawer open={isOpen} onOpenChange={onClose}>
       <DrawerContent className="max-h-[85vh]">
@@ -336,6 +343,16 @@ export const OfferDrawer = ({
           >
             <X className="h-4 w-4 mr-2" />
             No Thanks, Add Original Item
+          </Button>
+          
+          <Button 
+            variant="secondary" 
+            onClick={handleViewBasket}
+            className="w-full"
+            size="lg"
+          >
+            <Eye className="h-4 w-4 mr-2" />
+            View Basket
           </Button>
         </DrawerFooter>
       </DrawerContent>
