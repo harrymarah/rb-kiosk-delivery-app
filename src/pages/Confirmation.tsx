@@ -16,9 +16,9 @@ const Confirmation = () => {
   const didSetRecommendations = useRef(false);
 
   useEffect(() => {
-    // Calculate delivery time (30-45 minutes from now)
+    // Calculate delivery time (12-18 minutes from now, centered around 15 minutes)
     const now = new Date();
-    const deliveryMinutes = Math.floor(Math.random() * 16) + 30; // 30-45 minutes
+    const deliveryMinutes = Math.floor(Math.random() * 7) + 12; // 12-18 minutes
     const deliveryDate = new Date(now.getTime() + deliveryMinutes * 60000);
 
     setDeliveryTime(
