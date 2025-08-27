@@ -394,7 +394,7 @@
         "name": "Red Bull Original",
         "price": "£2.55",
         "offer": "2 for £4.50",
-        "image": "/assets/red-bull-original-new.png",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_original.png",
         "category": "beverages"
       },
       {
@@ -402,77 +402,77 @@
         "name": "Red Bull Sugar Free",
         "price": "£2.55",
         "offer": "2 for £4.50",
-        "image": "/assets/red-bull-sugar-free-new.png",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_sugar_free.png",
         "category": "beverages"
       },
       {
         "id": "52",
         "name": "Red Bull Tropical Edition",
         "price": "£2.75",
-        "image": "/assets/red-bull-tropical-new.png",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_tropical_edition.png",
         "category": "beverages"
       },
       {
         "id": "53",
         "name": "Red Bull Blue Edition",
         "price": "£2.75",
-        "image": "/assets/red-bull-blue.png",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_blue_edition.png",
         "category": "beverages"
       },
       {
         "id": "54",
         "name": "Red Bull Green Edition",
         "price": "£2.75",
-        "image": "/assets/red-bull-green.png",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_green_edition.png",
         "category": "beverages"
       },
       {
         "id": "55",
         "name": "Red Bull Red Edition",
         "price": "£2.75",
-        "image": "/assets/red-bull-red.png",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_red_edition.png",
         "category": "beverages"
       },
       {
         "id": "56",
         "name": "Red Bull Apricot Edition",
         "price": "£2.75",
-        "image": "/assets/red-bull-apricot.png",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_apricot_edition.png",
         "category": "beverages"
       },
       {
         "id": "57",
         "name": "Red Bull Coconut Edition",
         "price": "£2.75",
-        "image": "/assets/red-bull-coconut.png",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_coconut_edition.png",
         "category": "beverages"
       },
       {
         "id": "58",
         "name": "Red Bull Ice Edition",
         "price": "£2.75",
-        "image": "/assets/red-bull-ice.png",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_ice_edition.png",
         "category": "beverages"
       },
       {
         "id": "59",
         "name": "Red Bull Ruby Edition",
         "price": "£2.75",
-        "image": "/assets/red-bull-ruby.png",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_ruby_edition.png",
         "category": "beverages"
       },
       {
         "id": "60",
         "name": "Red Bull Summer Edition",
         "price": "£2.75",
-        "image": "/assets/red-bull-summer.png",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_summer_edition.png",
         "category": "beverages"
       },
       {
         "id": "61",
         "name": "Red Bull Zero",
         "price": "£2.55",
-        "image": "/assets/red-bull-zero.png",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_zero.png",
         "category": "beverages"
       },
       {
