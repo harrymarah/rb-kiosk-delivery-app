@@ -95,41 +95,22 @@ const Checkout = () => {
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="firstName">First Name</Label>
-                      <Input id="firstName" required />
-                    </div>
-                    <div>
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input id="lastName" required />
-                    </div>
+                  <div>
+                    <Label htmlFor="name">Name (Optional)</Label>
+                    <Input 
+                      id="name" 
+                      placeholder="Enter your name"
+                    />
                   </div>
                   
                   <div>
-                    <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" required />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input id="phone" type="tel" required />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="address">Address</Label>
-                    <Input id="address" required />
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="city">City</Label>
-                      <Input id="city" required />
-                    </div>
-                    <div>
-                      <Label htmlFor="postcode">Postcode</Label>
-                      <Input id="postcode" required />
-                    </div>
+                    <Label htmlFor="address">Delivery Address</Label>
+                    <Input 
+                      id="address" 
+                      value="42-56 Earlham Street, London WC2H 9LA"
+                      readOnly
+                      className="bg-muted"
+                    />
                   </div>
                   
                   <Separator />
