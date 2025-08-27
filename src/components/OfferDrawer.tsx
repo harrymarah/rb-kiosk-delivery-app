@@ -1,0 +1,247 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+} from "@/components/ui/drawer";
+import { Plus, X, Percent, Package, ShoppingCart } from "lucide-react";
+import { useBasket } from "@/contexts/BasketContext";
+import { useToast } from "@/components/ui/use-toast";
+
+interface Product {
+  id: string;
+  name: string;
+  price: string;
+  image: string;
+  category: string;
+}
+
+interface Offer {
+  id: string;
+  type: 'bundle' | 'size-up' | 'multi-buy';
+  title: string;
+  description: string;
+  discount: string;
+  originalPrice: string;
+  offerPrice: string;
+  items?: Product[];
+  savings: string;
+}
+
+interface OfferDrawerProps {
+  isOpen: boolean;
+  onClose: () => void;
+  product: Product;
+  quantity: number;
+  onAcceptOffer: (offer: Offer) => void;
+  onDeclineOffer: () => void;
+}
+
+const generateOffers = (product: Product, quantity: number): Offer[] => {
+  const basePrice = parseFloat(product.price.replace('£', ''));
+  
+  const offers: Offer[] = [];
+  
+  // Multi-buy offer
+  if (quantity === 1) {
+    const multiBuyPrice = basePrice * 2 * 0.85; // 15% off when buying 2
+    offers.push({
+      id: 'multi-buy-1',
+      type: 'multi-buy',
+      title: 'Buy 2, Save 15%',
+      description: `Get another ${product.name} for 15% off`,
+      discount: '15% OFF',
+      originalPrice: `£${(basePrice * 2).toFixed(2)}`,
+      offerPrice: `£${multiBuyPrice.toFixed(2)}`,
+      savings: `£${(basePrice * 2 - multiBuyPrice).toFixed(2)}`,
+    });
+  }
+  
+  // Bundle offer (category-based)
+  const bundlePrice = basePrice + 2.99; // Add complementary item for £2.99
+  let bundleItem = '';
+  switch (product.category) {
+    case 'drinks':
+      bundleItem = 'Crisps';
+      break;
+    case 'meals':
+      bundleItem = 'Drink';
+      break;
+    case 'snacks':
+      bundleItem = 'Juice';
+      break;
+    default:
+      bundleItem = 'Complementary item';
+  }
+  
+  offers.push({
+    id: 'bundle-1',
+    type: 'bundle',
+    title: `${product.name} + ${bundleItem}`,
+    description: `Perfect combo! Add ${bundleItem} for just £2.99`,
+    discount: 'COMBO DEAL',
+    originalPrice: `£${(basePrice + 3.99).toFixed(2)}`,
+    offerPrice: `£${bundlePrice.toFixed(2)}`,
+    savings: '£1.00',
+  });
+  
+  return offers;
+};
+
+export const OfferDrawer = ({
+  isOpen,
+  onClose,
+  product,
+  quantity,
+  onAcceptOffer,
+  onDeclineOffer,
+}: OfferDrawerProps) => {
+  const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
+  const { addItem } = useBasket();
+  const { toast } = useToast();
+  
+  const offers = generateOffers(product, quantity);
+  
+  const handleAcceptOffer = (offer: Offer) => {
+    onAcceptOffer(offer);
+    
+    // Add the base item
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+    }, quantity);
+    
+    // Handle different offer types
+    if (offer.type === 'multi-buy') {
+      addItem({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+      }, 1);
+    } else if (offer.type === 'bundle') {
+      // Add bundle item (simplified - in real app you'd have actual product data)
+      addItem({
+        id: 'bundle-item',
+        name: offer.title.split(' + ')[1],
+        price: '£2.99',
+        image: product.image, // Use same image for demo
+      }, 1);
+    }
+    
+    toast({
+      title: "Offer accepted!",
+      description: `${offer.title} added to your basket`,
+    });
+    
+    onClose();
+  };
+  
+  const handleDeclineOffer = () => {
+    onDeclineOffer();
+    
+    // Add just the original item
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+    }, quantity);
+    
+    toast({
+      title: "Added to basket",
+      description: `${quantity} x ${product.name} added to your basket`,
+    });
+    
+    onClose();
+  };
+
+  return (
+    <Drawer open={isOpen} onOpenChange={onClose}>
+      <DrawerContent className="max-h-[85vh]">
+        <DrawerHeader className="text-center pb-4">
+          <DrawerTitle className="text-2xl font-bold text-foreground">
+            Special Offers Available!
+          </DrawerTitle>
+          <DrawerDescription className="text-muted-foreground">
+            Great deals to complement your purchase
+          </DrawerDescription>
+        </DrawerHeader>
+        
+        <div className="px-6 pb-4 space-y-4 overflow-y-auto">
+          {offers.map((offer) => (
+            <div
+              key={offer.id}
+              className={`border border-border rounded-lg p-4 cursor-pointer transition-all ${
+                selectedOffer?.id === offer.id 
+                  ? 'border-primary bg-primary/5' 
+                  : 'hover:border-primary/50'
+              }`}
+              onClick={() => setSelectedOffer(offer)}
+            >
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  {offer.type === 'bundle' && <Package className="h-5 w-5 text-primary" />}
+                  {offer.type === 'multi-buy' && <Plus className="h-5 w-5 text-primary" />}
+                  {offer.type === 'size-up' && <Percent className="h-5 w-5 text-primary" />}
+                  <h3 className="font-semibold text-foreground">{offer.title}</h3>
+                </div>
+                <Badge variant="secondary" className="bg-primary/10 text-primary">
+                  {offer.discount}
+                </Badge>
+              </div>
+              
+              <p className="text-sm text-muted-foreground mb-3">
+                {offer.description}
+              </p>
+              
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-lg font-bold text-foreground">
+                    {offer.offerPrice}
+                  </span>
+                  <span className="text-sm text-muted-foreground line-through">
+                    {offer.originalPrice}
+                  </span>
+                </div>
+                <div className="text-sm font-medium text-green-600">
+                  Save {offer.savings}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <DrawerFooter className="gap-3">
+          {selectedOffer && (
+            <Button 
+              onClick={() => handleAcceptOffer(selectedOffer)}
+              className="w-full"
+              size="lg"
+            >
+              <ShoppingCart className="h-4 w-4 mr-2" />
+              Accept Offer - {selectedOffer.offerPrice}
+            </Button>
+          )}
+          
+          <Button 
+            variant="outline" 
+            onClick={handleDeclineOffer}
+            className="w-full"
+            size="lg"
+          >
+            <X className="h-4 w-4 mr-2" />
+            No Thanks, Add Original Item
+          </Button>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
+};

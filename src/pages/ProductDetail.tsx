@@ -8,6 +8,7 @@ import ProductCard from "@/components/ProductCard";
 import { useProducts } from "@/components/ProductSection";
 import { useBasket } from "@/contexts/BasketContext";
 import { useToast } from "@/components/ui/use-toast";
+import { OfferDrawer } from "@/components/OfferDrawer";
 
 interface Product {
   id: string;
@@ -30,6 +31,7 @@ const ProductDetail = () => {
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [showOfferDrawer, setShowOfferDrawer] = useState(false);
 
   useEffect(() => {
     if (allProducts && id) {
@@ -57,17 +59,8 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     if (!product) return;
     
-    addItem({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image,
-    }, quantity);
-    
-    toast({
-      title: "Added to basket",
-      description: `${quantity} x ${product.name} added to your basket`,
-    });
+    // Show offer drawer instead of immediately adding to cart
+    setShowOfferDrawer(true);
   };
 
   // Loading state
@@ -228,6 +221,22 @@ const ProductDetail = () => {
           </div>
         )}
       </div>
+      
+      {/* Offer Drawer */}
+      {product && (
+        <OfferDrawer
+          isOpen={showOfferDrawer}
+          onClose={() => setShowOfferDrawer(false)}
+          product={product}
+          quantity={quantity}
+          onAcceptOffer={(offer) => {
+            console.log('Offer accepted:', offer);
+          }}
+          onDeclineOffer={() => {
+            console.log('Offer declined');
+          }}
+        />
+      )}
     </div>
   );
 };
