@@ -26,9 +26,11 @@ const Header = () => {
   };
 
   return (
-    <header className="min-h-[200px] relative overflow-hidden bg-contain bg-center bg-repeat overflow-visible" style={{ backgroundImage: `url(${heroBanner})` }}>
+    <header className="min-h-[200px] relative overflow-hidden bg-cover bg-center bg-no-repeat overflow-visible" style={{ backgroundImage: `url(${heroBanner})` }}>
+      {/* Subtle overlay for better button visibility */}
+      <div className="absolute inset-0 bg-black/20"></div>
 
-      <div className="container mx-auto px-6 py-8">
+      <div className="relative z-10 container mx-auto px-6 py-8 h-full flex flex-col justify-center">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4 flex-1 max-w-2xl">
             <SearchBar />
@@ -67,7 +69,7 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="text-center">
+        <div className="text-center flex-1 flex items-center justify-center">
           <h1 className="text-5xl font-light text-brand-yellow mb-4 tracking-wider">
             QuickMart
           </h1>
