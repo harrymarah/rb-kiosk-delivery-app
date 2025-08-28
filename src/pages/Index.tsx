@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
 import WelcomeSection from "@/components/WelcomeSection";
 import TabNavigation from "@/components/TabNavigation";
 import ProductSection, { useProducts } from "@/components/ProductSection";
@@ -49,7 +48,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <HeroSection />
       <WelcomeSection />
       <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
       

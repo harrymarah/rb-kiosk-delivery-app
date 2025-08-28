@@ -7,6 +7,7 @@ import { useBasket } from "@/contexts/BasketContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import BasketDrawer from "./BasketDrawer";
 import FavoritesDrawer from "./FavoritesDrawer";
+import heroBanner from "@/assets/hero-banner.png";
 
 const Header = () => {
   const { products } = useProducts();
@@ -25,7 +26,7 @@ const Header = () => {
   };
 
   return (
-    <header className="min-h-[200px] relative overflow-hidden bg-cover bg-center bg-no-repeat overflow-visible" style={{ backgroundImage: "url('/assets/breakfast-items.jpg')" }}>
+    <header className="min-h-[200px] relative overflow-hidden bg-cover bg-center bg-no-repeat overflow-visible" style={{ backgroundImage: `url(${heroBanner})` }}>
       {/* Overlay for better text readability */}
       <div className="absolute inset-0 bg-primary/80"></div>
 
