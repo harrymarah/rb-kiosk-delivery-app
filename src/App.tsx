@@ -22,16 +22,18 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/basket" element={<Basket />} />
-            <Route path="/product/:id" element={<ProductDetail />} />
-            <Route path="/search" element={<SearchResults />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/confirmation" element={<Confirmation />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <div className="pb-24">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/basket" element={<Basket />} />
+              <Route path="/product/:id" element={<ProductDetail />} />
+              <Route path="/search" element={<SearchResults />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/confirmation" element={<Confirmation />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
           <StickyCartBar />
         </BrowserRouter>
       </TooltipProvider>
