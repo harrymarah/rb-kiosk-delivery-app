@@ -4,11 +4,14 @@ import { Badge } from "@/components/ui/badge";
 import SearchBar from "./SearchBar";
 import { useProducts } from "./ProductSection";
 import { useBasket } from "@/contexts/BasketContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
 import BasketDrawer from "./BasketDrawer";
+import FavoritesDrawer from "./FavoritesDrawer";
 
 const Header = () => {
   const { products } = useProducts();
   const { getTotalItems } = useBasket();
+  const { favorites } = useFavorites();
   
   // Flatten all products for search
   const allProducts = products ? [
@@ -33,9 +36,19 @@ const Header = () => {
           </div>
           
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10">
-              <Heart className="h-6 w-6" />
-            </Button>
+            <FavoritesDrawer>
+              <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 relative">
+                <Heart className="h-6 w-6" />
+                {favorites.length > 0 && (
+                  <Badge 
+                    variant="destructive" 
+                    className="absolute -top-2 -right-2 h-5 w-5 p-0 flex items-center justify-center text-xs"
+                  >
+                    {favorites.length}
+                  </Badge>
+                )}
+              </Button>
+            </FavoritesDrawer>
             <BasketDrawer>
               <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 relative">
                 <ShoppingCart className="h-6 w-6" />
