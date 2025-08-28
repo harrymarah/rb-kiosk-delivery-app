@@ -49,7 +49,7 @@ const ProductCard = ({
           <Button
             variant="ghost"
             size="icon"
-            className="absolute top-2 right-2 h-8 w-8 bg-background/80 hover:bg-background"
+            className="absolute top-2 right-2 h-8 w-8 bg-black/20 hover:bg-black/30 backdrop-blur-sm"
             onClick={(e) => {
               e.stopPropagation();
               onToggleFavorite?.();
