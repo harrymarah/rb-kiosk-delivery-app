@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
+import SearchFilterBar from "@/components/SearchFilterBar";
 import { useProducts } from "@/components/ProductSection";
 
 interface Product {
@@ -32,6 +33,9 @@ const SearchResults = () => {
   const [matchingProducts, setMatchingProducts] = useState<Product[]>([]);
   const [matchingCategories, setMatchingCategories] = useState<Category[]>([]);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [sortBy, setSortBy] = useState("relevance");
 
   useEffect(() => {
     if (allProducts && categories && query) {
@@ -52,6 +56,39 @@ const SearchResults = () => {
     }
   }, [allProducts, categories, query]);
 
+  // Filter and sort products based on selected filters
+  useEffect(() => {
+    let filtered = [...matchingProducts];
+
+    // Filter by category
+    if (selectedCategory !== "all") {
+      filtered = filtered.filter(product => 
+        product.category.toLowerCase() === selectedCategory.toLowerCase()
+      );
+    }
+
+    // Sort products
+    switch (sortBy) {
+      case "name-asc":
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "name-desc":
+        filtered.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case "price-low":
+        filtered.sort((a, b) => parseFloat(a.price.replace('£', '')) - parseFloat(b.price.replace('£', '')));
+        break;
+      case "price-high":
+        filtered.sort((a, b) => parseFloat(b.price.replace('£', '')) - parseFloat(a.price.replace('£', '')));
+        break;
+      default:
+        // Keep original order for relevance
+        break;
+    }
+
+    setFilteredProducts(filtered);
+  }, [matchingProducts, selectedCategory, sortBy]);
+
   const toggleFavorite = (productId: string) => {
     setFavorites(prev => {
       const newFavorites = new Set(prev);
@@ -67,6 +104,24 @@ const SearchResults = () => {
   const handleCategoryClick = (categoryName: string) => {
     navigate(`/?category=${categoryName.toLowerCase()}&tab=explore`);
   };
+
+  const handleCategoryFilter = (category: string) => {
+    setSelectedCategory(category);
+  };
+
+  const handleSortChange = (sort: string) => {
+    setSortBy(sort);
+  };
+
+  const handleClearFilters = () => {
+    setSelectedCategory("all");
+    setSortBy("relevance");
+  };
+
+  // Get unique categories from matching products
+  const availableCategories = Array.from(
+    new Set(matchingProducts.map(product => product.category))
+  );
 
   if (!query) {
     return (
@@ -97,10 +152,23 @@ const SearchResults = () => {
           <div>
             <h1 className="text-2xl font-bold text-foreground">Search Results</h1>
             <p className="text-muted-foreground">
-              {matchingProducts.length + matchingCategories.length} results for "{query}"
+              {filteredProducts.length + matchingCategories.length} results for "{query}"
             </p>
           </div>
         </div>
+
+        {/* Filter Bar */}
+        {(matchingProducts.length > 0 || matchingCategories.length > 0) && (
+          <SearchFilterBar
+            categories={availableCategories}
+            selectedCategory={selectedCategory}
+            sortBy={sortBy}
+            onCategoryChange={handleCategoryFilter}
+            onSortChange={handleSortChange}
+            onClearFilters={handleClearFilters}
+            resultCount={filteredProducts.length + matchingCategories.length}
+          />
+        )}
 
         {/* Categories section */}
         {matchingCategories.length > 0 && (
@@ -124,11 +192,11 @@ const SearchResults = () => {
         )}
 
         {/* Products section */}
-        {matchingProducts.length > 0 && (
+        {filteredProducts.length > 0 && (
           <section>
             <h2 className="text-xl font-semibold text-foreground mb-6">Products</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {matchingProducts.map((product) => (
+              {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}
                   image={product.image}
@@ -157,7 +225,7 @@ const SearchResults = () => {
         )}
 
         {/* No results */}
-        {!isLoading && matchingProducts.length === 0 && matchingCategories.length === 0 && (
+        {!isLoading && filteredProducts.length === 0 && matchingCategories.length === 0 && (
           <div className="text-center py-12">
             <h2 className="text-xl font-semibold text-foreground mb-2">No results found</h2>
             <p className="text-muted-foreground mb-6">
