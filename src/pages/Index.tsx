@@ -5,13 +5,15 @@ import WelcomeSection from "@/components/WelcomeSection";
 import TabNavigation from "@/components/TabNavigation";
 import ProductSection, { useProducts } from "@/components/ProductSection";
 import ProductCard from "@/components/ProductCard";
+import { useFavorites } from "@/contexts/FavoritesContext";
 
 const Index = () => {
   const [searchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState("explore");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const { favorites: favItems, toggleFavorite: toggleFav, isFavorite } = useFavorites();
   const { products, categories, allProducts } = useProducts();
+  const favoritesSet = new Set(favItems.map(f => f.id));
 
   // Handle URL params for category selection
   useEffect(() => {
@@ -26,19 +28,19 @@ const Index = () => {
     }
   }, [searchParams]);
 
-  const toggleFavorite = (productId: string) => {
-    setFavorites(prev => {
-      const newFavorites = new Set(prev);
-      if (newFavorites.has(productId)) {
-        newFavorites.delete(productId);
-      } else {
-        newFavorites.add(productId);
-      }
-      return newFavorites;
+  const toggleFavoriteById = (productId: string) => {
+    const product = allProducts?.find(p => p.id === productId);
+    if (!product) return;
+    toggleFav({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      category: product.category,
     });
   };
 
-  const favoriteProducts = allProducts?.filter(product => favorites.has(product.id)) || [];
+  const favoriteProducts = allProducts?.filter(product => favoritesSet.has(product.id)) || [];
   const categoryProducts = selectedCategory 
     ? allProducts?.filter(product => product.category === selectedCategory) || []
     : [];
@@ -54,14 +56,14 @@ const Index = () => {
           <ProductSection 
             title="Shop new" 
             products={products.shopNew} 
-            favorites={favorites}
-            onToggleFavorite={toggleFavorite}
+            favorites={favoritesSet}
+            onToggleFavorite={toggleFavoriteById}
           />
           <ProductSection 
             title="Breakfast" 
             products={products.breakfast} 
-            favorites={favorites}
-            onToggleFavorite={toggleFavorite}
+            favorites={favoritesSet}
+            onToggleFavorite={toggleFavoriteById}
           />
         </div>
       )}
@@ -87,8 +89,8 @@ const Index = () => {
                   price={product.price}
                   originalPrice={product.originalPrice}
                   offer={product.offer}
-                  isFavorite={favorites.has(product.id)}
-                  onToggleFavorite={() => toggleFavorite(product.id)}
+                  isFavorite={favoritesSet.has(product.id)}
+                  onToggleFavorite={() => toggleFavoriteById(product.id)}
                   onAddToCart={() => console.log(`Added ${product.name} to cart`)}
                   productId={product.id}
                 />
@@ -136,7 +138,7 @@ const Index = () => {
                     originalPrice={product.originalPrice}
                     offer={product.offer}
                     isFavorite={true}
-                    onToggleFavorite={() => toggleFavorite(product.id)}
+                    onToggleFavorite={() => toggleFavoriteById(product.id)}
                     onAddToCart={() => console.log(`Added ${product.name} to cart`)}
                     productId={product.id}
                   />
