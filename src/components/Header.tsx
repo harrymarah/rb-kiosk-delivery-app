@@ -7,7 +7,7 @@ import { useBasket } from "@/contexts/BasketContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import BasketDrawer from "./BasketDrawer";
 import FavoritesDrawer from "./FavoritesDrawer";
-import heroBanner from "@/assets/hero-banner.png";
+import heroBanner from "@/assets/hero-banner-long.png";
 
 const Header = () => {
   const { products } = useProducts();
