@@ -26,11 +26,9 @@ const Header = () => {
   };
 
   return (
-    <header className="min-h-[200px] relative overflow-hidden bg-cover bg-center bg-no-repeat overflow-visible" style={{ backgroundImage: `url(${heroBanner})` }}>
-      {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-primary/80"></div>
+    <header className="min-h-[200px] relative overflow-hidden bg-contain bg-center bg-repeat overflow-visible" style={{ backgroundImage: `url(${heroBanner})` }}>
 
-      <div className="relative z-10 container mx-auto px-6 py-8">
+      <div className="container mx-auto px-6 py-8">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4 flex-1 max-w-2xl">
             <SearchBar />
