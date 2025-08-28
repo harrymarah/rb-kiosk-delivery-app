@@ -63,9 +63,6 @@ const Header = () => {
                 )}
               </Button>
             </BasketDrawer>
-            <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10">
-              <User className="h-6 w-6" />
-            </Button>
           </div>
         </div>
 
