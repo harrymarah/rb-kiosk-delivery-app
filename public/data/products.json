@@ -77,14 +77,6 @@
         "category": "beverages"
       },
       {
-        "id": "5",
-        "name": "Fresh Croissants",
-        "price": "£3.99",
-        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/croissants.jpg",
-        "category": "breakfast",
-        "description": "Buttery, flaky croissants baked fresh daily. Perfect with jam, butter, or your favorite filling."
-      },
-      {
         "id": "35",
         "name": "Mixed Nuts",
         "price": "£3.25",
@@ -109,14 +101,6 @@
       }
     ],
     "breakfast": [
-      {
-        "id": "5",
-        "name": "Fresh Croissants",
-        "price": "£3.99",
-        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/croissants.jpg",
-        "category": "breakfast",
-        "description": "Buttery, flaky croissants baked fresh daily. Perfect with jam, butter, or your favorite filling."
-      },
       {
         "id": "6",
         "name": "Breakfast Muffins",
