@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import WelcomeSection from "@/components/WelcomeSection";
 import TabNavigation from "@/components/TabNavigation";
 import ProductSection, { useProducts } from "@/components/ProductSection";
+import ProductCarousel from "@/components/ProductCarousel";
 import ProductCard from "@/components/ProductCard";
 import { useFavorites } from "@/contexts/FavoritesContext";
 
@@ -53,7 +54,7 @@ const Index = () => {
       
       {activeTab === "explore" && !selectedCategory && products && (
         <div className="space-y-8">
-          <ProductSection 
+          <ProductCarousel 
             title="Shop new" 
             products={products.shopNew} 
             favorites={favoritesSet}
@@ -62,6 +63,24 @@ const Index = () => {
           <ProductSection 
             title="Breakfast" 
             products={products.breakfast} 
+            favorites={favoritesSet}
+            onToggleFavorite={toggleFavoriteById}
+          />
+          <ProductSection 
+            title="Lunch" 
+            products={products.lunch} 
+            favorites={favoritesSet}
+            onToggleFavorite={toggleFavoriteById}
+          />
+          <ProductSection 
+            title="Snacks" 
+            products={products.snacks} 
+            favorites={favoritesSet}
+            onToggleFavorite={toggleFavoriteById}
+          />
+          <ProductSection 
+            title="Beverages" 
+            products={products.beverages} 
             favorites={favoritesSet}
             onToggleFavorite={toggleFavoriteById}
           />
