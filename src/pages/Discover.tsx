@@ -115,7 +115,7 @@ const Discover = () => {
               <span className="text-sm opacity-80">Now</span>
               <div className="flex items-center gap-1">
                 <MapPin className="h-4 w-4" />
-                <span className="font-medium">Oddfellows Road</span>
+                <span className="font-medium">Earlham St</span>
                 <ChevronDown className="h-4 w-4" />
               </div>
             </div>
