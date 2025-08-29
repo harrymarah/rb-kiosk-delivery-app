@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBasket } from "@/contexts/BasketContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,12 +6,26 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, ShoppingCart } from "lucide-react";
+import { ArrowLeft, ShoppingCart, Plus } from "lucide-react";
+import { useProducts } from "@/components/ProductSection";
 
 const Checkout = () => {
-  const { items, getTotalPrice, clearBasket } = useBasket();
+  const { items, getTotalPrice, clearBasket, addItem } = useBasket();
+  const { allProducts } = useProducts();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [recommendations, setRecommendations] = useState<any[]>([]);
+
+  
+  // Get product recommendations (excluding items already in basket)
+  useEffect(() => {
+    if (allProducts && allProducts.length > 0) {
+      const basketProductIds = new Set(items.map(item => item.id));
+      const availableProducts = allProducts.filter(product => !basketProductIds.has(product.id));
+      const shuffled = [...availableProducts].sort(() => Math.random() - 0.5);
+      setRecommendations(shuffled.slice(0, 3));
+    }
+  }, [allProducts, items]);
 
   const formatPrice = (price: number) => `£${price.toFixed(2)}`;
 
@@ -138,6 +152,67 @@ const Checkout = () => {
             </Card>
           </div>
         </div>
+
+        {/* You Might Also Want Section */}
+        {recommendations.length > 0 && (
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold mb-6">You might also want</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {recommendations.map((product) => (
+                <Card key={product.id} className="group cursor-pointer hover:shadow-lg transition-all duration-200">
+                  <CardContent className="p-4">
+                    <div className="aspect-square bg-muted rounded-lg overflow-hidden mb-3">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).src = '/placeholder.svg';
+                        }}
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <h3 className="font-medium text-foreground line-clamp-2">{product.name}</h3>
+                      
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg font-bold text-foreground">{product.price}</span>
+                        {product.originalPrice && (
+                          <span className="text-sm text-muted-foreground line-through">
+                            {product.originalPrice}
+                          </span>
+                        )}
+                      </div>
+                      
+                      {product.offer && (
+                        <div className="text-xs text-primary font-medium bg-primary/10 px-2 py-1 rounded">
+                          {product.offer}
+                        </div>
+                      )}
+                      
+                      <Button
+                        size="sm"
+                        className="w-full mt-3"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addItem({
+                            id: product.id,
+                            name: product.name,
+                            price: product.price,
+                            image: product.image
+                          });
+                        }}
+                      >
+                        <Plus className="w-4 h-4 mr-1" />
+                        Add to Order
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
