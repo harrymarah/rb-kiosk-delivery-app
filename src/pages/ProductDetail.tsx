@@ -83,6 +83,20 @@ const ProductDetail = () => {
     setShowOfferDrawer(true);
   };
 
+  const handleAddRelatedToCart = (relatedProduct: Product) => {
+    addItem({
+      id: relatedProduct.id,
+      name: relatedProduct.name,
+      price: relatedProduct.price,
+      image: relatedProduct.image
+    }, 1);
+    
+    toast({
+      title: "Added to basket",
+      description: `${relatedProduct.name} has been added to your basket.`,
+    });
+  };
+
   // Loading state
   if (isLoading) {
     return (
@@ -271,7 +285,7 @@ const ProductDetail = () => {
                         offer={relatedProduct.offer}
                         isFavorite={false}
                         onToggleFavorite={() => {}}
-                        onAddToCart={() => console.log(`Added ${relatedProduct.name} to cart`)}
+                        onAddToCart={() => handleAddRelatedToCart(relatedProduct)}
                         productId={relatedProduct.id}
                       />
                     </div>
