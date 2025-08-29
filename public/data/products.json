@@ -60,6 +60,37 @@
         "offer": "2 for £5.00", 
         "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/juice.jpg",
         "category": "beverages"
+      },
+      {
+        "id": "5",
+        "name": "Fresh Croissants",
+        "price": "£3.99",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/croissants.jpg",
+        "category": "breakfast",
+        "description": "Buttery, flaky croissants baked fresh daily. Perfect with jam, butter, or your favorite filling."
+      },
+      {
+        "id": "35",
+        "name": "Mixed Nuts",
+        "price": "£3.25",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/snacks.jpg",
+        "category": "snacks"
+      },
+      {
+        "id": "36",
+        "name": "Chocolate Brownie",
+        "price": "£2.95",
+        "offer": "Fresh baked daily",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/brownie.jpg",
+        "category": "snacks"
+      },
+      {
+        "id": "25",
+        "name": "Spaghetti Bolognese",
+        "price": "£7.99",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/pasta.jpg",
+        "category": "meals",
+        "description": "Classic Italian pasta with rich meat sauce, slow-cooked with tomatoes, herbs, and red wine. Serves 1-2 people."
       }
     ],
     "breakfast": [
