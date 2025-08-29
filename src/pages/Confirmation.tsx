@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Clock, MapPin, ShoppingBag } from "lucide-react";
+import { CheckCircle, Clock, MapPin, ShoppingBag, AlertCircle } from "lucide-react";
 import { useProducts } from "@/components/ProductSection";
 import { useBasket } from "@/contexts/BasketContext";
 import BannerAd from "@/components/BannerAd";
@@ -13,6 +13,7 @@ const Confirmation = () => {
   const { addItem } = useBasket();
   const [deliveryTime, setDeliveryTime] = useState<string>("");
   const [timeRemaining, setTimeRemaining] = useState<number>(0);
+  const [lastChanceTime, setLastChanceTime] = useState<number>(300); // 5 minutes in seconds
   const [recommendedProducts, setRecommendedProducts] = useState<any[]>([]);
   const didSetRecommendations = useRef(false);
 
@@ -35,6 +36,12 @@ const Confirmation = () => {
       setTimeRemaining((prev) => {
         if (prev <= 0) {
           clearInterval(interval);
+          return 0;
+        }
+        return prev - 1;
+      });
+      setLastChanceTime((prev) => {
+        if (prev <= 0) {
           return 0;
         }
         return prev - 1;
@@ -151,12 +158,27 @@ const Confirmation = () => {
           />
         </div>
 
-        {/* Product Recommendations */}
+        {/* Last Chance to Buy */}
         <div className="animate-fade-in" style={{ animationDelay: '0.6s' }}>
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            <ShoppingBag className="w-6 h-6" />
-            While you wait, discover more products
-          </h2>
+          <div className="bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 rounded-lg p-4 mb-6 border border-red-200 dark:border-red-800">
+            <div className="flex items-center justify-between mb-2">
+              <h2 className="text-2xl font-bold flex items-center gap-2 text-red-700 dark:text-red-400">
+                <AlertCircle className="w-6 h-6" />
+                Last chance to buy
+              </h2>
+              <div className="text-right">
+                <div className="text-2xl font-bold text-red-600 dark:text-red-400 font-mono">
+                  {Math.floor(lastChanceTime / 60)}:{(lastChanceTime % 60).toString().padStart(2, '0')}
+                </div>
+                <div className="text-sm text-red-600/80 dark:text-red-400/80">
+                  Offer expires in
+                </div>
+              </div>
+            </div>
+            <p className="text-red-700 dark:text-red-400 text-sm">
+              Add these items to your current order before the timer runs out!
+            </p>
+          </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             {recommendedProducts.map((product, index) => (
