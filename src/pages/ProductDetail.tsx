@@ -17,6 +17,13 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 interface Product {
   id: string;
@@ -246,22 +253,34 @@ const ProductDetail = () => {
         {relatedProducts.length > 0 && (
           <div>
             <h2 className="text-2xl font-bold text-foreground mb-8">Usually bought next</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {relatedProducts.map((relatedProduct) => (
-                <ProductCard
-                  key={relatedProduct.id}
-                  image={relatedProduct.image}
-                  name={relatedProduct.name}
-                  price={relatedProduct.price}
-                  originalPrice={relatedProduct.originalPrice}
-                  offer={relatedProduct.offer}
-                  isFavorite={false}
-                  onToggleFavorite={() => {}}
-                  onAddToCart={() => console.log(`Added ${relatedProduct.name} to cart`)}
-                  productId={relatedProduct.id}
-                />
-              ))}
-            </div>
+            <Carousel
+              opts={{
+                align: "start",
+              }}
+              className="w-full"
+            >
+              <CarouselContent>
+                {relatedProducts.map((relatedProduct) => (
+                  <CarouselItem key={relatedProduct.id} className="md:basis-1/3 lg:basis-1/4">
+                    <div className="p-1">
+                      <ProductCard
+                        image={relatedProduct.image}
+                        name={relatedProduct.name}
+                        price={relatedProduct.price}
+                        originalPrice={relatedProduct.originalPrice}
+                        offer={relatedProduct.offer}
+                        isFavorite={false}
+                        onToggleFavorite={() => {}}
+                        onAddToCart={() => console.log(`Added ${relatedProduct.name} to cart`)}
+                        productId={relatedProduct.id}
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
           </div>
         )}
       </div>
