@@ -8,6 +8,13 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, ShoppingCart, Plus } from "lucide-react";
 import { useProducts } from "@/components/ProductSection";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const Checkout = () => {
   const { items, getTotalPrice, clearBasket, addItem } = useBasket();
@@ -157,54 +164,69 @@ const Checkout = () => {
         {recommendations.length > 0 && (
           <div className="mt-8">
             <h2 className="text-2xl font-bold mb-6">Add a little extra</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {recommendations.map((product) => (
-                <Card key={product.id} className="group cursor-pointer hover:shadow-lg transition-all duration-200">
-                  <CardContent className="p-4">
-                    <div className="aspect-square bg-muted rounded-lg overflow-hidden mb-3">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                        onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).src = '/placeholder.svg';
-                        }}
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <h3 className="font-medium text-foreground line-clamp-2">{product.name}</h3>
-                      
-                      <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold text-foreground">{product.price}</span>
-                        {product.originalPrice && (
-                          <span className="text-sm text-muted-foreground line-through">
-                            {product.originalPrice}
-                          </span>
-                        )}
-                      </div>
-                      
-                      <Button
-                        size="sm"
-                        className="w-full mt-3"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          addItem({
-                            id: product.id,
-                            name: product.name,
-                            price: product.price,
-                            image: product.image
-                          });
-                        }}
-                      >
-                        <Plus className="w-4 h-4 mr-1" />
-                        Add to Order
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            
+            <Carousel
+              opts={{
+                align: "start",
+                loop: false,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {recommendations.map((product) => (
+                  <CarouselItem key={product.id} className="pl-2 md:pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
+                    <Card className="group cursor-pointer hover:shadow-lg transition-all duration-200 h-full">
+                      <CardContent className="p-4 flex flex-col h-full">
+                        <div className="aspect-square bg-muted rounded-lg overflow-hidden mb-3">
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                            onError={(e) => {
+                              (e.currentTarget as HTMLImageElement).src = '/placeholder.svg';
+                            }}
+                          />
+                        </div>
+                        
+                        <div className="space-y-2 flex-1 flex flex-col">
+                          <h3 className="font-medium text-foreground line-clamp-2">{product.name}</h3>
+                          
+                          <div className="flex items-center gap-2">
+                            <span className="text-lg font-bold text-foreground">{product.price}</span>
+                            {product.originalPrice && (
+                              <span className="text-sm text-muted-foreground line-through">
+                                {product.originalPrice}
+                              </span>
+                            )}
+                          </div>
+                          
+                          <div className="mt-auto">
+                            <Button
+                              size="sm"
+                              className="w-full"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                addItem({
+                                  id: product.id,
+                                  name: product.name,
+                                  price: product.price,
+                                  image: product.image
+                                });
+                              }}
+                            >
+                              <Plus className="w-4 h-4 mr-1" />
+                              Add to Order
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
           </div>
         )}
       </div>
