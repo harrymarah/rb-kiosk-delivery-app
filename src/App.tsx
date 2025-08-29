@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { BasketProvider } from "@/contexts/BasketContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { StickyCartBar } from "@/components/StickyCartBar";
+import HomePage from "./pages/HomePage";
 import Index from "./pages/Index";
 import Basket from "./pages/Basket";
 import ProductDetail from "./pages/ProductDetail";
@@ -26,7 +27,8 @@ const App = () => (
         <BrowserRouter>
           <div className="pb-24">
             <Routes>
-              <Route path="/" element={<Index />} />
+              <Route path="/" element={<HomePage />} />
+              <Route path="/quickmart" element={<Index />} />
               <Route path="/basket" element={<Basket />} />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/search" element={<SearchResults />} />
