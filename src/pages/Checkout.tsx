@@ -156,7 +156,7 @@ const Checkout = () => {
         {/* You Might Also Want Section */}
         {recommendations.length > 0 && (
           <div className="mt-8">
-            <h2 className="text-2xl font-bold mb-6">You might also want</h2>
+            <h2 className="text-2xl font-bold mb-6">Add a little extra</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {recommendations.map((product) => (
                 <Card key={product.id} className="group cursor-pointer hover:shadow-lg transition-all duration-200">
@@ -183,12 +183,6 @@ const Checkout = () => {
                           </span>
                         )}
                       </div>
-                      
-                      {product.offer && (
-                        <div className="text-xs text-primary font-medium bg-primary/10 px-2 py-1 rounded">
-                          {product.offer}
-                        </div>
-                      )}
                       
                       <Button
                         size="sm"
