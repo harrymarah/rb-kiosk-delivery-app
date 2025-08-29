@@ -7,6 +7,7 @@ import { BasketProvider } from "@/contexts/BasketContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { StickyCartBar } from "@/components/StickyCartBar";
 import HomePage from "./pages/HomePage";
+import Discover from "./pages/Discover";
 import Index from "./pages/Index";
 import Basket from "./pages/Basket";
 import ProductDetail from "./pages/ProductDetail";
@@ -28,6 +29,7 @@ const App = () => (
           <div className="pb-24">
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/discover" element={<Discover />} />
               <Route path="/quickmart" element={<Index />} />
               <Route path="/basket" element={<Basket />} />
               <Route path="/product/:id" element={<ProductDetail />} />

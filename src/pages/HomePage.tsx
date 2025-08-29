@@ -255,7 +255,7 @@ const HomePage = () => {
             <div className="text-primary mb-1">🏠</div>
             <span className="text-xs text-primary font-medium">Home</span>
           </div>
-          <div className="text-center">
+          <div className="text-center cursor-pointer" onClick={() => navigate("/discover")}>
             <div className="text-muted-foreground mb-1">🔍</div>
             <span className="text-xs text-muted-foreground">Discover</span>
           </div>
