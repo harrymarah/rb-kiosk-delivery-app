@@ -71,7 +71,7 @@ const Header = () => {
             <h1 className="text-5xl font-light text-brand-yellow mb-1 tracking-wider">
               QuickMart
             </h1>
-            <p className="text-xl font-light text-brand-yellow/90 tracking-wide">
+            <p className="text-xl font-light text-white tracking-wide">
               Earlham Street
             </p>
           </div>
