@@ -2,13 +2,21 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, ArrowLeft, Plus, Minus, ShoppingCart } from "lucide-react";
+import { Heart, ArrowLeft, Plus, Minus, ShoppingCart, Star } from "lucide-react";
 import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
 import { useProducts } from "@/components/ProductSection";
 import { useBasket } from "@/contexts/BasketContext";
 import { useToast } from "@/components/ui/use-toast";
 import { OfferDrawer } from "@/components/OfferDrawer";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 interface Product {
   id: string;
@@ -102,15 +110,32 @@ const ProductDetail = () => {
       <Header />
       
       <div className="container mx-auto max-w-6xl px-6 py-8">
-        {/* Back button */}
-        <Button
-          variant="ghost"
-          onClick={() => navigate('/')}
-          className="mb-6 text-primary hover:text-primary/80"
-        >
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Products
-        </Button>
+        {/* Breadcrumb */}
+        <Breadcrumb className="mb-6">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink 
+                onClick={() => navigate('/')}
+                className="cursor-pointer hover:text-foreground"
+              >
+                Home
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink 
+                onClick={() => navigate('/')}
+                className="cursor-pointer hover:text-foreground"
+              >
+                {product.category}
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{product.name}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
 
         {/* Product details */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
@@ -131,6 +156,20 @@ const ProductDetail = () => {
           <div className="space-y-6">
             <div>
               <h1 className="text-3xl font-bold text-foreground mb-2">{product.name}</h1>
+              
+              {/* Star Rating */}
+              <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star
+                      key={star}
+                      className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                    />
+                  ))}
+                </div>
+                <span className="text-sm text-muted-foreground">(4.8)</span>
+              </div>
+              
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-3xl font-bold text-foreground">{product.price}</span>
                 {product.originalPrice && (
@@ -203,10 +242,10 @@ const ProductDetail = () => {
           </div>
         </div>
 
-        {/* Related products */}
+        {/* Usually bought next */}
         {relatedProducts.length > 0 && (
           <div>
-            <h2 className="text-2xl font-bold text-foreground mb-8">Related Products</h2>
+            <h2 className="text-2xl font-bold text-foreground mb-8">Usually bought next</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {relatedProducts.map((relatedProduct) => (
                 <ProductCard
