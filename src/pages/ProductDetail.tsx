@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, ArrowLeft, Plus, Minus, ShoppingCart } from "lucide-react";
+import { Heart, ArrowLeft, Plus, Minus, ShoppingCart, Star, ChevronRight, Home } from "lucide-react";
 import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
 import { useProducts } from "@/components/ProductSection";
@@ -101,37 +101,64 @@ const ProductDetail = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <div className="container mx-auto max-w-6xl px-6 py-8">
-        {/* Back button */}
-        <Button
-          variant="ghost"
-          onClick={() => navigate('/')}
-          className="mb-6 text-primary hover:text-primary/80"
-        >
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Products
-        </Button>
+      <div className="container mx-auto max-w-7xl px-6 py-4">
+        {/* Breadcrumbs */}
+        <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
+          <Home className="h-4 w-4" />
+          <ChevronRight className="h-4 w-4" />
+          <button 
+            onClick={() => navigate('/')}
+            className="hover:text-foreground transition-colors"
+          >
+            Products
+          </button>
+          <ChevronRight className="h-4 w-4" />
+          <span className="text-foreground">{product.name}</span>
+        </nav>
 
-        {/* Product details */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+        {/* Main product section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           {/* Product image */}
-          <div className="space-y-4">
-            <div className="aspect-square bg-muted rounded-lg overflow-hidden">
+          <div className="lg:max-w-md">
+            <div className="aspect-square bg-white rounded-lg overflow-hidden border border-border shadow-sm">
               <img
                 src={product.image}
                 alt={product.name}
                 loading="lazy"
                 onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/placeholder.svg'; }}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain p-4"
               />
             </div>
           </div>
 
-          {/* Product info */}
+          {/* Product details */}
           <div className="space-y-6">
-            <div>
-              <h1 className="text-3xl font-bold text-foreground mb-2">{product.name}</h1>
-              <div className="flex items-center gap-3 mb-4">
+            {/* Product title */}
+            <h1 className="text-2xl font-bold text-foreground leading-tight">{product.name}</h1>
+            
+            {/* Rating */}
+            <div className="flex items-center gap-2">
+              <div className="flex items-center">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star 
+                    key={star} 
+                    className={`h-4 w-4 ${star <= 4 ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} 
+                  />
+                ))}
+              </div>
+              <span className="text-sm text-muted-foreground">4.3 stars (35 Reviews)</span>
+            </div>
+
+            {/* Price match badge */}
+            {product.offer && (
+              <div className="inline-flex items-center gap-2 bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-medium">
+                <span>Price Match</span>
+              </div>
+            )}
+
+            {/* Price */}
+            <div className="space-y-1">
+              <div className="flex items-baseline gap-3">
                 <span className="text-3xl font-bold text-foreground">{product.price}</span>
                 {product.originalPrice && (
                   <span className="text-lg text-muted-foreground line-through">
@@ -139,42 +166,30 @@ const ProductDetail = () => {
                   </span>
                 )}
               </div>
-              {product.offer && (
-                <div className="flex items-center gap-2 text-destructive font-medium">
-                  <Heart className="h-4 w-4 fill-destructive" />
-                  <span>{product.offer}</span>
-                </div>
-              )}
+              <p className="text-sm text-muted-foreground">£0.21/100ml</p>
             </div>
 
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Description</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {product.description || "A high-quality product perfect for your daily needs. Made with care and attention to detail, this item offers great value and satisfaction."}
-              </p>
-            </div>
-
-            {/* Quantity selector and actions */}
+            {/* Quantity and Add button */}
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <span className="text-sm font-medium text-foreground">Quantity:</span>
-                <div className="flex items-center border border-border rounded-md">
+                <label className="text-sm font-medium text-foreground">Quantity:</label>
+                <div className="flex items-center">
                   <Button
-                    variant="ghost"
+                    variant="outline"
                     size="icon"
                     onClick={decrementQuantity}
-                    className="h-10 w-10 rounded-none border-r border-border"
+                    className="h-10 w-10 rounded-r-none border-r-0"
                   >
                     <Minus className="h-4 w-4" />
                   </Button>
-                  <span className="px-4 py-2 min-w-[3rem] text-center font-medium">
-                    {quantity}
-                  </span>
+                  <div className="h-10 w-16 flex items-center justify-center border-t border-b border-border bg-background">
+                    <span className="font-medium">{quantity}</span>
+                  </div>
                   <Button
-                    variant="ghost"
+                    variant="outline"
                     size="icon"
                     onClick={incrementQuantity}
-                    className="h-10 w-10 rounded-none border-l border-border"
+                    className="h-10 w-10 rounded-l-none border-l-0"
                   >
                     <Plus className="h-4 w-4" />
                   </Button>
@@ -184,11 +199,10 @@ const ProductDetail = () => {
               <div className="flex gap-3">
                 <Button
                   onClick={handleAddToCart}
-                  className="flex-1"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-base font-medium"
                   size="lg"
                 >
-                  <ShoppingCart className="h-4 w-4 mr-2" />
-                  Add to Basket
+                  Add
                 </Button>
                 <Button
                   variant="outline"
@@ -196,31 +210,50 @@ const ProductDetail = () => {
                   onClick={() => setIsFavorite(!isFavorite)}
                   className="px-4"
                 >
-                  <Heart className={`h-4 w-4 ${isFavorite ? 'fill-destructive text-destructive' : ''}`} />
+                  <Heart className={`h-5 w-5 ${isFavorite ? 'fill-red-500 text-red-500' : ''}`} />
                 </Button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Related products */}
+        {/* Usually bought next / Related products */}
         {relatedProducts.length > 0 && (
-          <div>
-            <h2 className="text-2xl font-bold text-foreground mb-8">Related Products</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="border-t border-border pt-8">
+            <h2 className="text-xl font-bold text-foreground mb-6">Usually bought next</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {relatedProducts.map((relatedProduct) => (
-                <ProductCard
-                  key={relatedProduct.id}
-                  image={relatedProduct.image}
-                  name={relatedProduct.name}
-                  price={relatedProduct.price}
-                  originalPrice={relatedProduct.originalPrice}
-                  offer={relatedProduct.offer}
-                  isFavorite={false}
-                  onToggleFavorite={() => {}}
-                  onAddToCart={() => console.log(`Added ${relatedProduct.name} to cart`)}
-                  productId={relatedProduct.id}
-                />
+                <Card key={relatedProduct.id} className="group cursor-pointer hover:shadow-md transition-shadow">
+                  <CardContent className="p-4">
+                    <div className="aspect-square bg-white rounded-lg overflow-hidden mb-3 border border-border">
+                      <img
+                        src={relatedProduct.image}
+                        alt={relatedProduct.name}
+                        className="w-full h-full object-contain p-2"
+                        loading="lazy"
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/placeholder.svg'; }}
+                        onClick={() => navigate(`/product/${relatedProduct.id}`)}
+                      />
+                    </div>
+                    <h3 className="text-sm font-medium text-foreground line-clamp-2 mb-2">
+                      {relatedProduct.name}
+                    </h3>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-bold text-foreground">{relatedProduct.price}</span>
+                      <Button 
+                        size="sm" 
+                        variant="outline"
+                        className="h-8 w-8 p-0"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log(`Added ${relatedProduct.name} to cart`);
+                        }}
+                      >
+                        <Plus className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>
