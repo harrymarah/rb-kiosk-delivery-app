@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useBasket } from "@/contexts/BasketContext";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, CreditCard, Eye } from "lucide-react";
@@ -6,9 +6,10 @@ import { ShoppingCart, CreditCard, Eye } from "lucide-react";
 export const StickyCartBar = () => {
   const { items, getTotalPrice } = useBasket();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // Don't show if no items in basket
-  if (items.length === 0) {
+  // Don't show if no items in basket or on confirmation page
+  if (items.length === 0 || location.pathname === '/confirmation') {
     return null;
   }
 
