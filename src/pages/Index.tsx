@@ -6,6 +6,7 @@ import TabNavigation from "@/components/TabNavigation";
 import ProductSection, { useProducts } from "@/components/ProductSection";
 import ProductCarousel from "@/components/ProductCarousel";
 import ProductCard from "@/components/ProductCard";
+import BannerAd from "@/components/BannerAd";
 import { useFavorites } from "@/contexts/FavoritesContext";
 
 const Index = () => {
@@ -60,6 +61,18 @@ const Index = () => {
             favorites={favoritesSet}
             onToggleFavorite={toggleFavoriteById}
           />
+          
+          {/* Mid-page Banner Advertisement */}
+          <div className="px-6">
+            <div className="container mx-auto max-w-4xl">
+              <BannerAd 
+                title="Fresh Ingredients, Fast Delivery" 
+                subtitle="Quality products delivered to your door in under 20 minutes"
+                className="my-8"
+              />
+            </div>
+          </div>
+          
           <ProductSection 
             title="Breakfast" 
             products={products.breakfast} 
@@ -84,6 +97,17 @@ const Index = () => {
             favorites={favoritesSet}
             onToggleFavorite={toggleFavoriteById}
           />
+          
+          {/* Bottom Banner Advertisement */}
+          <div className="px-6">
+            <div className="container mx-auto max-w-4xl">
+              <BannerAd 
+                title="Join Our Loyalty Program" 
+                subtitle="Earn points with every purchase and get exclusive member discounts"
+                className="my-8"
+              />
+            </div>
+          </div>
         </div>
       )}
 

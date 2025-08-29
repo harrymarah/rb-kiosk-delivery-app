@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, Clock, MapPin, ShoppingBag } from "lucide-react";
 import { useProducts } from "@/components/ProductSection";
 import { useBasket } from "@/contexts/BasketContext";
+import BannerAd from "@/components/BannerAd";
 
 const Confirmation = () => {
   const navigate = useNavigate();
@@ -142,6 +143,14 @@ const Confirmation = () => {
           </Card>
         </div>
 
+        {/* Banner Advertisement */}
+        <div className="mb-8 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+          <BannerAd 
+            title="Special Offer - 20% Off Next Order!" 
+            subtitle="Use code THANKS20 on your next purchase"
+          />
+        </div>
+
         {/* Product Recommendations */}
         <div className="animate-fade-in" style={{ animationDelay: '0.6s' }}>
           <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
@@ -191,6 +200,14 @@ const Confirmation = () => {
               </Card>
             ))}
           </div>
+        </div>
+
+        {/* Bottom Banner Advertisement */}
+        <div className="mb-8 animate-fade-in" style={{ animationDelay: '1.2s' }}>
+          <BannerAd 
+            title="Download Our App for Exclusive Deals" 
+            subtitle="Get 10% off your first app order and faster checkout"
+          />
         </div>
 
         {/* Action Buttons */}
