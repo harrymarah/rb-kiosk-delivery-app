@@ -139,7 +139,7 @@ const Checkout = () => {
                   <div className="bg-muted p-4 rounded-lg">
                     <h3 className="font-semibold mb-2">Delivery Information</h3>
                     <p className="text-sm text-muted-foreground">
-                      Expected delivery: Within 30-45 minutes
+                      Expected delivery: Within 15-20 minutes
                     </p>
                     <p className="text-sm text-muted-foreground">
                       Delivery fee: Free for orders over £20
