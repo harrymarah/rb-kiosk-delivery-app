@@ -125,7 +125,7 @@ const Discover = () => {
             </div>
           </div>
           
-          <h1 className="text-3xl font-bold text-white mb-6">{getGreeting()}, Octavia</h1>
+          <h1 className="text-3xl font-bold text-white mb-6">{getGreeting()}</h1>
           
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
