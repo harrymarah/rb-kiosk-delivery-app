@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart } from "lucide-react";
+import { Heart, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
@@ -76,6 +76,20 @@ const ProductCard = ({
               <Heart className="h-4 w-4 text-destructive fill-destructive" />
               <span className="text-sm font-medium text-destructive">{offer}</span>
             </div>
+          )}
+          
+          {onAddToCart && (
+            <Button
+              size="sm"
+              className="w-full mt-2"
+              onClick={(e) => {
+                e.stopPropagation();
+                onAddToCart();
+              }}
+            >
+              <ShoppingCart className="h-4 w-4 mr-2" />
+              Add to Basket
+            </Button>
           )}
         </div>
       </CardContent>
