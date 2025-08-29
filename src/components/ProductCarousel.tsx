@@ -37,17 +37,19 @@ const ProductCarousel = ({ title, products, favorites = new Set(), onToggleFavor
           <CarouselContent className="-ml-2 md:-ml-4">
             {products.map((product) => (
               <CarouselItem key={product.id} className="pl-2 md:pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
-                <ProductCard
-                  image={product.image}
-                  name={product.name}
-                  price={product.price}
-                  originalPrice={product.originalPrice}
-                  offer={product.offer}
-                  isFavorite={favorites.has(product.id)}
-                  onToggleFavorite={() => onToggleFavorite?.(product.id)}
-                  onAddToCart={() => console.log(`Added ${product.name} to cart`)}
-                  productId={product.id}
-                />
+                <div className="h-full">
+                  <ProductCard
+                    image={product.image}
+                    name={product.name}
+                    price={product.price}
+                    originalPrice={product.originalPrice}
+                    offer={product.offer}
+                    isFavorite={favorites.has(product.id)}
+                    onToggleFavorite={() => onToggleFavorite?.(product.id)}
+                    onAddToCart={() => console.log(`Added ${product.name} to cart`)}
+                    productId={product.id}
+                  />
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>

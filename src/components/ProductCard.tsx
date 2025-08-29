@@ -34,8 +34,8 @@ const ProductCard = ({
     }
   };
   return (
-    <Card className="group cursor-pointer hover:shadow-lg transition-all duration-200 border border-border" onClick={handleCardClick}>
-      <CardContent className="p-4">
+    <Card className="group cursor-pointer hover:shadow-lg transition-all duration-200 border border-border h-full flex flex-col" onClick={handleCardClick}>
+      <CardContent className="p-4 flex flex-col flex-1">
         <div className="relative mb-4">
           <div className="aspect-square bg-muted rounded-lg overflow-hidden">
             <img 
@@ -59,7 +59,7 @@ const ProductCard = ({
           </Button>
         </div>
         
-        <div className="space-y-2">
+        <div className="space-y-2 flex-1 flex flex-col justify-end">
           <h3 className="font-medium text-foreground line-clamp-2">{name}</h3>
           
           <div className="flex items-center gap-2">
