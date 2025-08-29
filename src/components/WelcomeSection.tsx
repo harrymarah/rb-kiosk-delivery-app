@@ -5,7 +5,7 @@ const WelcomeSection = () => {
     <section className="bg-background px-6 py-8">
       <div className="container mx-auto max-w-4xl">
         <h2 className="text-3xl font-bold text-foreground mb-6">
-          Welcome to QuickMart
+          Welcome to QuickMart, Earlham Street
         </h2>
 
         <div className="flex gap-12 mb-3">

@@ -67,9 +67,14 @@ const Header = () => {
         </div>
 
         <div className="text-center flex-1 flex items-center justify-center">
-          <h1 className="text-5xl font-light text-brand-yellow mb-4 tracking-wider">
-            QuickMart
-          </h1>
+          <div>
+            <h1 className="text-5xl font-light text-brand-yellow mb-1 tracking-wider">
+              QuickMart
+            </h1>
+            <p className="text-xl font-light text-brand-yellow/90 tracking-wide">
+              Earlham Street
+            </p>
+          </div>
         </div>
       </div>
     </header>
