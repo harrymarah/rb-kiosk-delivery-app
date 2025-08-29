@@ -21,6 +21,21 @@
       "description": "Quick bites and treats"
     },
     {
+      "id": "matchReady",
+      "name": "Get Match Ready",
+      "description": "Fuel up for the game with protein and energy"
+    },
+    {
+      "id": "softDrinks",
+      "name": "Soft Drinks",
+      "description": "Refreshing non-alcoholic beverages"
+    },
+    {
+      "id": "energyDrinks",
+      "name": "Energy Drinks",
+      "description": "Boost your energy levels"
+    },
+    {
       "id": "beverages",
       "name": "Beverages",
       "description": "Drinks and refreshments"
@@ -560,6 +575,144 @@
         "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/breakfast-items.jpg",
         "category": "beverages",
         "description": "Bold espresso with hot water"
+      }
+    ],
+    "matchReady": [
+      {
+        "id": "39",
+        "name": "Protein Bar",
+        "price": "£2.75",
+        "offer": "3 for £7",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/breakfast-items.jpg",
+        "category": "matchReady"
+      },
+      {
+        "id": "41",
+        "name": "Trail Mix",
+        "price": "£3.75",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/breakfast-items.jpg",
+        "category": "matchReady"
+      },
+      {
+        "id": "35",
+        "name": "Mixed Nuts",
+        "price": "£3.25",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/snacks.jpg",
+        "category": "matchReady"
+      },
+      {
+        "id": "68",
+        "name": "Energy Granola Bar",
+        "price": "£2.95",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/breakfast-items.jpg",
+        "category": "matchReady"
+      },
+      {
+        "id": "69",
+        "name": "Pre-Workout Smoothie",
+        "price": "£4.99",
+        "offer": "High protein",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/breakfast-items.jpg",
+        "category": "matchReady"
+      },
+      {
+        "id": "70",
+        "name": "Sports Drink",
+        "price": "£2.50",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/breakfast-items.jpg",
+        "category": "matchReady"
+      }
+    ],
+    "softDrinks": [
+      {
+        "id": "43",
+        "name": "Sparkling Water",
+        "price": "£1.50",
+        "offer": "6 pack £7",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/breakfast-items.jpg",
+        "category": "softDrinks"
+      },
+      {
+        "id": "45",
+        "name": "Fresh Lemonade",
+        "price": "£2.75",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/breakfast-items.jpg",
+        "category": "softDrinks"
+      },
+      {
+        "id": "50",
+        "name": "Coconut Water",
+        "price": "£2.25",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/breakfast-items.jpg",
+        "category": "softDrinks"
+      },
+      {
+        "id": "71",
+        "name": "Coca Cola",
+        "price": "£1.85",
+        "offer": "2 for £3",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/breakfast-items.jpg",
+        "category": "softDrinks"
+      },
+      {
+        "id": "72",
+        "name": "Pepsi",
+        "price": "£1.85",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/breakfast-items.jpg",
+        "category": "softDrinks"
+      },
+      {
+        "id": "73",
+        "name": "Sprite",
+        "price": "£1.85",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/breakfast-items.jpg",
+        "category": "softDrinks"
+      }
+    ],
+    "energyDrinks": [
+      {
+        "id": "49",
+        "name": "Red Bull Original",
+        "price": "£2.55",
+        "offer": "2 for £4.50",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_original.png",
+        "category": "energyDrinks"
+      },
+      {
+        "id": "51",
+        "name": "Red Bull Sugar Free",
+        "price": "£2.55",
+        "offer": "2 for £4.50",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_sugar_free.png",
+        "category": "energyDrinks"
+      },
+      {
+        "id": "52",
+        "name": "Red Bull Tropical Edition",
+        "price": "£2.75",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_tropical_edition.png",
+        "category": "energyDrinks"
+      },
+      {
+        "id": "53",
+        "name": "Red Bull Blue Edition",
+        "price": "£2.75",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_blue_edition.png",
+        "category": "energyDrinks"
+      },
+      {
+        "id": "54",
+        "name": "Red Bull Green Edition",
+        "price": "£2.75",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_green_edition.png",
+        "category": "energyDrinks"
+      },
+      {
+        "id": "55",
+        "name": "Red Bull Red Edition",
+        "price": "£2.75",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/red_bull_red_edition.png",
+        "category": "energyDrinks"
       }
     ]
   }
