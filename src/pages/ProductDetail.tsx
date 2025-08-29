@@ -79,8 +79,27 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     if (!product) return;
     
-    // Show offer drawer instead of immediately adding to cart
-    setShowOfferDrawer(true);
+    // Check if this is a hot drink that should show the "one for now, one for later" offer
+    const hotDrinkNames = ['Premium Coffee', 'Cappuccino', 'Latte', 'Earl Grey Tea', 'English Breakfast Tea', 'Chai Latte', 'Americano', 'Hot Chocolate'];
+    const isHotDrink = hotDrinkNames.some(name => product.name.includes(name)) || hotDrinkNames.includes(product.name);
+    
+    if (isHotDrink) {
+      // Show offer drawer for hot drinks with the "one for now, one for later" deal
+      setShowOfferDrawer(true);
+    } else {
+      // For all other products, add directly to cart without showing offers
+      addItem({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image
+      }, quantity);
+      
+      toast({
+        title: "Added to basket",
+        description: `${quantity} x ${product.name} has been added to your basket.`,
+      });
+    }
   };
 
   const handleAddRelatedToCart = (relatedProduct: Product) => {
