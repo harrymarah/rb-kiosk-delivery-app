@@ -1,4 +1,4 @@
-import { Heart, User, ShoppingCart } from "lucide-react";
+import { Heart, User, ShoppingCart, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import SearchBar from "./SearchBar";
@@ -8,11 +8,13 @@ import { useFavorites } from "@/contexts/FavoritesContext";
 import BasketDrawer from "./BasketDrawer";
 import FavoritesDrawer from "./FavoritesDrawer";
 import heroBanner from "@/assets/hero-banner-long.png";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const { products } = useProducts();
   const { getTotalItems } = useBasket();
   const { favorites } = useFavorites();
+  const navigate = useNavigate();
   
   // Flatten all products for search
   const allProducts = products ? [
@@ -37,6 +39,14 @@ const Header = () => {
           </div>
           
           <div className="flex items-center gap-4">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="text-primary-foreground hover:bg-white/10"
+              onClick={() => navigate('/')}
+            >
+              <Home className="h-6 w-6" />
+            </Button>
             <FavoritesDrawer>
               <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 relative">
                 <Heart className="h-6 w-6" />
