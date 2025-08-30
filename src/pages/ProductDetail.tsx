@@ -167,7 +167,7 @@ const ProductDetail = () => {
                 onClick={() => navigate('/')}
                 className="cursor-pointer hover:text-foreground"
               >
-                {product.category}
+                {product.category.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()).trim()}
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
