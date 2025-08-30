@@ -61,7 +61,7 @@ const SearchBar = () => {
     <div className="relative">
       <form onSubmit={handleSubmit} className="relative">
         <div className="relative">
-          <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 h-8 w-8 text-muted-foreground" />
+          <Search className="absolute left-[clamp(1rem,2vw,2rem)] top-1/2 transform -translate-y-1/2 h-[clamp(1.5rem,2vw,3rem)] w-[clamp(1.5rem,2vw,3rem)] text-muted-foreground" />
           <Input
             type="text"
             placeholder="Search products and categories..."
@@ -69,7 +69,7 @@ const SearchBar = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={() => searchTerm && setShowSuggestions(true)}
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-            className="pl-16 pr-8 w-full h-20 text-2xl"
+            className="pl-[clamp(3rem,5vw,6rem)] pr-[clamp(1rem,2vw,3rem)] w-full h-[clamp(3rem,5vw,6rem)] text-[clamp(1.125rem,2vw,2rem)]"
           />
         </div>
       </form>
