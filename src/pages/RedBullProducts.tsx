@@ -32,6 +32,9 @@ const RedBullProducts = () => {
       ...(productsData.shopNew || []).filter(product => 
         product.name.toLowerCase().includes('red bull')
       ),
+      ...(productsData.beverages || []).filter(product => 
+        product.name.toLowerCase().includes('red bull')
+      ),
     ];
 
     // Remove duplicates based on product name
@@ -64,7 +67,7 @@ const RedBullProducts = () => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => navigate(-1)}
+              onClick={() => navigate('/quickmart')}
               className="shrink-0"
             >
               <ChevronLeft className="h-6 w-6" />
