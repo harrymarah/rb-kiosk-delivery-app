@@ -37,7 +37,7 @@ const ProductCard = ({
     <Card className="group cursor-pointer hover:shadow-lg transition-all duration-200 border border-border h-full flex flex-col" onClick={handleCardClick}>
       <CardContent className="p-4 flex flex-col flex-1">
         <div className="relative mb-4">
-          <div className="aspect-square bg-muted rounded-lg overflow-hidden">
+          <div className="aspect-square bg-white rounded-lg overflow-hidden border border-border/20">
             <img 
               src={image} 
               alt={name} 
