@@ -13,15 +13,15 @@ interface TabNavigationProps {
 
 const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) => {
   return (
-    <div className="border-b border-border px-6">
-      <div className="container mx-auto max-w-4xl">
+    <div className="border-b border-border px-8">
+      <div className="container mx-auto">
         <nav className="flex">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
               className={cn(
-                "py-4 px-6 text-lg font-medium border-b-2 transition-colors",
+                "py-6 px-10 text-2xl font-medium border-b-4 transition-colors min-h-[80px] flex items-center",
                 activeTab === tab.id
                   ? "border-accent text-foreground"
                   : "border-transparent text-muted-foreground hover:text-foreground"

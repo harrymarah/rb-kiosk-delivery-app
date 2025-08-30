@@ -2,36 +2,36 @@ import { Star, Truck, ReceiptPoundSterling } from 'lucide-react'
 
 const WelcomeSection = () => {
   return (
-    <section className="bg-background px-6 py-8">
-      <div className="container mx-auto max-w-4xl">
-        <h2 className="text-3xl font-bold text-foreground mb-6">
+    <section className="bg-background px-8 py-12">
+      <div className="container mx-auto">
+        <h2 className="text-5xl font-bold text-foreground mb-10">
           Welcome to QuickMart, Earlham Street
         </h2>
 
-        <div className="flex gap-12 mb-3">
-          <div className="flex items-center gap-3">
-            <Star className="h-6 w-6 text-primary fill-primary" />
+        <div className="flex gap-16 mb-6">
+          <div className="flex items-center gap-4">
+            <Star className="h-10 w-10 text-primary fill-primary" />
             <div>
-              <span className="text-lg font-bold text-primary">4.8</span>
-              <span className="text-lg text-primary ml-2">Excellent</span>
+              <span className="text-3xl font-bold text-primary">4.8</span>
+              <span className="text-3xl text-primary ml-3">Excellent</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <Truck className="h-6 w-6 text-primary" />
+          <div className="flex items-center gap-4">
+            <Truck className="h-10 w-10 text-primary" />
             <div>
-              <span className="text-lg text-foreground">Deliver in</span>
-              <span className="text-lg font-semibold text-primary ml-2">
+              <span className="text-3xl text-foreground">Deliver in</span>
+              <span className="text-3xl font-semibold text-primary ml-3">
                 15-30 minutes
               </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <ReceiptPoundSterling className="h-6 w-6 text-primary" />
+          <div className="flex items-center gap-4">
+            <ReceiptPoundSterling className="h-10 w-10 text-primary" />
             <div>
-              <span className="text-lg text-foreground">Minimum order</span>
-              <span className="text-lg font-semibold text-primary ml-2">
+              <span className="text-3xl text-foreground">Minimum order</span>
+              <span className="text-3xl font-semibold text-primary ml-3">
                 £15
               </span>
             </div>

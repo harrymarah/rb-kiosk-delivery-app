@@ -32,28 +32,28 @@ const Header = () => {
       {/* Subtle overlay for better button visibility */}
       <div className="absolute inset-0 bg-black/20"></div>
 
-      <div className="relative z-10 container mx-auto px-6 py-8 h-full flex flex-col justify-center">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-4 flex-1 max-w-2xl">
+      <div className="relative z-10 container mx-auto px-8 py-12 h-full flex flex-col justify-center">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-6 flex-1">
             <SearchBar />
           </div>
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
             <Button 
               variant="ghost" 
-              size="icon" 
-              className="text-primary-foreground hover:bg-white/10"
+              size="lg" 
+              className="text-primary-foreground hover:bg-white/10 h-16 w-16"
               onClick={() => navigate('/')}
             >
-              <Home className="h-6 w-6" />
+              <Home className="h-8 w-8" />
             </Button>
             <FavoritesDrawer>
-              <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 relative">
-                <Heart className="h-6 w-6" />
+              <Button variant="ghost" size="lg" className="text-primary-foreground hover:bg-white/10 relative h-16 w-16">
+                <Heart className="h-8 w-8" />
                 {favorites.length > 0 && (
                   <Badge 
                     variant="destructive" 
-                    className="absolute -top-2 -right-2 h-5 w-5 p-0 flex items-center justify-center text-xs"
+                    className="absolute -top-1 -right-1 h-7 w-7 p-0 flex items-center justify-center text-sm font-bold"
                   >
                     {favorites.length}
                   </Badge>
@@ -61,12 +61,12 @@ const Header = () => {
               </Button>
             </FavoritesDrawer>
             <BasketDrawer>
-              <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 relative">
-                <ShoppingCart className="h-6 w-6" />
+              <Button variant="ghost" size="lg" className="text-primary-foreground hover:bg-white/10 relative h-16 w-16">
+                <ShoppingCart className="h-8 w-8" />
                 {getTotalItems() > 0 && (
                   <Badge 
                     variant="destructive" 
-                    className="absolute -top-2 -right-2 h-5 w-5 p-0 flex items-center justify-center text-xs"
+                    className="absolute -top-1 -right-1 h-7 w-7 p-0 flex items-center justify-center text-sm font-bold"
                   >
                     {getTotalItems()}
                   </Badge>
@@ -78,10 +78,10 @@ const Header = () => {
 
         <div className="text-center flex-1 flex items-center justify-center">
           <div>
-            <h1 className="text-5xl font-light text-brand-yellow mb-1 tracking-wider">
+            <h1 className="text-7xl font-light text-brand-yellow mb-2 tracking-wider">
               QuickMart
             </h1>
-            <p className="text-xl font-light text-white tracking-wide">
+            <p className="text-3xl font-light text-white tracking-wide">
               Earlham Street
             </p>
           </div>
