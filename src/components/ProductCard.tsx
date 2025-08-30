@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Heart, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { getProxiedImageUrl } from "@/lib/image";
 
 interface ProductCardProps {
   image: string;
@@ -39,9 +40,11 @@ const ProductCard = ({
         <div className="relative mb-4">
           <div className="aspect-square bg-white rounded-lg overflow-hidden border border-border/20">
             <img 
-              src={image} 
+              src={getProxiedImageUrl(image)} 
               alt={name} 
               loading="lazy"
+              referrerPolicy="no-referrer"
+              crossOrigin="anonymous"
               onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/placeholder.svg'; }}
               className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-200"
             />

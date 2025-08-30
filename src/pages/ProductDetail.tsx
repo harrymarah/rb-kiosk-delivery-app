@@ -9,6 +9,7 @@ import { useProducts } from "@/components/ProductSection";
 import { useBasket } from "@/contexts/BasketContext";
 import { useToast } from "@/components/ui/use-toast";
 import { OfferDrawer } from "@/components/OfferDrawer";
+import { getProxiedImageUrl } from "@/lib/image";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -183,9 +184,11 @@ const ProductDetail = () => {
           <div className="space-y-4">
             <div className="aspect-square bg-muted rounded-lg overflow-hidden">
               <img
-                src={product.image}
+                src={getProxiedImageUrl(product.image)}
                 alt={product.name}
                 loading="lazy"
+                referrerPolicy="no-referrer"
+                crossOrigin="anonymous"
                 onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/placeholder.svg'; }}
                 className="w-full h-full object-cover"
               />
