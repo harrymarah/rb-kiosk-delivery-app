@@ -155,7 +155,7 @@ const ProductDetail = () => {
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink 
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/quickmart')}
                 className="cursor-pointer hover:text-foreground"
               >
                 Home
