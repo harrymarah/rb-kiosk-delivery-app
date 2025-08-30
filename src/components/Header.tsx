@@ -42,18 +42,18 @@ const Header = () => {
             <Button 
               variant="ghost" 
               size="lg" 
-              className="text-primary-foreground hover:bg-white/10 h-16 w-16"
+              className="text-primary-foreground hover:bg-white/10 h-24 w-24"
               onClick={() => navigate('/')}
             >
-              <Home className="h-8 w-8" />
+              <Home className="h-12 w-12" />
             </Button>
             <FavoritesDrawer>
-              <Button variant="ghost" size="lg" className="text-primary-foreground hover:bg-white/10 relative h-16 w-16">
-                <Heart className="h-8 w-8" />
+              <Button variant="ghost" size="lg" className="text-primary-foreground hover:bg-white/10 relative h-24 w-24">
+                <Heart className="h-12 w-12" />
                 {favorites.length > 0 && (
                   <Badge 
                     variant="destructive" 
-                    className="absolute -top-1 -right-1 h-7 w-7 p-0 flex items-center justify-center text-sm font-bold"
+                    className="absolute -top-2 -right-2 h-10 w-10 p-0 flex items-center justify-center text-lg font-bold"
                   >
                     {favorites.length}
                   </Badge>
@@ -61,12 +61,12 @@ const Header = () => {
               </Button>
             </FavoritesDrawer>
             <BasketDrawer>
-              <Button variant="ghost" size="lg" className="text-primary-foreground hover:bg-white/10 relative h-16 w-16">
-                <ShoppingCart className="h-8 w-8" />
+              <Button variant="ghost" size="lg" className="text-primary-foreground hover:bg-white/10 relative h-24 w-24">
+                <ShoppingCart className="h-12 w-12" />
                 {getTotalItems() > 0 && (
                   <Badge 
                     variant="destructive" 
-                    className="absolute -top-1 -right-1 h-7 w-7 p-0 flex items-center justify-center text-sm font-bold"
+                    className="absolute -top-2 -right-2 h-10 w-10 p-0 flex items-center justify-center text-lg font-bold"
                   >
                     {getTotalItems()}
                   </Badge>

@@ -59,13 +59,13 @@ const ProductCard = ({
           <Button
             variant="ghost"
             size="lg"
-            className="absolute top-3 right-3 h-12 w-12 bg-gray-100/90 hover:bg-gray-200/90 backdrop-blur-sm"
+            className="absolute top-4 right-4 h-16 w-16 bg-gray-100/90 hover:bg-gray-200/90 backdrop-blur-sm"
             onClick={(e) => {
               e.stopPropagation();
               onToggleFavorite?.();
             }}
           >
-            <Heart className={`h-6 w-6 ${isFavorite ? 'fill-destructive text-destructive' : ''}`} />
+            <Heart className={`h-8 w-8 ${isFavorite ? 'fill-destructive text-destructive' : ''}`} />
           </Button>
         </div>
         
@@ -91,13 +91,13 @@ const ProductCard = ({
           {onAddToCart && (
             <Button
               size="lg"
-              className="w-full mt-4 h-12 text-lg"
+              className="w-full mt-6 h-16 text-xl"
               onClick={(e) => {
                 e.stopPropagation();
                 onAddToCart();
               }}
             >
-              <ShoppingCart className="h-5 w-5 mr-3" />
+              <ShoppingCart className="h-6 w-6 mr-4" />
               Add to Basket
             </Button>
           )}

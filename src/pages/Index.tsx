@@ -108,7 +108,7 @@ const Index = () => {
             <div className="flex items-center gap-6 mb-8">
               <button
                 onClick={() => setSelectedCategory(null)}
-                className="text-primary hover:text-primary/80 text-2xl font-medium py-4 px-6 min-h-[60px] flex items-center"
+                className="text-primary hover:text-primary/80 text-3xl font-medium py-6 px-8 min-h-[80px] flex items-center"
               >
                 ← Back to explore
               </button>

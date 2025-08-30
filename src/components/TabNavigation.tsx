@@ -21,7 +21,7 @@ const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) => {
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
               className={cn(
-                "py-6 px-10 text-2xl font-medium border-b-4 transition-colors min-h-[80px] flex items-center",
+                "py-8 px-12 text-3xl font-medium border-b-4 transition-colors min-h-[100px] flex items-center",
                 activeTab === tab.id
                   ? "border-accent text-foreground"
                   : "border-transparent text-muted-foreground hover:text-foreground"
