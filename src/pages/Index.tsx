@@ -90,12 +90,12 @@ const Index = () => {
           />
           
           {/* Bottom Banner Advertisement */}
-          <div className="px-8">
-            <div className="container mx-auto">
+          <div className="px-6">
+            <div className="container mx-auto max-w-4xl">
               <BannerAd 
                 title="Join Our Loyalty Program" 
                 subtitle="Earn points with every purchase and get exclusive member discounts"
-                className="my-12"
+                className="my-8"
               />
             </div>
           </div>
@@ -103,18 +103,18 @@ const Index = () => {
       )}
 
       {activeTab === "explore" && selectedCategory && (
-        <div className="px-8 py-8">
-          <div className="container mx-auto">
-            <div className="flex items-center gap-6 mb-8">
+        <div className="px-6 py-6">
+          <div className="container mx-auto max-w-4xl">
+            <div className="flex items-center gap-4 mb-6">
               <button
                 onClick={() => setSelectedCategory(null)}
-                className="text-primary hover:text-primary/80 text-3xl font-medium py-6 px-8 min-h-[80px] flex items-center"
+                className="text-primary hover:text-primary/80 text-sm font-medium"
               >
                 ← Back to explore
               </button>
             </div>
-            <h2 className="text-4xl font-bold text-foreground mb-8 capitalize">{selectedCategory}</h2>
-            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8">
+            <h2 className="text-2xl font-bold text-foreground mb-6 capitalize">{selectedCategory}</h2>
+            <div className="grid grid-cols-4 gap-6">
               {categoryProducts.map((product) => (
                 <ProductCard
                   key={product.id}
@@ -136,11 +136,11 @@ const Index = () => {
       
       
       {activeTab === "favourites" && (
-        <div className="px-8 py-12">
-          <div className="container mx-auto">
-            <h2 className="text-4xl font-bold text-foreground mb-12 text-center">Your Favourites</h2>
+        <div className="px-6 py-8">
+          <div className="container mx-auto max-w-4xl">
+            <h2 className="text-2xl font-bold text-foreground mb-8 text-center">Your Favourites</h2>
             {favItems.length > 0 ? (
-              <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8">
+              <div className="grid grid-cols-4 gap-6">
                 {favItems.map((product) => (
                   <ProductCard
                     key={product.id}
@@ -156,8 +156,8 @@ const Index = () => {
               </div>
             ) : (
               <div className="text-center">
-                <p className="text-2xl text-muted-foreground">No favorite products yet</p>
-                <p className="text-xl text-muted-foreground mt-4">Click the heart icon on products to add them to your favorites</p>
+                <p className="text-muted-foreground">No favorite products yet</p>
+                <p className="text-sm text-muted-foreground mt-2">Click the heart icon on products to add them to your favorites</p>
               </div>
             )}
           </div>

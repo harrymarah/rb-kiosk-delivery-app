@@ -2,36 +2,36 @@ import { Star, Truck, ReceiptPoundSterling } from 'lucide-react'
 
 const WelcomeSection = () => {
   return (
-    <section className="bg-background px-[clamp(1rem,2vw,4rem)] py-[clamp(2rem,3vw,6rem)]">
-      <div className="container mx-auto">
-        <h2 className="text-[clamp(2rem,5vw,6rem)] font-bold text-foreground mb-[clamp(2rem,3vw,5rem)]">
+    <section className="bg-background px-6 py-8">
+      <div className="container mx-auto max-w-4xl">
+        <h2 className="text-3xl font-bold text-foreground mb-6">
           Welcome to QuickMart, Earlham Street
         </h2>
 
-        <div className="flex gap-[clamp(2rem,4vw,8rem)] mb-6">
-          <div className="flex items-center gap-[clamp(1rem,2vw,3rem)]">
-            <Star className="h-[clamp(2rem,3vw,4rem)] w-[clamp(2rem,3vw,4rem)] text-primary fill-primary" />
+        <div className="flex gap-12 mb-3">
+          <div className="flex items-center gap-3">
+            <Star className="h-6 w-6 text-primary fill-primary" />
             <div>
-              <span className="text-[clamp(1.5rem,3vw,4rem)] font-bold text-primary">4.8</span>
-              <span className="text-[clamp(1.5rem,3vw,4rem)] text-primary ml-3">Excellent</span>
+              <span className="text-lg font-bold text-primary">4.8</span>
+              <span className="text-lg text-primary ml-2">Excellent</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-[clamp(1rem,2vw,3rem)]">
-            <Truck className="h-[clamp(2rem,3vw,4rem)] w-[clamp(2rem,3vw,4rem)] text-primary" />
+          <div className="flex items-center gap-3">
+            <Truck className="h-6 w-6 text-primary" />
             <div>
-              <span className="text-[clamp(1.5rem,3vw,4rem)] text-foreground">Deliver in</span>
-              <span className="text-[clamp(1.5rem,3vw,4rem)] font-semibold text-primary ml-3">
+              <span className="text-lg text-foreground">Deliver in</span>
+              <span className="text-lg font-semibold text-primary ml-2">
                 15-30 minutes
               </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-[clamp(1rem,2vw,3rem)]">
-            <ReceiptPoundSterling className="h-[clamp(2rem,3vw,4rem)] w-[clamp(2rem,3vw,4rem)] text-primary" />
+          <div className="flex items-center gap-3">
+            <ReceiptPoundSterling className="h-6 w-6 text-primary" />
             <div>
-              <span className="text-[clamp(1.5rem,3vw,4rem)] text-foreground">Minimum order</span>
-              <span className="text-[clamp(1.5rem,3vw,4rem)] font-semibold text-primary ml-3">
+              <span className="text-lg text-foreground">Minimum order</span>
+              <span className="text-lg font-semibold text-primary ml-2">
                 £15
               </span>
             </div>
