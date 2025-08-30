@@ -61,7 +61,7 @@ const SearchBar = () => {
     <div className="relative">
       <form onSubmit={handleSubmit} className="relative">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-6 text-muted-foreground" />
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-6 w-6 text-muted-foreground" />
           <Input
             type="text"
             placeholder="Search products and categories..."
@@ -69,29 +69,29 @@ const SearchBar = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={() => searchTerm && setShowSuggestions(true)}
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-            className="pl-9 pr-4 w-80"
+            className="pl-12 pr-6 w-full h-16 text-xl"
           />
         </div>
       </form>
 
       {showSuggestions && filteredSuggestions.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-lg shadow-lg z-[9999] max-h-80 overflow-y-auto">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-lg shadow-lg z-[9999] max-h-96 overflow-y-auto">
           {filteredSuggestions.map((suggestion, index) => (
             <div
               key={`${suggestion.type}-${suggestion.id}`}
-              className="flex items-center gap-3 p-3 hover:bg-accent cursor-pointer border-b border-border last:border-0"
+              className="flex items-center gap-4 p-5 hover:bg-accent cursor-pointer border-b border-border last:border-0"
               onClick={() => handleSuggestionClick(suggestion)}
             >
               {suggestion.image && (
                 <img
                   src={suggestion.image}
                   alt={suggestion.name}
-                  className="w-10 h-10 object-cover rounded"
+                  className="w-14 h-14 object-cover rounded"
                 />
               )}
               <div className="flex-1 min-w-0">
-                <p className="font-medium text-foreground truncate">{suggestion.name}</p>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <p className="font-medium text-foreground truncate text-lg">{suggestion.name}</p>
+                <div className="flex items-center gap-2 text-base text-muted-foreground">
                   <span className="capitalize">{suggestion.type}</span>
                   {suggestion.price && <span>• {suggestion.price}</span>}
                   {suggestion.offer && <span className="text-destructive">• {suggestion.offer}</span>}
@@ -101,11 +101,11 @@ const SearchBar = () => {
           ))}
           {searchTerm && (
             <div
-              className="flex items-center gap-3 p-3 hover:bg-accent cursor-pointer border-t border-border text-primary"
+              className="flex items-center gap-4 p-5 hover:bg-accent cursor-pointer border-t border-border text-primary"
               onClick={() => handleSubmit(new Event('submit') as any)}
             >
-              <Search className="h-4 w-4" />
-              <span className="font-medium">Search for "{searchTerm}"</span>
+              <Search className="h-5 w-5" />
+              <span className="font-medium text-lg">Search for "{searchTerm}"</span>
             </div>
           )}
         </div>
