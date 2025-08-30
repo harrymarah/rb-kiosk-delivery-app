@@ -60,12 +60,17 @@ export const useProducts = () => {
         
         // Flatten all products into a single array
         const flatProducts = [
-          ...data.products.shopNew,
-          ...data.products.breakfast,
-          ...data.products.lunch,
-          ...data.products.meals,
-          ...data.products.snacks,
-          ...data.products.beverages
+          ...(data.products.shopNew || []),
+          ...(data.products.breakfast || []),
+          ...(data.products.lunch || []),
+          ...(data.products.meals || []),
+          ...(data.products.snacks || []),
+          ...(data.products.beverages || []),
+          ...(data.products.energyDrinks || []),
+          ...(data.products.matchReady || []),
+          ...(data.products.softDrinks || []),
+          ...(data.products.favourites || []),
+          ...(data.products.redBull || [])
         ];
         setAllProducts(flatProducts);
       } catch (error) {
