@@ -8,7 +8,7 @@ export const getProxiedImageUrl = (src: string): string => {
       const hostAndPath = `${u.host}${u.pathname}${u.search}`;
       return `https://images.weserv.nl/?url=${hostAndPath}&w=800&h=800&fit=contain&output=webp`; // optimize and improve reliability
     } catch {
-      return src;
+      return '/placeholder.svg'; // fallback to placeholder if URL parsing fails
     }
   }
   return src;

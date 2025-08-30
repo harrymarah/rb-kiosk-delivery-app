@@ -189,7 +189,12 @@ const ProductDetail = () => {
                 loading="lazy"
                 referrerPolicy="no-referrer"
                 crossOrigin="anonymous"
-                onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/placeholder.svg'; }}
+                onError={(e) => { 
+                  const target = e.currentTarget as HTMLImageElement;
+                  if (target.src !== '/placeholder.svg') {
+                    target.src = '/placeholder.svg';
+                  }
+                }}
                 className="w-full h-full object-cover"
               />
             </div>
