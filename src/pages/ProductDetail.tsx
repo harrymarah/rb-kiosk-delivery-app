@@ -156,7 +156,7 @@ const ProductDetail = () => {
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink 
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/quickmart')}
                 className="cursor-pointer hover:text-foreground"
               >
                 Home
@@ -165,7 +165,7 @@ const ProductDetail = () => {
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink 
-                onClick={() => navigate(`/?category=${product.category}&tab=explore`)}
+                onClick={() => navigate(`/quickmart?category=${product.category}&tab=explore`)}
                 className="cursor-pointer hover:text-foreground"
               >
                 {product.category.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()).trim()}
