@@ -42,7 +42,6 @@ const Index = () => {
     });
   };
 
-  const favoriteProducts = allProducts?.filter(product => favoritesSet.has(product.id)) || [];
   const categoryProducts = selectedCategory 
     ? allProducts?.filter(product => product.category === selectedCategory) || []
     : [];
@@ -140,18 +139,16 @@ const Index = () => {
         <div className="px-6 py-8">
           <div className="container mx-auto max-w-4xl">
             <h2 className="text-2xl font-bold text-foreground mb-8 text-center">Your Favourites</h2>
-            {favoriteProducts.length > 0 ? (
+            {favItems.length > 0 ? (
               <div className="grid grid-cols-4 gap-6">
-                {favoriteProducts.map((product) => (
+                {favItems.map((product) => (
                   <ProductCard
                     key={product.id}
                     image={product.image}
                     name={product.name}
                     price={product.price}
-                    originalPrice={product.originalPrice}
-                    offer={product.offer}
                     isFavorite={true}
-                    onToggleFavorite={() => toggleFavoriteById(product.id)}
+                    onToggleFavorite={() => toggleFav(product)}
                     onAddToCart={() => console.log(`Added ${product.name} to cart`)}
                     productId={product.id}
                   />
