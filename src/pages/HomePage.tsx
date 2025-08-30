@@ -22,7 +22,7 @@ const HomePage = () => {
     },
     {
       id: "waitrose",
-      name: "WaitRose & P...",
+      name: "StopRose & P...",
       logo: "🌿",
       bgColor: "bg-green-500",
       deliveryTime: "20 min",
@@ -30,7 +30,7 @@ const HomePage = () => {
     },
     {
       id: "sainsbury",
-      name: "SainsBury's",
+      name: "SaneBury's",
       logo: "🧡",
       bgColor: "bg-orange-500",
       deliveryTime: "18 min",
