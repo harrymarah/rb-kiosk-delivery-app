@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import bannerImage from "@/assets/banner-sf-4pk.png";
 
 interface BannerAdProps {
@@ -11,11 +12,20 @@ const BannerAd = ({
   subtitle = "Contact us to advertise your brand",
   className = ""
 }: BannerAdProps) => {
+  const navigate = useNavigate();
+
+  const handleBannerClick = () => {
+    navigate("/red-bull-products");
+  };
+
   return (
-    <div className={`w-full rounded-lg overflow-hidden ${className}`}>
+    <div 
+      className={`w-full rounded-lg overflow-hidden cursor-pointer hover:opacity-95 transition-opacity ${className}`}
+      onClick={handleBannerClick}
+    >
       <img 
         src={bannerImage} 
-        alt="Advertisement Banner" 
+        alt="Red Bull Products - Click to view all" 
         className="w-full h-auto object-cover"
       />
     </div>

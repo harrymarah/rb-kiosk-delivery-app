@@ -15,6 +15,7 @@ import SearchResults from "./pages/SearchResults";
 import Checkout from "./pages/Checkout";
 import Confirmation from "./pages/Confirmation";
 import NotFound from "./pages/NotFound";
+import RedBullProducts from "./pages/RedBullProducts";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => (
               <Route path="/search" element={<SearchResults />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/confirmation" element={<Confirmation />} />
+              <Route path="/red-bull-products" element={<RedBullProducts />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
