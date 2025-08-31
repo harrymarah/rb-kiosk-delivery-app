@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import BannerAd from "@/components/BannerAd";
+import PromoBanner from "@/components/PromoBanner";
 import AsDealsLogo from "@/assets/logos/AsDeal_logo.png";
 import MorriSaveLogo from "@/assets/logos/MorriSave_logo.png";
 import SaneBuryLogo from "@/assets/logos/SaneBury_logo.png";
@@ -190,10 +191,10 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Banner Ad */}
-        <BannerAd 
-          title="Special Weekend Offers"
-          subtitle="Get up to 30% off on selected restaurants and groceries"
+        {/* Promo Banner */}
+        <PromoBanner 
+          title="20% off with Tasty Thursday"
+          subtitle="Enjoy the dishes you love for less"
           className="my-6"
         />
 
