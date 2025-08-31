@@ -20,7 +20,7 @@ const BannerAd = ({
 
   return (
     <div 
-      className={`w-full rounded-lg overflow-hidden cursor-pointer hover:opacity-95 transition-opacity ${className}`}
+      className={`w-full max-w-4xl mx-auto rounded-lg overflow-hidden cursor-pointer hover:opacity-95 transition-opacity ${className}`}
       onClick={handleBannerClick}
     >
       <img 
