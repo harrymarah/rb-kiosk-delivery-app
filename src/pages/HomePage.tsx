@@ -11,6 +11,7 @@ import MorriSaveLogo from "@/assets/logos/MorriSave_logo.png";
 import SaneBuryLogo from "@/assets/logos/SaneBury_logo.png";
 import StopRoseLogo from "@/assets/logos/StopRose_logo.png";
 import TesGoLogo from "@/assets/logos/TesGo_logo.png";
+import QuickMartLogo from "@/assets/logos/QuickMart_logo.png";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -20,8 +21,8 @@ const HomePage = () => {
     {
       id: "quickmart",
       name: "QuickMart",
-      logo: "🛒",
-      logoType: "emoji",
+      logo: QuickMartLogo,
+      logoType: "image",
       bgColor: "bg-blue-500",
       deliveryTime: "15 min",
       functional: true
@@ -176,15 +177,11 @@ const HomePage = () => {
                 onClick={() => handleSupermarketClick(supermarket)}
               >
                 <div className={`w-16 h-16 mx-auto rounded-full ${supermarket.bgColor} flex items-center justify-center text-white text-2xl mb-2 relative overflow-hidden`}>
-                  {supermarket.logoType === "image" ? (
-                    <img 
-                      src={supermarket.logo} 
-                      alt={supermarket.name}
-                      className="w-12 h-12 object-contain"
-                    />
-                  ) : (
-                    supermarket.logo
-                  )}
+                  <img 
+                    src={supermarket.logo} 
+                    alt={supermarket.name}
+                    className="w-full h-full object-cover rounded-full"
+                  />
                   {!supermarket.functional && (
                     <div className="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
                       <span className="text-white text-xs">×</span>
