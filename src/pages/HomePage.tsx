@@ -182,11 +182,6 @@ const HomePage = () => {
                     alt={supermarket.name}
                     className="w-full h-full object-cover rounded-full"
                   />
-                  {!supermarket.functional && (
-                    <div className="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs">×</span>
-                    </div>
-                  )}
                 </div>
                 <div className="text-xs font-medium text-foreground mb-1">{supermarket.name}</div>
                 <div className="text-xs text-muted-foreground">{supermarket.deliveryTime}</div>
