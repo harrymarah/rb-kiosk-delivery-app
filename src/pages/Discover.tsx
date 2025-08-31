@@ -57,7 +57,8 @@ const Discover = () => {
       bgColor: "bg-blue-500",
       deliveryTime: "15 min",
       functional: true,
-      description: "Groceries, snacks & more"
+      description: "Groceries, snacks & more",
+      videoUrl: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/videos/supermarket_compressed.mp4"
     },
     {
       id: "fresh-market",
