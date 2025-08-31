@@ -6,6 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import BannerAd from "@/components/BannerAd";
+import AsDealsLogo from "@/assets/logos/AsDeal_logo.png";
+import MorriSaveLogo from "@/assets/logos/MorriSave_logo.png";
+import SaneBuryLogo from "@/assets/logos/SaneBury_logo.png";
+import StopRoseLogo from "@/assets/logos/StopRose_logo.png";
+import TesGoLogo from "@/assets/logos/TesGo_logo.png";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -16,6 +21,7 @@ const HomePage = () => {
       id: "quickmart",
       name: "QuickMart",
       logo: "🛒",
+      logoType: "emoji",
       bgColor: "bg-blue-500",
       deliveryTime: "15 min",
       functional: true
@@ -23,7 +29,8 @@ const HomePage = () => {
     {
       id: "waitrose",
       name: "StopRose & P...",
-      logo: "🌿",
+      logo: StopRoseLogo,
+      logoType: "image",
       bgColor: "bg-green-500",
       deliveryTime: "20 min",
       functional: false
@@ -31,7 +38,8 @@ const HomePage = () => {
     {
       id: "sainsbury",
       name: "SaneBury's",
-      logo: "🧡",
+      logo: SaneBuryLogo,
+      logoType: "image",
       bgColor: "bg-orange-500",
       deliveryTime: "18 min",
       functional: false
@@ -39,7 +47,8 @@ const HomePage = () => {
     {
       id: "tesgo",
       name: "TesGo",
-      logo: "🔴",
+      logo: TesGoLogo,
+      logoType: "image",
       bgColor: "bg-red-500",
       deliveryTime: "25 min",
       functional: false
@@ -47,7 +56,8 @@ const HomePage = () => {
     {
       id: "asdeal",
       name: "AsDeal",
-      logo: "💚",
+      logo: AsDealsLogo,
+      logoType: "image",
       bgColor: "bg-emerald-500",
       deliveryTime: "22 min",
       functional: false
@@ -55,7 +65,8 @@ const HomePage = () => {
     {
       id: "morrisave",
       name: "MorriSave",
-      logo: "🟨",
+      logo: MorriSaveLogo,
+      logoType: "image",
       bgColor: "bg-yellow-500",
       deliveryTime: "30 min",
       functional: false
@@ -164,8 +175,16 @@ const HomePage = () => {
                 }`}
                 onClick={() => handleSupermarketClick(supermarket)}
               >
-                <div className={`w-16 h-16 mx-auto rounded-full ${supermarket.bgColor} flex items-center justify-center text-white text-2xl mb-2 relative`}>
-                  {supermarket.logo}
+                <div className={`w-16 h-16 mx-auto rounded-full ${supermarket.bgColor} flex items-center justify-center text-white text-2xl mb-2 relative overflow-hidden`}>
+                  {supermarket.logoType === "image" ? (
+                    <img 
+                      src={supermarket.logo} 
+                      alt={supermarket.name}
+                      className="w-12 h-12 object-contain"
+                    />
+                  ) : (
+                    supermarket.logo
+                  )}
                   {!supermarket.functional && (
                     <div className="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
                       <span className="text-white text-xs">×</span>
