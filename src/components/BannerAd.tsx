@@ -26,7 +26,7 @@ const BannerAd = ({
       <img 
         src={bannerImage} 
         alt="Red Bull Products - Click to view all" 
-        className="w-full h-auto max-h-48 object-contain"
+        className="w-full h-auto max-h-48 object-contain rounded-lg"
       />
     </div>
   );
