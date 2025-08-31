@@ -8,8 +8,8 @@ const WelcomeSection = () => {
           Welcome to QuickMart, Earlham Street
         </h2>
 
-        <div className="flex gap-12 mb-3">
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-12 mb-3">
+          <div className="flex items-center gap-3 justify-center sm:justify-start">
             <Star className="h-6 w-6 text-primary fill-primary" />
             <div>
               <span className="text-lg font-bold text-primary">4.8</span>
@@ -17,7 +17,7 @@ const WelcomeSection = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 justify-center sm:justify-start">
             <Truck className="h-6 w-6 text-primary" />
             <div>
               <span className="text-lg text-foreground">Deliver in</span>
@@ -27,7 +27,7 @@ const WelcomeSection = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 justify-center sm:justify-start">
             <ReceiptPoundSterling className="h-6 w-6 text-primary" />
             <div>
               <span className="text-lg text-foreground">Minimum order</span>

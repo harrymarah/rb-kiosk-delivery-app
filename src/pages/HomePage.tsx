@@ -155,7 +155,7 @@ const HomePage = () => {
             </Button>
           </div>
           
-          <div className="flex gap-4 overflow-x-auto pb-2">
+          <div className="grid grid-cols-3 sm:flex sm:gap-4 gap-2 overflow-x-auto pb-2">
             {supermarkets.map((supermarket) => (
               <div
                 key={supermarket.id}
@@ -164,7 +164,7 @@ const HomePage = () => {
                 }`}
                 onClick={() => handleSupermarketClick(supermarket)}
               >
-                <div className={`w-16 h-16 rounded-full ${supermarket.bgColor} flex items-center justify-center text-white text-2xl mb-2 relative`}>
+                <div className={`w-16 h-16 mx-auto rounded-full ${supermarket.bgColor} flex items-center justify-center text-white text-2xl mb-2 relative`}>
                   {supermarket.logo}
                   {!supermarket.functional && (
                     <div className="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
@@ -199,8 +199,8 @@ const HomePage = () => {
             {restaurants.map((restaurant) => (
               <Card key={restaurant.id} className="overflow-hidden hover:shadow-md transition-shadow cursor-pointer">
                 <CardContent className="p-0">
-                  <div className="flex">
-                    <div className="relative w-32 h-24 flex-shrink-0">
+                  <div className="flex flex-col sm:flex-row">
+                    <div className="relative w-full sm:w-32 h-24 flex-shrink-0">
                       <img
                         src={restaurant.image}
                         alt={restaurant.name}
@@ -212,14 +212,14 @@ const HomePage = () => {
                     </div>
                     
                     <div className="flex-1 p-3">
-                      <div className="flex justify-between items-start mb-1">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-1">
                         <h3 className="font-semibold text-foreground">{restaurant.name}</h3>
-                        <div className="text-right text-xs text-muted-foreground">
+                        <div className="text-xs text-muted-foreground">
                           {restaurant.deliveryTime}
                         </div>
                       </div>
                       
-                      <div className="flex items-center gap-2 mb-2">
+                      <div className="flex flex-wrap items-center gap-2 mb-2">
                         <div className="flex items-center gap-1">
                           <span className="text-green-600">★</span>
                           <span className="text-sm font-medium">{restaurant.rating}</span>

@@ -33,8 +33,8 @@ const Header = () => {
       <div className="absolute inset-0 bg-black/20"></div>
 
       <div className="relative z-10 container mx-auto px-6 py-8 h-full flex flex-col justify-center">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-4 flex-1 max-w-2xl">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
+          <div className="flex items-center gap-4 flex-1 max-w-2xl w-full">
             <SearchBar />
           </div>
           
