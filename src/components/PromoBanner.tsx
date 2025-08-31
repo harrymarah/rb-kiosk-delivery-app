@@ -9,7 +9,7 @@ interface PromoBannerProps {
 const PromoBanner = ({ title, subtitle, className }: PromoBannerProps) => {
   return (
     <div className={cn(
-      "relative w-full max-w-4xl mx-auto rounded-lg overflow-hidden bg-gradient-to-r from-teal-400 to-cyan-500 p-6 text-white",
+      "relative w-full max-w-4xl mx-auto rounded-lg overflow-hidden bg-gradient-to-r from-teal-400 to-cyan-500 p-6 text-white max-h-48",
       className
     )}>
       <div className="relative z-10">
