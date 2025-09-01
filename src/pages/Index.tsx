@@ -56,7 +56,7 @@ const Index = () => {
         <div className="space-y-8">
           <ProductCarousel 
             title="Shop new" 
-            products={products.shopNew} 
+            products={products.shopNew?.map(product => ({ ...product, isNewArrival: true }))} 
             favorites={favoritesSet}
             onToggleFavorite={toggleFavoriteById}
           />

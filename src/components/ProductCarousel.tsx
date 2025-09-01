@@ -16,6 +16,7 @@ interface ProductCarouselProps {
     originalPrice?: string;
     offer?: string;
     image: string;
+    isNewArrival?: boolean;
   }>;
   favorites?: Set<string>;
   onToggleFavorite?: (productId: string) => void;
@@ -48,6 +49,7 @@ const ProductCarousel = ({ title, products, favorites = new Set(), onToggleFavor
                     onToggleFavorite={() => onToggleFavorite?.(product.id)}
                     onAddToCart={() => console.log(`Added ${product.name} to cart`)}
                     productId={product.id}
+                    isNewArrival={product.isNewArrival}
                   />
                 </div>
               </CarouselItem>

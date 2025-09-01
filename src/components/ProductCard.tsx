@@ -14,6 +14,7 @@ interface ProductCardProps {
   onToggleFavorite?: () => void;
   onAddToCart?: () => void;
   productId?: string;
+  isNewArrival?: boolean;
 }
 
 const ProductCard = ({ 
@@ -25,7 +26,8 @@ const ProductCard = ({
   isFavorite = false,
   onToggleFavorite,
   onAddToCart,
-  productId
+  productId,
+  isNewArrival = false
 }: ProductCardProps) => {
   const navigate = useNavigate();
 
@@ -56,6 +58,12 @@ const ProductCard = ({
               className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-200"
             />
           </div>
+          {isNewArrival && (
+            <div className="absolute top-2 left-2 bg-destructive text-destructive-foreground px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+              <Heart className="h-3 w-3 fill-current" />
+              New
+            </div>
+          )}
           <Button
             variant="ghost"
             size="icon"
