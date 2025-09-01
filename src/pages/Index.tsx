@@ -74,28 +74,28 @@ const Index = () => {
         <div className="space-y-8">
           <ProductCarousel 
             title="Shop new" 
-            products={products.shopNew?.map(product => ({ ...product, isNewArrival: true }))} 
+            products={products.shopNew?.map(product => ({ ...product, isNewArrival: true })) || []} 
             favorites={favoritesSet}
             onToggleFavorite={toggleFavoriteById}
           />
           
           <ProductCarousel
             title="Breakfast" 
-            products={products.breakfast?.slice(0, 6)} 
+            products={products.breakfast?.slice(0, 6) || []} 
             favorites={favoritesSet}
             onToggleFavorite={toggleFavoriteById}
           />
           
-          <ProductCarousel 
+          <ProductCarousel
             title="Get Match Ready" 
-            products={products.matchReady?.slice(0, 6)} 
+            products={products.matchReady?.slice(0, 6) || []} 
             favorites={favoritesSet}
             onToggleFavorite={toggleFavoriteById}
           />
           
           <ProductCarousel 
             title="Soft Drinks" 
-            products={products.softDrinks?.slice(0, 6)} 
+            products={products.softDrinks?.slice(0, 6) || []} 
             favorites={favoritesSet}
             onToggleFavorite={toggleFavoriteById}
           />
@@ -114,7 +114,7 @@ const Index = () => {
               <div className="-mx-6">
                 <ProductCarousel 
                   title="" 
-                  products={products.energyDrinks?.slice(0, 6)} 
+                  products={products.energyDrinks?.slice(0, 6) || []} 
                   favorites={favoritesSet}
                   onToggleFavorite={toggleFavoriteById}
                 />

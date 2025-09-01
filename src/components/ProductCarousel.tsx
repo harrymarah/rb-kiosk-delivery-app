@@ -40,6 +40,11 @@ const ProductCarousel = ({ title, products, favorites = new Set(), onToggleFavor
       description: `${product.name} has been added to your basket`,
     });
   };
+
+  // Safety check: if products is undefined or empty, don't render
+  if (!products || products.length === 0) {
+    return null;
+  }
   return (
     <section className="px-6 py-6">
       <div className="container mx-auto max-w-4xl">
