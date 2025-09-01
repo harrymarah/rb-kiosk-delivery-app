@@ -57,11 +57,17 @@ const SearchResults = () => {
 
   useEffect(() => {
     if (allProducts && categories && query) {
+      console.log('Search Debug - Total allProducts:', allProducts.length);
+      console.log('Search Debug - Query:', query);
+      
       // Filter products that match the search query
       const productMatches = allProducts.filter((product: Product) =>
         product.name.toLowerCase().includes(query.toLowerCase()) ||
         product.category.toLowerCase().includes(query.toLowerCase())
       );
+      
+      console.log('Search Debug - Initial matches:', productMatches.length);
+      console.log('Search Debug - Red Bull matches:', productMatches.filter(p => p.name.toLowerCase().includes('red bull')));
 
       // Remove duplicates based on product name and price to avoid duplicate Red Bull products
       const uniqueProducts = productMatches.reduce((acc: Product[], current: Product) => {
@@ -74,6 +80,8 @@ const SearchResults = () => {
         }
         return acc;
       }, []);
+      
+      console.log('Search Debug - After deduplication:', uniqueProducts.length);
 
       // Filter categories that match the search query
       const categoryMatches = categories.filter((category: Category) =>
