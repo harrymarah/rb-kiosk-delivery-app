@@ -238,9 +238,36 @@ const ProductDetail = () => {
 
             <div>
               <h3 className="text-lg font-semibold text-foreground mb-2">Description</h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed mb-4">
                 {product.description || "A high-quality product perfect for your daily needs. Made with care and attention to detail, this item offers great value and satisfaction."}
               </p>
+              
+              {/* Sugar Free Red Bull Info Images */}
+              {product.name.toLowerCase().includes("sugar free") && product.name.toLowerCase().includes("red bull") && (
+                <div className="mt-6">
+                  <h4 className="text-md font-medium text-foreground mb-3">Product Information</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <img
+                      src="https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Info%20Squares/1.jpg"
+                      alt="Red Bull Sugar Free Information 1"
+                      className="w-full h-auto rounded-md"
+                      loading="lazy"
+                    />
+                    <img
+                      src="https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Info%20Squares/2.jpg"
+                      alt="Red Bull Sugar Free Information 2"
+                      className="w-full h-auto rounded-md"
+                      loading="lazy"
+                    />
+                    <img
+                      src="https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Info%20Squares/3.jpg"
+                      alt="Red Bull Sugar Free Information 3"
+                      className="w-full h-auto rounded-md"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Quantity selector and actions */}
