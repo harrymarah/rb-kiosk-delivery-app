@@ -1,5 +1,7 @@
 import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
+import { useBasket } from "@/contexts/BasketContext";
+import { useToast } from "@/hooks/use-toast";
 import { isShopNewProduct } from "@/lib/product-utils";
 
 interface ProductSectionProps {
@@ -17,6 +19,21 @@ interface ProductSectionProps {
 }
 
 const ProductSection = ({ title, products, favorites = new Set(), onToggleFavorite }: ProductSectionProps) => {
+  const { addItem } = useBasket();
+  const { toast } = useToast();
+
+  const handleAddToCart = (product: any) => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image
+    });
+    toast({
+      title: "Added to basket",
+      description: `${product.name} has been added to your basket`,
+    });
+  };
   return (
     <section className="px-6 py-6">
       <div className="container mx-auto max-w-4xl">
@@ -33,7 +50,7 @@ const ProductSection = ({ title, products, favorites = new Set(), onToggleFavori
                offer={product.offer}
                isFavorite={favorites.has(product.id)}
                onToggleFavorite={() => onToggleFavorite?.(product.id)}
-               onAddToCart={() => console.log(`Added ${product.name} to cart`)}
+               onAddToCart={() => handleAddToCart(product)}
                productId={product.id}
                isNewArrival={isShopNewProduct(product.id)}
              />

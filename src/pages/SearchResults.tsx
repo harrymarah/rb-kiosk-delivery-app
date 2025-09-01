@@ -7,6 +7,8 @@ import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
 import SearchFilterBar from "@/components/SearchFilterBar";
 import { useProducts } from "@/components/ProductSection";
+import { useBasket } from "@/contexts/BasketContext";
+import { useToast } from "@/hooks/use-toast";
 import { isShopNewProduct } from "@/lib/product-utils";
 
 interface Product {
@@ -31,12 +33,27 @@ const SearchResults = () => {
   const navigate = useNavigate();
   const query = searchParams.get("q") || "";
   const { allProducts, categories, isLoading } = useProducts();
+  const { addItem } = useBasket();
+  const { toast } = useToast();
   const [matchingProducts, setMatchingProducts] = useState<Product[]>([]);
   const [matchingCategories, setMatchingCategories] = useState<Category[]>([]);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("relevance");
+
+  const handleAddToCart = (product: Product) => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image
+    });
+    toast({
+      title: "Added to basket",
+      description: `${product.name} has been added to your basket`,
+    });
+  };
 
   useEffect(() => {
     if (allProducts && categories && query) {
@@ -219,7 +236,7 @@ const SearchResults = () => {
                    offer={product.offer}
                    isFavorite={favorites.has(product.id)}
                    onToggleFavorite={() => toggleFavorite(product.id)}
-                   onAddToCart={() => console.log(`Added ${product.name} to cart`)}
+                   onAddToCart={() => handleAddToCart(product)}
                    productId={product.id}
                    isNewArrival={isShopNewProduct(product.id)}
                  />

@@ -4,12 +4,16 @@ import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { useBasket } from "@/contexts/BasketContext";
+import { useToast } from "@/hooks/use-toast";
 import { useProducts } from "@/components/ProductSection";
 import { isShopNewProduct } from "@/lib/product-utils";
 
 const RedBullProducts = () => {
   const navigate = useNavigate();
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
+  const { addItem } = useBasket();
+  const { toast } = useToast();
   const { products: productsData } = useProducts();
 
   // Get all Red Bull products from various categories
@@ -59,6 +63,19 @@ const RedBullProducts = () => {
     }
   };
 
+  const handleAddToCart = (product: any) => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image
+    });
+    toast({
+      title: "Added to basket",
+      description: `${product.name} has been added to your basket`,
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -96,6 +113,7 @@ const RedBullProducts = () => {
                  offer={product.offer}
                  isFavorite={isFavorite(product.id)}
                  onToggleFavorite={() => toggleFavoriteById(product.id)}
+                 onAddToCart={() => handleAddToCart(product)}
                  productId={product.id}
                  isNewArrival={isShopNewProduct(product.id)}
                />
