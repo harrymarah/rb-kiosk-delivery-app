@@ -154,7 +154,7 @@ const Index = () => {
               
               {/* Energy Drinks Category - Advert Block Second */}
               {selectedCategory === "energyDrinks" && (
-                <div className="mb-8">
+                <div className="mb-4">
                   <BannerAd 
                     title="Red Bull Energy Drinks" 
                     subtitle="Discover the full range of Red Bull products"
@@ -165,7 +165,7 @@ const Index = () => {
               
               {/* Energy Drinks Category - Featured Products Third (No Title) */}
               {selectedCategory === "energyDrinks" && (
-                <div className="mb-8">
+                <div className="mb-8 -mt-2">
                   <ProductCarousel 
                     title="" 
                     products={[
