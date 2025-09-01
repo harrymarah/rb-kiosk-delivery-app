@@ -46,13 +46,25 @@ const SearchResults = () => {
         product.category.toLowerCase().includes(query.toLowerCase())
       );
 
+      // Remove duplicates based on product name and price to avoid duplicate Red Bull products
+      const uniqueProducts = productMatches.reduce((acc: Product[], current: Product) => {
+        const isDuplicate = acc.some(item => 
+          item.name.toLowerCase() === current.name.toLowerCase() && 
+          item.price === current.price
+        );
+        if (!isDuplicate) {
+          acc.push(current);
+        }
+        return acc;
+      }, []);
+
       // Filter categories that match the search query
       const categoryMatches = categories.filter((category: Category) =>
         category.name.toLowerCase().includes(query.toLowerCase()) ||
         category.description.toLowerCase().includes(query.toLowerCase())
       );
 
-      setMatchingProducts(productMatches);
+      setMatchingProducts(uniqueProducts);
       setMatchingCategories(categoryMatches);
     }
   }, [allProducts, categories, query]);

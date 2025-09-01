@@ -17,7 +17,21 @@ const SearchBar = () => {
       const productMatches = allProducts
         .filter((product: any) =>
           product.name.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+        );
+
+      // Remove duplicates based on product name and price
+      const uniqueProducts = productMatches.reduce((acc: any[], current: any) => {
+        const isDuplicate = acc.some(item => 
+          item.name.toLowerCase() === current.name.toLowerCase() && 
+          item.price === current.price
+        );
+        if (!isDuplicate) {
+          acc.push(current);
+        }
+        return acc;
+      }, []);
+
+      const limitedProducts = uniqueProducts
         .slice(0, 4)
         .map((product: any) => ({ ...product, type: 'product' }));
 
@@ -30,7 +44,7 @@ const SearchBar = () => {
         .slice(0, 2)
         .map((category: any) => ({ ...category, type: 'category' }));
 
-      setFilteredSuggestions([...productMatches, ...categoryMatches]);
+      setFilteredSuggestions([...limitedProducts, ...categoryMatches]);
       setShowSuggestions(true);
     } else {
       setFilteredSuggestions([]);
