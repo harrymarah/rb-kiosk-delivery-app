@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
@@ -11,10 +11,14 @@ import { isShopNewProduct } from "@/lib/product-utils";
 
 const RedBullProducts = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
   const { addItem } = useBasket();
   const { toast } = useToast();
   const { products: productsData } = useProducts();
+
+  // Get the path where user came from, fallback to /quickmart
+  const fromPath = location.state?.fromPath || '/quickmart';
 
   // Get all Red Bull products from various categories
   const getAllRedBullProducts = () => {
@@ -108,7 +112,7 @@ const RedBullProducts = () => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => navigate('/quickmart')}
+              onClick={() => navigate(fromPath)}
               className="shrink-0"
             >
               <ChevronLeft className="h-6 w-6" />

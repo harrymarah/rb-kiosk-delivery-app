@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import bannerImage from "@/assets/banner-sf-4pk.png";
 
 interface BannerAdProps {
@@ -13,9 +13,12 @@ const BannerAd = ({
   className = ""
 }: BannerAdProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleBannerClick = () => {
-    navigate("/red-bull-products");
+    navigate("/red-bull-products", { 
+      state: { fromPath: location.pathname }
+    });
   };
 
   return (
