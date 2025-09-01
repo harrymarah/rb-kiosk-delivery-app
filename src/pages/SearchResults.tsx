@@ -102,7 +102,7 @@ const SearchResults = () => {
   };
 
   const handleCategoryClick = (categoryName: string) => {
-    navigate(`/?category=${categoryName.toLowerCase()}&tab=explore`);
+    navigate(`/quickmart?category=${categoryName.toLowerCase()}&tab=explore`);
   };
 
   const handleCategoryFilter = (category: string) => {

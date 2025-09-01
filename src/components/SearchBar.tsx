@@ -51,7 +51,7 @@ const SearchBar = () => {
     if (suggestion.type === 'product') {
       navigate(`/product/${suggestion.id}`);
     } else if (suggestion.type === 'category') {
-      navigate(`/?category=${suggestion.name.toLowerCase()}&tab=explore`);
+      navigate(`/quickmart?category=${suggestion.id}&tab=explore`);
     }
     setShowSuggestions(false);
     setSearchTerm("");
