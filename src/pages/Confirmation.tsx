@@ -189,13 +189,13 @@ const Confirmation = () => {
               >
                 <CardContent className="p-4">
                   <div onClick={() => navigate(`/product/${product.id}`)}>
-                    <div className="w-full h-32 bg-muted rounded-lg overflow-hidden mb-3">
+                    <div className="w-full h-32 bg-white rounded-lg overflow-hidden mb-3">
                       <img
                         src={product.image}
                         alt={product.name}
                         loading="lazy"
                         onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/placeholder.svg'; }}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                       />
                     </div>
                     <h3 className="font-medium text-sm text-foreground truncate mb-1">
