@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -70,6 +70,11 @@ const RedBullProducts = () => {
 
   const redBullProducts = getAllRedBullProducts();
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleProductClick = (productId: string) => {
     navigate(`/product/${productId}`);
   };
@@ -111,7 +116,7 @@ const RedBullProducts = () => {
             <div>
               <h1 className="text-2xl font-bold">Red Bull Products</h1>
               <p className="text-muted-foreground">
-                Complete collection of Red Bull energy drinks
+                Complete collection of Red Bull Energy Drinks
               </p>
             </div>
           </div>
