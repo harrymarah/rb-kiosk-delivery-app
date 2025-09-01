@@ -78,28 +78,35 @@ export const useProducts = () => {
         if (cachedData) {
           const data = JSON.parse(cachedData);
           
+          // Check if we have the new structure (array) or old structure (object)
+          const productsArray = Array.isArray(data.products) ? data.products : [];
+          
+          if (productsArray.length === 0) {
+            console.log('No products found in cache, structure:', data);
+          }
+          
           // Transform the new structure to the old format for backward compatibility
           const transformedProducts = {
-            shopNew: data.products.filter((p: any) => p.categories.includes('newProducts')).map((p: any) => ({ ...p, category: 'newProducts', isNewArrival: true })),
-            breakfast: data.products.filter((p: any) => p.categories.includes('breakfast')).map((p: any) => ({ ...p, category: 'breakfast' })),
-            lunch: data.products.filter((p: any) => p.categories.includes('lunch')).map((p: any) => ({ ...p, category: 'lunch' })),
-            meals: data.products.filter((p: any) => p.categories.includes('meals')).map((p: any) => ({ ...p, category: 'meals' })),
-            snacks: data.products.filter((p: any) => p.categories.includes('snacks')).map((p: any) => ({ ...p, category: 'snacks' })),
-            beverages: data.products.filter((p: any) => p.categories.includes('beverages')).map((p: any) => ({ ...p, category: 'beverages' })),
-            energyDrinks: data.products.filter((p: any) => p.categories.includes('energyDrinks')).map((p: any) => ({ ...p, category: 'energyDrinks' })),
-            matchReady: data.products.filter((p: any) => p.categories.includes('matchReady')).map((p: any) => ({ ...p, category: 'matchReady' })),
-            softDrinks: data.products.filter((p: any) => p.categories.includes('softDrinks')).map((p: any) => ({ ...p, category: 'softDrinks' })),
-            favourites: data.products.filter((p: any) => p.categories.includes('favourites')).map((p: any) => ({ ...p, category: 'favourites' })),
-            redBull: data.products.filter((p: any) => p.categories.includes('redBull')).map((p: any) => ({ ...p, category: 'redBull' }))
+            shopNew: productsArray.filter((p: any) => p.categories?.includes('newProducts')).map((p: any) => ({ ...p, category: 'newProducts', isNewArrival: true })),
+            breakfast: productsArray.filter((p: any) => p.categories?.includes('breakfast')).map((p: any) => ({ ...p, category: 'breakfast' })),
+            lunch: productsArray.filter((p: any) => p.categories?.includes('lunch')).map((p: any) => ({ ...p, category: 'lunch' })),
+            meals: productsArray.filter((p: any) => p.categories?.includes('meals')).map((p: any) => ({ ...p, category: 'meals' })),
+            snacks: productsArray.filter((p: any) => p.categories?.includes('snacks')).map((p: any) => ({ ...p, category: 'snacks' })),
+            beverages: productsArray.filter((p: any) => p.categories?.includes('beverages')).map((p: any) => ({ ...p, category: 'beverages' })),
+            energyDrinks: productsArray.filter((p: any) => p.categories?.includes('energyDrinks')).map((p: any) => ({ ...p, category: 'energyDrinks' })),
+            matchReady: productsArray.filter((p: any) => p.categories?.includes('matchReady')).map((p: any) => ({ ...p, category: 'matchReady' })),
+            softDrinks: productsArray.filter((p: any) => p.categories?.includes('softDrinks')).map((p: any) => ({ ...p, category: 'softDrinks' })),
+            favourites: productsArray.filter((p: any) => p.categories?.includes('favourites')).map((p: any) => ({ ...p, category: 'favourites' })),
+            redBull: productsArray.filter((p: any) => p.categories?.includes('redBull')).map((p: any) => ({ ...p, category: 'redBull' }))
           };
           
           setProducts(transformedProducts);
-          setCategories(data.categories);
+          setCategories(data.categories || []);
           
           // Use the unique products array directly
-          const allProductsWithCategory = data.products.map((p: any) => ({ 
+          const allProductsWithCategory = productsArray.map((p: any) => ({ 
             ...p, 
-            category: p.categories[0] // Use first category as primary category for backward compatibility
+            category: p.categories?.[0] || 'unknown' // Use first category as primary category for backward compatibility
           }));
           setAllProducts(allProductsWithCategory);
           setIsLoading(false);
@@ -113,28 +120,31 @@ export const useProducts = () => {
           // Cache the data for offline use
           localStorage.setItem('productsData', JSON.stringify(data));
           
+          // Check if we have the new structure (array) or old structure (object)
+          const productsArray = Array.isArray(data.products) ? data.products : [];
+          
           // Transform the new structure to the old format for backward compatibility
           const transformedProducts = {
-            shopNew: data.products.filter((p: any) => p.categories.includes('newProducts')).map((p: any) => ({ ...p, category: 'newProducts', isNewArrival: true })),
-            breakfast: data.products.filter((p: any) => p.categories.includes('breakfast')).map((p: any) => ({ ...p, category: 'breakfast' })),
-            lunch: data.products.filter((p: any) => p.categories.includes('lunch')).map((p: any) => ({ ...p, category: 'lunch' })),
-            meals: data.products.filter((p: any) => p.categories.includes('meals')).map((p: any) => ({ ...p, category: 'meals' })),
-            snacks: data.products.filter((p: any) => p.categories.includes('snacks')).map((p: any) => ({ ...p, category: 'snacks' })),
-            beverages: data.products.filter((p: any) => p.categories.includes('beverages')).map((p: any) => ({ ...p, category: 'beverages' })),
-            energyDrinks: data.products.filter((p: any) => p.categories.includes('energyDrinks')).map((p: any) => ({ ...p, category: 'energyDrinks' })),
-            matchReady: data.products.filter((p: any) => p.categories.includes('matchReady')).map((p: any) => ({ ...p, category: 'matchReady' })),
-            softDrinks: data.products.filter((p: any) => p.categories.includes('softDrinks')).map((p: any) => ({ ...p, category: 'softDrinks' })),
-            favourites: data.products.filter((p: any) => p.categories.includes('favourites')).map((p: any) => ({ ...p, category: 'favourites' })),
-            redBull: data.products.filter((p: any) => p.categories.includes('redBull')).map((p: any) => ({ ...p, category: 'redBull' }))
+            shopNew: productsArray.filter((p: any) => p.categories?.includes('newProducts')).map((p: any) => ({ ...p, category: 'newProducts', isNewArrival: true })),
+            breakfast: productsArray.filter((p: any) => p.categories?.includes('breakfast')).map((p: any) => ({ ...p, category: 'breakfast' })),
+            lunch: productsArray.filter((p: any) => p.categories?.includes('lunch')).map((p: any) => ({ ...p, category: 'lunch' })),
+            meals: productsArray.filter((p: any) => p.categories?.includes('meals')).map((p: any) => ({ ...p, category: 'meals' })),
+            snacks: productsArray.filter((p: any) => p.categories?.includes('snacks')).map((p: any) => ({ ...p, category: 'snacks' })),
+            beverages: productsArray.filter((p: any) => p.categories?.includes('beverages')).map((p: any) => ({ ...p, category: 'beverages' })),
+            energyDrinks: productsArray.filter((p: any) => p.categories?.includes('energyDrinks')).map((p: any) => ({ ...p, category: 'energyDrinks' })),
+            matchReady: productsArray.filter((p: any) => p.categories?.includes('matchReady')).map((p: any) => ({ ...p, category: 'matchReady' })),
+            softDrinks: productsArray.filter((p: any) => p.categories?.includes('softDrinks')).map((p: any) => ({ ...p, category: 'softDrinks' })),
+            favourites: productsArray.filter((p: any) => p.categories?.includes('favourites')).map((p: any) => ({ ...p, category: 'favourites' })),
+            redBull: productsArray.filter((p: any) => p.categories?.includes('redBull')).map((p: any) => ({ ...p, category: 'redBull' }))
           };
           
           setProducts(transformedProducts);
-          setCategories(data.categories);
+          setCategories(data.categories || []);
           
           // Use the unique products array directly
-          const allProductsWithCategory = data.products.map((p: any) => ({ 
+          const allProductsWithCategory = productsArray.map((p: any) => ({ 
             ...p, 
-            category: p.categories[0] // Use first category as primary category for backward compatibility
+            category: p.categories?.[0] || 'unknown' // Use first category as primary category for backward compatibility
           }));
           setAllProducts(allProductsWithCategory);
         }
@@ -146,27 +156,30 @@ export const useProducts = () => {
         if (cachedData) {
           const data = JSON.parse(cachedData);
           
+          // Check if we have the new structure (array) or old structure (object)
+          const productsArray = Array.isArray(data.products) ? data.products : [];
+          
           // Transform the new structure to the old format for backward compatibility
           const transformedProducts = {
-            shopNew: data.products.filter((p: any) => p.categories.includes('newProducts')).map((p: any) => ({ ...p, category: 'newProducts', isNewArrival: true })),
-            breakfast: data.products.filter((p: any) => p.categories.includes('breakfast')).map((p: any) => ({ ...p, category: 'breakfast' })),
-            lunch: data.products.filter((p: any) => p.categories.includes('lunch')).map((p: any) => ({ ...p, category: 'lunch' })),
-            meals: data.products.filter((p: any) => p.categories.includes('meals')).map((p: any) => ({ ...p, category: 'meals' })),
-            snacks: data.products.filter((p: any) => p.categories.includes('snacks')).map((p: any) => ({ ...p, category: 'snacks' })),
-            beverages: data.products.filter((p: any) => p.categories.includes('beverages')).map((p: any) => ({ ...p, category: 'beverages' })),
-            energyDrinks: data.products.filter((p: any) => p.categories.includes('energyDrinks')).map((p: any) => ({ ...p, category: 'energyDrinks' })),
-            matchReady: data.products.filter((p: any) => p.categories.includes('matchReady')).map((p: any) => ({ ...p, category: 'matchReady' })),
-            softDrinks: data.products.filter((p: any) => p.categories.includes('softDrinks')).map((p: any) => ({ ...p, category: 'softDrinks' })),
-            favourites: data.products.filter((p: any) => p.categories.includes('favourites')).map((p: any) => ({ ...p, category: 'favourites' })),
-            redBull: data.products.filter((p: any) => p.categories.includes('redBull')).map((p: any) => ({ ...p, category: 'redBull' }))
+            shopNew: productsArray.filter((p: any) => p.categories?.includes('newProducts')).map((p: any) => ({ ...p, category: 'newProducts', isNewArrival: true })),
+            breakfast: productsArray.filter((p: any) => p.categories?.includes('breakfast')).map((p: any) => ({ ...p, category: 'breakfast' })),
+            lunch: productsArray.filter((p: any) => p.categories?.includes('lunch')).map((p: any) => ({ ...p, category: 'lunch' })),
+            meals: productsArray.filter((p: any) => p.categories?.includes('meals')).map((p: any) => ({ ...p, category: 'meals' })),
+            snacks: productsArray.filter((p: any) => p.categories?.includes('snacks')).map((p: any) => ({ ...p, category: 'snacks' })),
+            beverages: productsArray.filter((p: any) => p.categories?.includes('beverages')).map((p: any) => ({ ...p, category: 'beverages' })),
+            energyDrinks: productsArray.filter((p: any) => p.categories?.includes('energyDrinks')).map((p: any) => ({ ...p, category: 'energyDrinks' })),
+            matchReady: productsArray.filter((p: any) => p.categories?.includes('matchReady')).map((p: any) => ({ ...p, category: 'matchReady' })),
+            softDrinks: productsArray.filter((p: any) => p.categories?.includes('softDrinks')).map((p: any) => ({ ...p, category: 'softDrinks' })),
+            favourites: productsArray.filter((p: any) => p.categories?.includes('favourites')).map((p: any) => ({ ...p, category: 'favourites' })),
+            redBull: productsArray.filter((p: any) => p.categories?.includes('redBull')).map((p: any) => ({ ...p, category: 'redBull' }))
           };
           
           setProducts(transformedProducts);
-          setCategories(data.categories);
+          setCategories(data.categories || []);
           
-          const allProductsWithCategory = data.products.map((p: any) => ({ 
+          const allProductsWithCategory = productsArray.map((p: any) => ({ 
             ...p, 
-            category: p.categories[0] // Use first category as primary category for backward compatibility
+            category: p.categories?.[0] || 'unknown' // Use first category as primary category for backward compatibility
           }));
           setAllProducts(allProductsWithCategory);
         }
