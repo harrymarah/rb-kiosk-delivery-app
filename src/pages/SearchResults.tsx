@@ -19,6 +19,7 @@ interface Product {
   offer?: string;
   image: string;
   category: string;
+  categories?: string[];
   description?: string;
 }
 
@@ -57,17 +58,21 @@ const SearchResults = () => {
 
   useEffect(() => {
     if (allProducts && categories && query) {
-      console.log('Search Debug - Total allProducts:', allProducts.length);
-      console.log('Search Debug - Query:', query);
-      
-      // Filter products that match the search query
-      const productMatches = allProducts.filter((product: Product) =>
-        product.name.toLowerCase().includes(query.toLowerCase()) ||
-        product.category.toLowerCase().includes(query.toLowerCase())
+      const queryLower = query.toLowerCase().trim();
+      const normalizedQueryNoSpace = queryLower.replace(/\s+/g, '');
+      const categoriesMap = Object.fromEntries(
+        categories.map((c: Category) => [c.id.toLowerCase(), c.name.toLowerCase()])
       );
-      
-      console.log('Search Debug - Initial matches:', productMatches.length);
-      console.log('Search Debug - Red Bull matches:', productMatches.filter(p => p.name.toLowerCase().includes('red bull')));
+
+      // Filter products that match the search query
+      const productMatches = allProducts.filter((product: Product | any) => {
+        const nameMatch = product.name.toLowerCase().includes(queryLower);
+        const primaryCategoryMatch = product.category?.toLowerCase()?.includes(normalizedQueryNoSpace);
+        const categoryIds: string[] = product.categories || [];
+        const categoryIdMatch = categoryIds.some((cid) => cid.toLowerCase().includes(normalizedQueryNoSpace));
+        const categoryNameMatch = categoryIds.some((cid) => categoriesMap[cid.toLowerCase()]?.includes(queryLower));
+        return nameMatch || primaryCategoryMatch || categoryIdMatch || categoryNameMatch;
+      });
 
       // Remove duplicates based on product name and price to avoid duplicate Red Bull products
       const uniqueProducts = productMatches.reduce((acc: Product[], current: Product) => {
@@ -80,13 +85,11 @@ const SearchResults = () => {
         }
         return acc;
       }, []);
-      
-      console.log('Search Debug - After deduplication:', uniqueProducts.length);
 
       // Filter categories that match the search query
       const categoryMatches = categories.filter((category: Category) =>
-        category.name.toLowerCase().includes(query.toLowerCase()) ||
-        category.description.toLowerCase().includes(query.toLowerCase())
+        category.name.toLowerCase().includes(queryLower) ||
+        category.description.toLowerCase().includes(queryLower)
       );
 
       setMatchingProducts(uniqueProducts);
@@ -98,11 +101,12 @@ const SearchResults = () => {
   useEffect(() => {
     let filtered = [...matchingProducts];
 
-    // Filter by category
+    // Filter by category (use all category tags if available)
     if (selectedCategory !== "all") {
-      filtered = filtered.filter(product => 
-        product.category.toLowerCase() === selectedCategory.toLowerCase()
-      );
+      filtered = filtered.filter(product => {
+        const tags = (product as any).categories || [product.category];
+        return tags.some((c: string) => c.toLowerCase() === selectedCategory.toLowerCase());
+      });
     }
 
     // Sort products

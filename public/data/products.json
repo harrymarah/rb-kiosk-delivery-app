@@ -519,6 +519,6 @@
       "price": "£2.99",
       "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/red_bull_assets/9%20-Red%20Bull%20Zero%20Energy%20Drink%20355ml.jpg",
       "categories": ["redBull", "energyDrinks", "beverages"]
-    },
+    }
   ]
 }
