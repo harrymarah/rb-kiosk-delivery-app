@@ -58,12 +58,6 @@ const ProductCard = ({
               className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-200"
             />
           </div>
-          {isNewArrival && (
-            <div className="absolute top-2 left-2 bg-destructive text-destructive-foreground px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
-              <Heart className="h-3 w-3 fill-current" />
-              New
-            </div>
-          )}
           <Button
             variant="ghost"
             size="icon"
@@ -88,6 +82,13 @@ const ProductCard = ({
               </span>
             )}
           </div>
+          
+          {isNewArrival && (
+            <div className="flex items-center gap-1">
+              <Heart className="h-4 w-4 text-destructive fill-destructive" />
+              <span className="text-sm font-medium text-destructive">New Arrival</span>
+            </div>
+          )}
           
           {offer && (
             <div className="flex items-center gap-1">
