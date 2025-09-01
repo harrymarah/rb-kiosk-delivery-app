@@ -23,7 +23,7 @@ const Discover = () => {
       rating: 4.6,
       reviews: "300+",
       deliveryTime: "15 - 25 min",
-      videoUrl: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/videos/fresh_fruit_and_veg_chopping_board.mp4",
+      videoUrl: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/videos/compressed/fresh_fruit_and_veg_chopping_board_v2_min.mp4",
       badge: "Popular",
       badgeColor: "bg-green-600"
     },
@@ -33,7 +33,7 @@ const Discover = () => {
       rating: 4.5,
       reviews: "300+",
       deliveryTime: "10 - 25 min",
-      videoUrl: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/videos/drizzling_pancakes.mp4",
+      videoUrl: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/videos/compressed/drizzling_pancakes_v2_min.mp4",
       badge: "Fast delivery",
       badgeColor: "bg-blue-600"
     },
@@ -43,7 +43,7 @@ const Discover = () => {
       rating: 4.6,
       reviews: "200+",
       deliveryTime: "15 - 30 min",
-      videoUrl: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/videos/meal_at_table.mp4",
+      videoUrl: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/videos/compressed/meal_at_table_v2_min.mp4",
       badge: "Premium",
       badgeColor: "bg-purple-600"
     }
@@ -68,7 +68,7 @@ const Discover = () => {
       deliveryTime: "20 min",
       functional: false,
       description: "Fresh produce daily",
-      videoUrl: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/videos/vegetable_stall.mp4"
+      videoUrl: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/videos/compressed/vegetable_stall_v2_min.mp4"
     }
   ];
 
