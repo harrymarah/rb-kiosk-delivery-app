@@ -60,10 +60,10 @@
     {
       "id": "new1",
       "name": "Red Bull Lilac Edition Sugar Free Energy Drink 4x250ml",
-      "price": "£9.99",
+      "price": "£7.99",
       "offer": "New Arrival",
       "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/12%20New%20Products/Image%201%20-%20Red%20Bull%20Lilac%20Edition%20Sugar%20Free%20Energy%20Drink%204x250ml.jpg",
-      "categories": ["newProducts"]
+      "categories": ["newProducts", "redBull", "beverages"]
     },
     {
       "id": "new2",
@@ -408,12 +408,5 @@
       "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Beverages/12%20Energy%20Drinks/12%20-%20Monster%20Energy%20Zero%20Sugar%204x500ml.jpg",
       "categories": ["beverages"]
     },
-    {
-      "id": "bev7_lilac",
-      "name": "Red Bull Lilac Edition Sugar Free Energy Drink 4x250ml",
-      "price": "£7.99",
-      "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Beverages/12%20Energy%20Drinks/7%20-%20Red%20Bull%20Lilac%20Edition%20Sugar%20Free%20Energy%20Drink%204x250ml.jpg",
-      "categories": ["beverages", "redBull"]
-    }
   ]
 }
