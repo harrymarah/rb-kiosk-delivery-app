@@ -322,7 +322,7 @@
       "name": "Red Bull Energy Drink 8x250ml",
       "price": "£15.99",
       "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Favourite%20Products/12%20Favourites/Image%204%20-%20Red%20Bull%20Energy%20Drink%208x250ml.jpg",
-      "categories": ["favourites", "redBull"]
+      "categories": ["favourites", "redBull", "energyDrinks", "beverages"]
     },
     {
       "id": "fav5",
@@ -358,13 +358,6 @@
       "price": "£1.49",
       "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Favourite%20Products/12%20Favourites/Image%2012%20-%20Walkers%20Extra%20Flamin%20Hot.jpg",
       "categories": ["favourites"]
-    },
-    {
-      "id": "rb10",
-      "name": "Red Bull Energy 250ml x8",
-      "price": "£15.99",
-      "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Red%20Bull%20Products/ALL/10%20-%20Red%20Bull%20Energy%20250ml%20x8.jpeg",
-      "categories": ["redBull"]
     },
     {
       "id": "rb11",
