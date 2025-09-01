@@ -158,34 +158,34 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="px-4 py-6 space-y-8">
+      <div className="px-4 py-4 space-y-6 max-w-6xl mx-auto">
         {/* Supermarkets Section */}
         <section>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-foreground">Groceries, snacks, drinks and more</h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-foreground">Groceries, snacks, drinks and more</h2>
             <Button variant="ghost" size="sm" className="text-primary">
               See all →
             </Button>
           </div>
           
-          <div className="grid grid-cols-3 sm:flex sm:gap-4 gap-2 overflow-x-auto pb-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
             {supermarkets.map((supermarket) => (
               <div
                 key={supermarket.id}
-                className={`flex-shrink-0 text-center cursor-pointer ${
+                className={`text-center cursor-pointer p-4 rounded-lg hover:bg-muted/50 transition-colors ${
                   supermarket.functional ? 'hover:opacity-80' : 'opacity-75'
                 }`}
                 onClick={() => handleSupermarketClick(supermarket)}
               >
-                <div className={`w-16 h-16 mx-auto rounded-full ${supermarket.bgColor} flex items-center justify-center text-white text-2xl mb-2 relative overflow-hidden`}>
+                <div className={`w-20 h-20 mx-auto rounded-full ${supermarket.bgColor} flex items-center justify-center text-white text-2xl mb-3 relative overflow-hidden shadow-md`}>
                   <img 
                     src={supermarket.logo} 
                     alt={supermarket.name}
                     className="w-full h-full object-cover rounded-full"
                   />
                 </div>
-                <div className="text-xs font-medium text-foreground mb-1">{supermarket.name}</div>
-                <div className="text-xs text-muted-foreground">{supermarket.deliveryTime}</div>
+                <div className="text-sm font-medium text-foreground mb-1">{supermarket.name}</div>
+                <div className="text-sm text-muted-foreground">{supermarket.deliveryTime}</div>
               </div>
             ))}
           </div>
@@ -195,53 +195,53 @@ const HomePage = () => {
         <PromoBanner 
           title="20% off with Tasty Thursday"
           subtitle="Enjoy the dishes you love for less"
-          className="my-6"
+          className="my-8"
         />
 
         {/* Restaurants Section */}
         <section>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-foreground">Local favorites delivered fast</h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-foreground">Local favorites delivered fast</h2>
             <Button variant="ghost" size="sm" className="text-primary">
               See all →
             </Button>
           </div>
           
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {restaurants.map((restaurant) => (
-              <Card key={restaurant.id} className="overflow-hidden hover:shadow-md transition-shadow cursor-pointer">
+              <Card key={restaurant.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer">
                 <CardContent className="p-0">
-                  <div className="flex flex-col sm:flex-row">
-                    <div className="relative w-full sm:w-32 h-24 flex-shrink-0">
+                  <div className="flex">
+                    <div className="relative w-32 lg:w-36 h-28 lg:h-32 flex-shrink-0">
                       <img
                         src={restaurant.image}
                         alt={restaurant.name}
                         className="w-full h-full object-cover"
                       />
-                      <Badge className={`absolute top-2 left-2 text-white text-xs ${restaurant.badgeColor}`}>
+                      <Badge className={`absolute top-3 left-3 text-white text-xs ${restaurant.badgeColor}`}>
                         {restaurant.badge}
                       </Badge>
                     </div>
                     
-                    <div className="flex-1 p-3">
-                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-1">
-                        <h3 className="font-semibold text-foreground">{restaurant.name}</h3>
-                        <div className="text-xs text-muted-foreground">
+                    <div className="flex-1 p-4">
+                      <div className="flex justify-between items-start gap-2 mb-2">
+                        <h3 className="font-semibold text-foreground text-lg">{restaurant.name}</h3>
+                        <div className="text-sm text-muted-foreground font-medium">
                           {restaurant.deliveryTime}
                         </div>
                       </div>
                       
-                      <div className="flex flex-wrap items-center gap-2 mb-2">
+                      <div className="flex items-center gap-3 mb-3">
                         <div className="flex items-center gap-1">
-                          <span className="text-green-600">★</span>
+                          <span className="text-green-600 text-lg">★</span>
                           <span className="text-sm font-medium">{restaurant.rating}</span>
-                          <span className="text-xs text-muted-foreground">({restaurant.reviews})</span>
+                          <span className="text-sm text-muted-foreground">({restaurant.reviews})</span>
                         </div>
-                        <span className="text-xs text-muted-foreground">•</span>
-                        <span className="text-xs text-muted-foreground">{restaurant.cuisine}</span>
+                        <span className="text-muted-foreground">•</span>
+                        <span className="text-sm text-muted-foreground">{restaurant.cuisine}</span>
                       </div>
                       
-                      <div className="text-xs text-muted-foreground">
+                      <div className="text-sm text-muted-foreground font-medium">
                         {restaurant.deliveryFee} delivery
                       </div>
                     </div>
@@ -256,7 +256,7 @@ const HomePage = () => {
         <BannerAd 
           title="20% off with Tasty Thursday"
           subtitle="Enjoy the dishes you love for less"
-          className="mb-8"
+          className="mb-12"
         />
       </div>
 
