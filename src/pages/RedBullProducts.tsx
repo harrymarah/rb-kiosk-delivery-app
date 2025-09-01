@@ -42,10 +42,17 @@ const RedBullProducts = () => {
       ),
     ];
 
-    // Remove duplicates based on product name
-    const uniqueProducts = allProducts.filter((product, index, self) =>
-      index === self.findIndex(p => p.name === product.name)
-    );
+    // Remove duplicates across categories by normalized name; prefer items from redBull category
+    const normalize = (s: string) => s.toLowerCase().replace(/drink/g, "").replace(/\s+/g, "").replace(/[^a-z0-9]/g, "");
+    const map = new Map<string, any>();
+    for (const p of allProducts) {
+      const key = normalize(p.name);
+      const existing = map.get(key);
+      if (!existing || (p.category === 'redBull' && existing.category !== 'redBull')) {
+        map.set(key, p);
+      }
+    }
+    const uniqueProducts = Array.from(map.values());
 
     return uniqueProducts;
   };
