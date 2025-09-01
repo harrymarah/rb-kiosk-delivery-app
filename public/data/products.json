@@ -129,7 +129,7 @@
         "id": "breakfast3",
         "name": "Red Bull Energy Drink 250ml",
         "price": "£2.49",
-        "image": "/assets/red-bull-original.jpg",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Red%20Bull%20Products/ALL/17%20-%20Red%20Bull%20Energy%20Drink%20250ml.png",
         "category": "breakfast"
       },
       {
