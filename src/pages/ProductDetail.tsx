@@ -248,8 +248,8 @@ const ProductDetail = () => {
                 {product.description || "A high-quality product perfect for your daily needs. Made with care and attention to detail, this item offers great value and satisfaction."}
               </p>
               
-              {/* Sugar Free Red Bull Info Images */}
-              {product.name.toLowerCase().includes("sugar free") && product.name.toLowerCase().includes("red bull") && (
+              {/* Sugar Free Red Bull Info Images - Only show for "Red Bull Sugar Free Energy Drink" */}
+              {product.name === "Red Bull Sugar Free Energy Drink" && (
                 <div className="mt-6">
                   <h4 className="text-md font-medium text-foreground mb-3">Product Information</h4>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
