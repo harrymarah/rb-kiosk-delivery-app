@@ -131,8 +131,8 @@ const SearchResults = () => {
     });
   };
 
-  const handleCategoryClick = (categoryName: string) => {
-    navigate(`/quickmart?category=${categoryName.toLowerCase()}&tab=explore`);
+  const handleCategoryClick = (categoryId: string) => {
+    navigate(`/quickmart?category=${categoryId}&tab=explore`);
   };
 
   const handleCategoryFilter = (category: string) => {
@@ -209,7 +209,7 @@ const SearchResults = () => {
                 <Card
                   key={category.id}
                   className="cursor-pointer hover:shadow-lg transition-shadow"
-                  onClick={() => handleCategoryClick(category.name)}
+                  onClick={() => handleCategoryClick(category.id)}
                 >
                   <CardContent className="p-4">
                     <h3 className="font-semibold text-foreground mb-2">{category.name}</h3>

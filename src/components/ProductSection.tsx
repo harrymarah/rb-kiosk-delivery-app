@@ -114,7 +114,7 @@ export const useProducts = () => {
         
         // Always try to fetch fresh data when online
         if (navigator.onLine) {
-          const response = await fetch('/data/products.json');
+          const response = await fetch(`/data/products.json?v=${Date.now()}`);
           const data = await response.json();
           
           // Cache the data for offline use
