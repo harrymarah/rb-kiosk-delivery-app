@@ -259,16 +259,16 @@
     "softDrinks": [
       {
         "id": "soft1",
-        "name": "Red Bull Energy Drink 8x250ml",
-        "price": "£15.99",
-        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/6%20Soft%20Drinks/1%20-%20Red%20Bull%20Energy%20Drink%208x250ml.jpeg",
+        "name": "Coca Cola Original 8x330ml",
+        "price": "£6.49",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/6%20Soft%20Drinks/2%20-%20Coca%20Cola%20Original%208x330ml.jpg",
         "category": "softDrinks"
       },
       {
         "id": "soft2",
-        "name": "Coca Cola Original 8x330ml",
-        "price": "£6.49",
-        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/6%20Soft%20Drinks/2%20-%20Coca%20Cola%20Original%208x330ml.jpg",
+        "name": "Diet Coke 10x330ml",
+        "price": "£7.99",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/6%20Soft%20Drinks/4%20-%20Diet%20Coke%2010x330ml.jpg",
         "category": "softDrinks"
       },
       {
@@ -280,20 +280,6 @@
       },
       {
         "id": "soft4",
-        "name": "Diet Coke 10x330ml",
-        "price": "£7.99",
-        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/6%20Soft%20Drinks/4%20-%20Diet%20Coke%2010x330ml.jpg",
-        "category": "softDrinks"
-      },
-      {
-        "id": "soft5",
-        "name": "Monster Energy Drink 4 X 500ml",
-        "price": "£8.99",
-        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/6%20Soft%20Drinks/5%20-%20Monster%20Energy%20Drink%204%20X%20500ml.jpg",
-        "category": "softDrinks"
-      },
-      {
-        "id": "soft6",
         "name": "Evian Water 6x500ml",
         "price": "£4.99",
         "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/6%20Soft%20Drinks/6%20-%20Evian%20Water%206x500ml.jpg",
