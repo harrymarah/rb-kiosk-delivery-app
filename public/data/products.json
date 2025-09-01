@@ -364,14 +364,14 @@
       "name": "Red Bull Winter Edition Sugar Free Energy Drink 250ml x 4",
       "price": "£7.99",
       "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Red%20Bull%20Products/ALL/11%20-%20Red%20Bull%20Winter%20Edition%20Sugar%20Free%20Energy%20Drink%20250ml%20x%204.jpg",
-      "categories": ["redBull"]
+      "categories": ["redBull", "energyDrinks", "beverages"]
     },
     {
       "id": "rb12",
       "name": "Red Bull Peach Edition Sugar Free Energy Drink 250ml x 4",
       "price": "£7.99",
       "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Red%20Bull%20Products/ALL/12%20-%20Red%20Bull%20Peach%20Edition%20Sugar%20Free%20Energy%20Drink%20250ml%20x%204.jpg",
-      "categories": ["redBull"]
+      "categories": ["redBull", "energyDrinks", "beverages"]
     },
     {
       "id": "bev3",
