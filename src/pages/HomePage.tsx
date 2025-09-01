@@ -84,7 +84,7 @@ const HomePage = () => {
       reviews: "300+",
       deliveryTime: "25-40 min",
       deliveryFee: "£1.99",
-      image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1525755662778-989d0524087e?w=400&h=300&fit=crop&auto=format",
       badge: "Free delivery",
       badgeColor: "bg-green-600"
     },
@@ -96,7 +96,7 @@ const HomePage = () => {
       reviews: "500+",
       deliveryTime: "20-35 min",
       deliveryFee: "£2.49",
-      image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1574653406055-21c4b9a7b0a9?w=400&h=300&fit=crop&auto=format",
       badge: "Popular",
       badgeColor: "bg-orange-600"
     },
@@ -108,7 +108,7 @@ const HomePage = () => {
       reviews: "800+",
       deliveryTime: "15-30 min",
       deliveryFee: "£1.49",
-      image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop&auto=format",
       badge: "Fast delivery",
       badgeColor: "bg-blue-600"
     },
@@ -120,7 +120,7 @@ const HomePage = () => {
       reviews: "400+",
       deliveryTime: "20-35 min",
       deliveryFee: "£2.99",
-      image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&h=300&fit=crop&auto=format",
       badge: "Hot deals",
       badgeColor: "bg-red-600"
     },
@@ -132,7 +132,7 @@ const HomePage = () => {
       reviews: "250+",
       deliveryTime: "30-45 min",
       deliveryFee: "£2.99",
-      image: "https://images.unsplash.com/photo-1544148103-0773bf10d330?w=400&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&h=300&fit=crop&auto=format",
       badge: "Healthy choice",
       badgeColor: "bg-emerald-600"
     },
@@ -144,7 +144,7 @@ const HomePage = () => {
       reviews: "180+",
       deliveryTime: "25-35 min",
       deliveryFee: "£3.49",
-      image: "https://images.unsplash.com/photo-1553621042-f6e147245754?w=400&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400&h=300&fit=crop&auto=format",
       badge: "Premium",
       badgeColor: "bg-purple-600"
     },
@@ -156,7 +156,7 @@ const HomePage = () => {
       reviews: "350+",
       deliveryTime: "20-30 min",
       deliveryFee: "£1.99",
-      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1574653406955-8b6b8cb733c1?w=400&h=300&fit=crop&auto=format",
       badge: "Spicy hot",
       badgeColor: "bg-red-600"
     },
@@ -168,7 +168,7 @@ const HomePage = () => {
       reviews: "220+",
       deliveryTime: "35-50 min",
       deliveryFee: "£2.49",
-      image: "https://images.unsplash.com/photo-1544961503-7ad532fbb2cd?w=400&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=400&h=300&fit=crop&auto=format",
       badge: "Authentic",
       badgeColor: "bg-blue-600"
     }
@@ -257,36 +257,41 @@ const HomePage = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {restaurants.map((restaurant) => (
-              <Card key={restaurant.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer">
-                <CardContent className="p-0">
-                  <div className="flex">
-                    <div className="relative w-40 lg:w-44 h-32 lg:h-36 flex-shrink-0">
+              <Card key={restaurant.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer h-40">
+                <CardContent className="p-0 h-full">
+                  <div className="flex h-full">
+                    <div className="relative w-40 lg:w-44 h-full flex-shrink-0">
                       <img
                         src={restaurant.image}
                         alt={restaurant.name}
                         className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src = "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop&auto=format";
+                        }}
                       />
                       <Badge className={`absolute top-3 left-3 text-white text-xs ${restaurant.badgeColor}`}>
                         {restaurant.badge}
                       </Badge>
                     </div>
                     
-                    <div className="flex-1 p-5">
-                      <div className="flex justify-between items-start gap-2 mb-2">
-                        <h3 className="font-semibold text-foreground text-xl">{restaurant.name}</h3>
-                        <div className="text-sm text-muted-foreground font-medium">
-                          {restaurant.deliveryTime}
+                    <div className="flex-1 p-5 flex flex-col justify-between">
+                      <div>
+                        <div className="flex justify-between items-start gap-2 mb-2">
+                          <h3 className="font-semibold text-foreground text-xl">{restaurant.name}</h3>
+                          <div className="text-sm text-muted-foreground font-medium">
+                            {restaurant.deliveryTime}
+                          </div>
                         </div>
-                      </div>
-                      
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="flex items-center gap-1">
-                          <span className="text-green-600 text-lg">★</span>
-                          <span className="text-sm font-medium">{restaurant.rating}</span>
-                          <span className="text-sm text-muted-foreground">({restaurant.reviews})</span>
+                        
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="flex items-center gap-1">
+                            <span className="text-green-600 text-lg">★</span>
+                            <span className="text-sm font-medium">{restaurant.rating}</span>
+                            <span className="text-sm text-muted-foreground">({restaurant.reviews})</span>
+                          </div>
+                          <span className="text-muted-foreground">•</span>
+                          <span className="text-sm text-muted-foreground">{restaurant.cuisine}</span>
                         </div>
-                        <span className="text-muted-foreground">•</span>
-                        <span className="text-sm text-muted-foreground">{restaurant.cuisine}</span>
                       </div>
                       
                       <div className="text-sm text-muted-foreground font-medium">
