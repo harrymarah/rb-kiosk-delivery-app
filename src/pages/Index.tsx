@@ -133,7 +133,26 @@ const Index = () => {
                 {selectedCategory === "energyDrinks" ? "Energy Drinks" : selectedCategory}
               </h2>
               
-              {/* Energy Drinks Category - Add Advert Block */}
+              
+              {/* Products Grid First */}
+              <div className="grid grid-cols-4 gap-6 mb-8">
+                {categoryProducts.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    image={product.image}
+                    name={product.name}
+                    price={product.price}
+                    originalPrice={product.originalPrice}
+                    offer={product.offer}
+                    isFavorite={favoritesSet.has(product.id)}
+                    onToggleFavorite={() => toggleFavoriteById(product.id)}
+                    onAddToCart={() => console.log(`Added ${product.name} to cart`)}
+                    productId={product.id}
+                  />
+                ))}
+              </div>
+              
+              {/* Energy Drinks Category - Advert Block Second */}
               {selectedCategory === "energyDrinks" && (
                 <div className="mb-8">
                   <BannerAd 
@@ -144,11 +163,11 @@ const Index = () => {
                 </div>
               )}
               
-              {/* Energy Drinks Category - Featured Products Carousel */}
+              {/* Energy Drinks Category - Featured Products Third (No Title) */}
               {selectedCategory === "energyDrinks" && (
                 <div className="mb-8">
                   <ProductCarousel 
-                    title="Featured Red Bull Products" 
+                    title="" 
                     products={[
                       {
                         id: "energy2",
@@ -180,23 +199,6 @@ const Index = () => {
                   />
                 </div>
               )}
-              
-              <div className="grid grid-cols-4 gap-6">
-                {categoryProducts.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    image={product.image}
-                    name={product.name}
-                    price={product.price}
-                    originalPrice={product.originalPrice}
-                    offer={product.offer}
-                    isFavorite={favoritesSet.has(product.id)}
-                    onToggleFavorite={() => toggleFavoriteById(product.id)}
-                    onAddToCart={() => console.log(`Added ${product.name} to cart`)}
-                    productId={product.id}
-                  />
-                ))}
-              </div>
             </div>
           </div>
         </div>
