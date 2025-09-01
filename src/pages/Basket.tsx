@@ -75,7 +75,7 @@ const Basket = () => {
     <div className="min-h-screen bg-background pb-20">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="mb-6">
-          <Button variant="ghost" onClick={() => navigate('/')} className="mb-4">
+          <Button variant="ghost" onClick={() => navigate('/quickmart')} className="mb-4">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Continue Shopping
           </Button>
