@@ -123,6 +123,54 @@ const HomePage = () => {
       image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop",
       badge: "Hot deals",
       badgeColor: "bg-red-600"
+    },
+    {
+      id: "mediterranean-grill",
+      name: "Mediterranean Grill",
+      cuisine: "Mediterranean",
+      rating: 4.7,
+      reviews: "250+",
+      deliveryTime: "30-45 min",
+      deliveryFee: "£2.99",
+      image: "https://images.unsplash.com/photo-1544148103-0773bf10d330?w=400&h=300&fit=crop",
+      badge: "Healthy choice",
+      badgeColor: "bg-emerald-600"
+    },
+    {
+      id: "sushi-express",
+      name: "Sushi Express",
+      cuisine: "Japanese",
+      rating: 4.8,
+      reviews: "180+",
+      deliveryTime: "25-35 min",
+      deliveryFee: "£3.49",
+      image: "https://images.unsplash.com/photo-1553621042-f6e147245754?w=400&h=300&fit=crop",
+      badge: "Premium",
+      badgeColor: "bg-purple-600"
+    },
+    {
+      id: "tex-mex-cantina",
+      name: "Tex-Mex Cantina",
+      cuisine: "Mexican",
+      rating: 4.3,
+      reviews: "350+",
+      deliveryTime: "20-30 min",
+      deliveryFee: "£1.99",
+      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop",
+      badge: "Spicy hot",
+      badgeColor: "bg-red-600"
+    },
+    {
+      id: "greek-taverna",
+      name: "Greek Taverna",
+      cuisine: "Greek",
+      rating: 4.5,
+      reviews: "220+",
+      deliveryTime: "35-50 min",
+      deliveryFee: "£2.49",
+      image: "https://images.unsplash.com/photo-1544961503-7ad532fbb2cd?w=400&h=300&fit=crop",
+      badge: "Authentic",
+      badgeColor: "bg-blue-600"
     }
   ];
 
@@ -212,7 +260,7 @@ const HomePage = () => {
               <Card key={restaurant.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer">
                 <CardContent className="p-0">
                   <div className="flex">
-                    <div className="relative w-32 lg:w-36 h-28 lg:h-32 flex-shrink-0">
+                    <div className="relative w-40 lg:w-44 h-32 lg:h-36 flex-shrink-0">
                       <img
                         src={restaurant.image}
                         alt={restaurant.name}
@@ -223,9 +271,9 @@ const HomePage = () => {
                       </Badge>
                     </div>
                     
-                    <div className="flex-1 p-4">
+                    <div className="flex-1 p-5">
                       <div className="flex justify-between items-start gap-2 mb-2">
-                        <h3 className="font-semibold text-foreground text-lg">{restaurant.name}</h3>
+                        <h3 className="font-semibold text-foreground text-xl">{restaurant.name}</h3>
                         <div className="text-sm text-muted-foreground font-medium">
                           {restaurant.deliveryTime}
                         </div>
