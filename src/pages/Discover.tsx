@@ -164,6 +164,11 @@ const Discover = () => {
                       loop
                       muted
                       playsInline
+                      preload="metadata"
+                      style={{ 
+                        willChange: 'auto',
+                        transform: 'translateZ(0)'
+                      }}
                     >
                       <source src={highlight.videoUrl} type="video/mp4" />
                     </video>
@@ -204,6 +209,11 @@ const Discover = () => {
                           loop
                           muted
                           playsInline
+                          preload="metadata"
+                          style={{ 
+                            willChange: 'auto',
+                            transform: 'translateZ(0)'
+                          }}
                         >
                           <source src={store.videoUrl} type="video/mp4" />
                         </video>
