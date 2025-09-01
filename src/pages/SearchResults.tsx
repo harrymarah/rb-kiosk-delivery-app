@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
 import SearchFilterBar from "@/components/SearchFilterBar";
 import { useProducts } from "@/components/ProductSection";
+import { isShopNewProduct } from "@/lib/product-utils";
 
 interface Product {
   id: string;
@@ -197,18 +198,19 @@ const SearchResults = () => {
             <h2 className="text-xl font-semibold text-foreground mb-6">Products</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {filteredProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  image={product.image}
-                  name={product.name}
-                  price={product.price}
-                  originalPrice={product.originalPrice}
-                  offer={product.offer}
-                  isFavorite={favorites.has(product.id)}
-                  onToggleFavorite={() => toggleFavorite(product.id)}
-                  onAddToCart={() => console.log(`Added ${product.name} to cart`)}
-                  productId={product.id}
-                />
+                 <ProductCard
+                   key={product.id}
+                   image={product.image}
+                   name={product.name}
+                   price={product.price}
+                   originalPrice={product.originalPrice}
+                   offer={product.offer}
+                   isFavorite={favorites.has(product.id)}
+                   onToggleFavorite={() => toggleFavorite(product.id)}
+                   onAddToCart={() => console.log(`Added ${product.name} to cart`)}
+                   productId={product.id}
+                   isNewArrival={isShopNewProduct(product.id)}
+                 />
               ))}
             </div>
           </section>

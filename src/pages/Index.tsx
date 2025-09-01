@@ -8,6 +8,7 @@ import ProductCarousel from "@/components/ProductCarousel";
 import ProductCard from "@/components/ProductCard";
 import BannerAd from "@/components/BannerAd";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { isShopNewProduct } from "@/lib/product-utils";
 
 const Index = () => {
   const [searchParams] = useSearchParams();
@@ -141,20 +142,21 @@ const Index = () => {
               
               {/* Products Grid First */}
               <div className="grid grid-cols-4 gap-6 mb-8">
-                {categoryProducts.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    image={product.image}
-                    name={product.name}
-                    price={product.price}
-                    originalPrice={product.originalPrice}
-                    offer={product.offer}
-                    isFavorite={favoritesSet.has(product.id)}
-                    onToggleFavorite={() => toggleFavoriteById(product.id)}
-                    onAddToCart={() => console.log(`Added ${product.name} to cart`)}
-                    productId={product.id}
-                  />
-                ))}
+                 {categoryProducts.map((product) => (
+                   <ProductCard
+                     key={product.id}
+                     image={product.image}
+                     name={product.name}
+                     price={product.price}
+                     originalPrice={product.originalPrice}
+                     offer={product.offer}
+                     isFavorite={favoritesSet.has(product.id)}
+                     onToggleFavorite={() => toggleFavoriteById(product.id)}
+                     onAddToCart={() => console.log(`Added ${product.name} to cart`)}
+                     productId={product.id}
+                     isNewArrival={isShopNewProduct(product.id)}
+                   />
+                 ))}
               </div>
               
               {/* Energy Drinks Category - Advert Block Second */}
@@ -216,18 +218,19 @@ const Index = () => {
             <h2 className="text-2xl font-bold text-foreground mb-8 text-center">Your Favourites</h2>
             {favItems.length > 0 ? (
               <div className="grid grid-cols-4 gap-6">
-                {favItems.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    image={product.image}
-                    name={product.name}
-                    price={product.price}
-                    isFavorite={true}
-                    onToggleFavorite={() => toggleFav(product)}
-                    onAddToCart={() => console.log(`Added ${product.name} to cart`)}
-                    productId={product.id}
-                  />
-                ))}
+                 {favItems.map((product) => (
+                   <ProductCard
+                     key={product.id}
+                     image={product.image}
+                     name={product.name}
+                     price={product.price}
+                     isFavorite={true}
+                     onToggleFavorite={() => toggleFav(product)}
+                     onAddToCart={() => console.log(`Added ${product.name} to cart`)}
+                     productId={product.id}
+                     isNewArrival={isShopNewProduct(product.id)}
+                   />
+                 ))}
               </div>
             ) : (
               <div className="text-center">

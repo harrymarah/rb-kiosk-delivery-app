@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useProducts } from "@/components/ProductSection";
+import { isShopNewProduct } from "@/lib/product-utils";
 
 const RedBullProducts = () => {
   const navigate = useNavigate();
@@ -87,16 +88,17 @@ const RedBullProducts = () => {
         {redBullProducts.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {redBullProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                image={product.image}
-                name={product.name}
-                price={product.price}
-                offer={product.offer}
-                isFavorite={isFavorite(product.id)}
-                onToggleFavorite={() => toggleFavoriteById(product.id)}
-                productId={product.id}
-              />
+               <ProductCard
+                 key={product.id}
+                 image={product.image}
+                 name={product.name}
+                 price={product.price}
+                 offer={product.offer}
+                 isFavorite={isFavorite(product.id)}
+                 onToggleFavorite={() => toggleFavoriteById(product.id)}
+                 productId={product.id}
+                 isNewArrival={isShopNewProduct(product.id)}
+               />
             ))}
           </div>
         ) : (

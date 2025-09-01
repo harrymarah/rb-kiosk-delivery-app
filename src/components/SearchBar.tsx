@@ -93,8 +93,9 @@ const SearchBar = () => {
                 <p className="font-medium text-foreground truncate">{suggestion.name}</p>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <span className="capitalize">{suggestion.type}</span>
-                  {suggestion.price && <span>• {suggestion.price}</span>}
-                  {suggestion.offer && <span className="text-destructive">• {suggestion.offer}</span>}
+                   {suggestion.price && <span>• {suggestion.price}</span>}
+                   {suggestion.type === 'product' && ['new1', 'new2', 'new3', 'new4', 'new5', 'new7', 'new8', 'new9', 'new10', 'new12'].includes(suggestion.id) && <span className="text-destructive">• New Arrival</span>}
+                   {suggestion.offer && suggestion.type === 'product' && !['new1', 'new2', 'new3', 'new4', 'new5', 'new7', 'new8', 'new9', 'new10', 'new12'].includes(suggestion.id) && <span className="text-destructive">• {suggestion.offer}</span>}
                 </div>
               </div>
             </div>

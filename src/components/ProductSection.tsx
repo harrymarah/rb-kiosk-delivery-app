@@ -1,5 +1,6 @@
 import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
+import { isShopNewProduct } from "@/lib/product-utils";
 
 interface ProductSectionProps {
   title: string;
@@ -23,18 +24,19 @@ const ProductSection = ({ title, products, favorites = new Set(), onToggleFavori
         
         <div className="grid grid-cols-4 gap-6">
           {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              image={product.image}
-              name={product.name}
-              price={product.price}
-              originalPrice={product.originalPrice}
-              offer={product.offer}
-              isFavorite={favorites.has(product.id)}
-              onToggleFavorite={() => onToggleFavorite?.(product.id)}
-              onAddToCart={() => console.log(`Added ${product.name} to cart`)}
-              productId={product.id}
-            />
+             <ProductCard
+               key={product.id}
+               image={product.image}
+               name={product.name}
+               price={product.price}
+               originalPrice={product.originalPrice}
+               offer={product.offer}
+               isFavorite={favorites.has(product.id)}
+               onToggleFavorite={() => onToggleFavorite?.(product.id)}
+               onAddToCart={() => console.log(`Added ${product.name} to cart`)}
+               productId={product.id}
+               isNewArrival={isShopNewProduct(product.id)}
+             />
           ))}
         </div>
       </div>

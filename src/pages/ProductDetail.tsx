@@ -10,6 +10,7 @@ import { useBasket } from "@/contexts/BasketContext";
 import { useToast } from "@/components/ui/use-toast";
 import { OfferDrawer } from "@/components/OfferDrawer";
 import { getProxiedImageUrl } from "@/lib/image";
+import { isShopNewProduct } from "@/lib/product-utils";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -338,17 +339,18 @@ const ProductDetail = () => {
                 {relatedProducts.map((relatedProduct) => (
                   <CarouselItem key={relatedProduct.id} className="md:basis-1/3 lg:basis-1/4">
                     <div className="p-1">
-                      <ProductCard
-                        image={relatedProduct.image}
-                        name={relatedProduct.name}
-                        price={relatedProduct.price}
-                        originalPrice={relatedProduct.originalPrice}
-                        offer={relatedProduct.offer}
-                        isFavorite={false}
-                        onToggleFavorite={() => {}}
-                        onAddToCart={() => handleAddRelatedToCart(relatedProduct)}
-                        productId={relatedProduct.id}
-                      />
+                       <ProductCard
+                         image={relatedProduct.image}
+                         name={relatedProduct.name}
+                         price={relatedProduct.price}
+                         originalPrice={relatedProduct.originalPrice}
+                         offer={relatedProduct.offer}
+                         isFavorite={false}
+                         onToggleFavorite={() => {}}
+                         onAddToCart={() => handleAddRelatedToCart(relatedProduct)}
+                         productId={relatedProduct.id}
+                         isNewArrival={isShopNewProduct(relatedProduct.id)}
+                       />
                     </div>
                   </CarouselItem>
                 ))}
