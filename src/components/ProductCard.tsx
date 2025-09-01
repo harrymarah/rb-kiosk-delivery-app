@@ -90,7 +90,7 @@ const ProductCard = ({
             </div>
           )}
           
-          {offer && (
+          {offer && !isNewArrival && (
             <div className="flex items-center gap-1">
               <Heart className="h-4 w-4 text-destructive fill-destructive" />
               <span className="text-sm font-medium text-destructive">{offer}</span>
