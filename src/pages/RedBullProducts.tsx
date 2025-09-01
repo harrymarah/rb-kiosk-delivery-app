@@ -42,8 +42,19 @@ const RedBullProducts = () => {
       ),
     ];
 
-    // Remove duplicates across categories by normalized name; prefer items from redBull category
-    const normalize = (s: string) => s.toLowerCase().replace(/drink/g, "").replace(/\s+/g, "").replace(/[^a-z0-9]/g, "");
+    // Remove duplicates with enhanced normalization for Red Bull products
+    const normalize = (name: string) => {
+      return name
+        .toLowerCase()
+        .replace(/drink/g, "")
+        .replace(/energy/g, "")
+        .replace(/red\s*bull/g, "rb")
+        .replace(/(\d+)x(\d+ml)/g, "$2x$1") // normalize "8x250ml" to "250mlx8" 
+        .replace(/(\d+ml)\s*x\s*(\d+)/g, "$1x$2") // normalize "250ml x 8" to "250mlx8"
+        .replace(/\s+/g, "")
+        .replace(/[^a-z0-9]/g, "");
+    };
+    
     const map = new Map<string, any>();
     for (const p of allProducts) {
       const key = normalize(p.name);
