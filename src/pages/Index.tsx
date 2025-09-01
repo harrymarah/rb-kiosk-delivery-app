@@ -103,32 +103,85 @@ const Index = () => {
       )}
 
       {activeTab === "explore" && selectedCategory && (
-        <div className="px-6 py-6">
-          <div className="container mx-auto max-w-4xl">
-            <div className="flex items-center gap-4 mb-6">
-              <button
-                onClick={() => setSelectedCategory(null)}
-                className="text-primary hover:text-primary/80 text-sm font-medium"
-              >
-                ← Back to explore
-              </button>
-            </div>
-            <h2 className="text-2xl font-bold text-foreground mb-6 capitalize">{selectedCategory}</h2>
-            <div className="grid grid-cols-4 gap-6">
-              {categoryProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  image={product.image}
-                  name={product.name}
-                  price={product.price}
-                  originalPrice={product.originalPrice}
-                  offer={product.offer}
-                  isFavorite={favoritesSet.has(product.id)}
-                  onToggleFavorite={() => toggleFavoriteById(product.id)}
-                  onAddToCart={() => console.log(`Added ${product.name} to cart`)}
-                  productId={product.id}
-                />
-              ))}
+        <div>
+          <div className="px-6 py-6">
+            <div className="container mx-auto max-w-4xl">
+              <div className="flex items-center gap-4 mb-6">
+                <button
+                  onClick={() => setSelectedCategory(null)}
+                  className="text-primary hover:text-primary/80 text-sm font-medium"
+                >
+                  ← Back to explore
+                </button>
+              </div>
+              <h2 className="text-2xl font-bold text-foreground mb-6 capitalize">
+                {selectedCategory === "energyDrinks" ? "Energy Drinks" : selectedCategory}
+              </h2>
+              
+              {/* Energy Drinks Category - Add Advert Block */}
+              {selectedCategory === "energyDrinks" && (
+                <div className="mb-8">
+                  <BannerAd 
+                    title="Red Bull Energy Drinks" 
+                    subtitle="Discover the full range of Red Bull products"
+                    className="my-6"
+                  />
+                </div>
+              )}
+              
+              {/* Energy Drinks Category - Featured Products Carousel */}
+              {selectedCategory === "energyDrinks" && (
+                <div className="mb-8">
+                  <ProductCarousel 
+                    title="Featured Red Bull Products" 
+                    products={[
+                      {
+                        id: "energy2",
+                        name: "Red Bull Sugar Free Energy Drink 250ml",
+                        price: "£2.49",
+                        image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Red%20Bull%20Products/ALL/18%20-%20Red%20Bull%20Sugar%20Free%20Energy%20Drink%20250ml%20.png"
+                      },
+                      {
+                        id: "energy4",
+                        name: "Red Bull Sugar Free Energy Drink 250ml x4",
+                        price: "£7.99",
+                        image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/6%20Energy%20Drinks/4%20-%20Red%20Bull%20Sugar%20Free%20Energy%20Drink%20250ml%20x4.jpeg"
+                      },
+                      {
+                        id: "rb11",
+                        name: "Red Bull Winter Edition Sugar Free Energy Drink 250ml x 4",
+                        price: "£7.99",
+                        image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Red%20Bull%20Products/ALL/11%20-%20Red%20Bull%20Winter%20Edition%20Sugar%20Free%20Energy%20Drink%20250ml%20x%204.jpg"
+                      },
+                      {
+                        id: "new1",
+                        name: "Red Bull Lilac Edition Sugar Free Energy Drink 4x250ml",
+                        price: "£9.99",
+                        image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/12%20New%20Products/Image%201%20-%20Red%20Bull%20Lilac%20Edition%20Sugar%20Free%20Energy%20Drink%204x250ml.jpg"
+                      }
+                    ]}
+                    favorites={favoritesSet}
+                    onToggleFavorite={toggleFavoriteById}
+                  />
+                </div>
+              )}
+              
+              <div className="grid grid-cols-4 gap-6">
+                {categoryProducts.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    image={product.image}
+                    name={product.name}
+                    price={product.price}
+                    originalPrice={product.originalPrice}
+                    offer={product.offer}
+                    isFavorite={favoritesSet.has(product.id)}
+                    onToggleFavorite={() => toggleFavoriteById(product.id)}
+                    onAddToCart={() => console.log(`Added ${product.name} to cart`)}
+                    productId={product.id}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
