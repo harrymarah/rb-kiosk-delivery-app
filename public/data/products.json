@@ -127,27 +127,41 @@
       },
       {
         "id": "breakfast3",
+        "name": "Red Bull Energy Drink 250ml",
+        "price": "£2.49",
+        "image": "/assets/red-bull-original.jpg",
+        "category": "breakfast"
+      },
+      {
+        "id": "breakfast4",
         "name": "White Farmhouse Bread 800g",
         "price": "£1.25",
         "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/6%20Breakfast%20Items/Image%203%20-%20White%20Farmhouse%20Bread%20800g.jpg",
         "category": "breakfast"
       },
       {
-        "id": "breakfast4",
+        "id": "breakfast5",
+        "name": "The Jolly Hog Smoked Black Treacle Back Bacon Rashers 300g",
+        "price": "£4.99",
+        "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/6%20Breakfast%20Items/The%20Jolly%20Hog%20Smoked%20Black%20Treacle%20Back%20Bacon%20Rashers%20300g.jpg",
+        "category": "breakfast"
+      },
+      {
+        "id": "breakfast6",
         "name": "Large Free Range Eggs 6 Pack",
         "price": "£2.49",
         "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/6%20Breakfast%20Items/Image%204%20-%20Large%20Free%20Range%20Eggs%206%20Pack.jpg",
         "category": "breakfast"
       },
       {
-        "id": "breakfast5",
+        "id": "breakfast7",
         "name": "Activia Vanilla & Granola Breakfast Pot",
         "price": "£2.99",
         "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/6%20Breakfast%20Items/Image%205%20-%20Activia%20Vanilla%20&%20Granola%20Breakfast%20Pot.jpg",
         "category": "breakfast"
       },
       {
-        "id": "breakfast6",
+        "id": "breakfast8",
         "name": "Innocent Orange Juice Smooth 900ml",
         "price": "£3.49",
         "image": "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/6%20Breakfast%20Items/Image%206%20-%20Innocent%20Orange%20Juice%20Smooth%20900ml.jpg",
