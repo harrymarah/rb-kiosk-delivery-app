@@ -249,9 +249,12 @@ const ProductDetail = () => {
               </p>
               
               {/* Sugar Free Red Bull Info Images - Only show for Red Bull Sugar Free Energy Drink variants */}
-              {(product.name === "Red Bull Sugar Free Energy Drink" || 
-                product.name === "Red Bull Sugar Free Energy Drink 250ml" || 
-                product.name === "Red Bull Sugar Free Energy Drink 250ml x4") && (
+              {(product.id === "rb_sf8pack" || 
+                product.id === "rb_sf473" || 
+                product.id === "rb_sf355" || 
+                product.id === "rb_zero4pack" || 
+                product.id === "rb_zero473" || 
+                product.id === "rb_zero355") && (
                 <div className="mt-6">
                   <h4 className="text-md font-medium text-foreground mb-3">Product Information</h4>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
