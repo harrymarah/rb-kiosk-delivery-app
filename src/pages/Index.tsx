@@ -130,7 +130,12 @@ const Index = () => {
                 </button>
               </div>
               <h2 className="text-2xl font-bold text-foreground mb-6 capitalize">
-                {selectedCategory === "energyDrinks" ? "Energy Drinks" : selectedCategory}
+                {selectedCategory === "energyDrinks" ? "Energy Drinks" : 
+                 selectedCategory === "softDrinks" ? "Soft Drinks" :
+                 selectedCategory === "matchReady" ? "Match Ready" :
+                 selectedCategory === "redBull" ? "Red Bull Products" :
+                 selectedCategory === "newProducts" ? "New Products" :
+                 selectedCategory?.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()).trim() || selectedCategory}
               </h2>
               
               

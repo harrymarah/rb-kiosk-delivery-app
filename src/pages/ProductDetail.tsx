@@ -168,7 +168,12 @@ const ProductDetail = () => {
                 onClick={() => navigate(`/quickmart?category=${product.category}&tab=explore`)}
                 className="cursor-pointer hover:text-foreground"
               >
-                {product.category.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()).trim()}
+                {product.category === "energyDrinks" ? "Energy Drinks" : 
+                 product.category === "softDrinks" ? "Soft Drinks" :
+                 product.category === "matchReady" ? "Match Ready" :
+                 product.category === "redBull" ? "Red Bull Products" :
+                 product.category === "newProducts" ? "New Products" :
+                 product.category.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()).trim()}
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
