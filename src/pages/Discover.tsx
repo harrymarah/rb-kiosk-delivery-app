@@ -58,7 +58,7 @@ const Discover = () => {
       deliveryTime: "15 min",
       functional: true,
       description: "Groceries, snacks & more",
-      imageUrl: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop"
+      imageUrl: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop"
     },
     {
       id: "fresh-market",
@@ -68,7 +68,7 @@ const Discover = () => {
       deliveryTime: "20 min",
       functional: false,
       description: "Fresh produce daily",
-      imageUrl: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop"
+      imageUrl: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=400&h=300&fit=crop"
     }
   ];
 
