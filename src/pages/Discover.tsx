@@ -23,7 +23,7 @@ const Discover = () => {
       rating: 4.6,
       reviews: "300+",
       deliveryTime: "15 - 25 min",
-      videoUrl: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/videos/compressed/fresh_fruit_and_veg_chopping_board_v2_min.mp4",
+      imageUrl: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=300&fit=crop",
       badge: "Popular",
       badgeColor: "bg-green-600"
     },
@@ -33,7 +33,7 @@ const Discover = () => {
       rating: 4.5,
       reviews: "300+",
       deliveryTime: "10 - 25 min",
-      videoUrl: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/videos/compressed/drizzling_pancakes_v2_min.mp4",
+      imageUrl: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop",
       badge: "Fast delivery",
       badgeColor: "bg-blue-600"
     },
@@ -43,7 +43,7 @@ const Discover = () => {
       rating: 4.6,
       reviews: "200+",
       deliveryTime: "15 - 30 min",
-      videoUrl: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/videos/compressed/meal_at_table_v2_min.mp4",
+      imageUrl: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop",
       badge: "Premium",
       badgeColor: "bg-purple-600"
     }
@@ -58,7 +58,7 @@ const Discover = () => {
       deliveryTime: "15 min",
       functional: true,
       description: "Groceries, snacks & more",
-      videoUrl: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/videos/supermarket_compressed.mp4"
+      imageUrl: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop"
     },
     {
       id: "fresh-market",
@@ -68,7 +68,7 @@ const Discover = () => {
       deliveryTime: "20 min",
       functional: false,
       description: "Fresh produce daily",
-      videoUrl: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/videos/compressed/vegetable_stall_v2_min.mp4"
+      imageUrl: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop"
     }
   ];
 
@@ -158,20 +158,11 @@ const Discover = () => {
               <Card key={highlight.id} className="flex-shrink-0 w-72 overflow-hidden cursor-pointer hover:shadow-lg transition-shadow">
                 <CardContent className="p-0">
                   <div className="relative h-48">
-                    <video
+                    <img
+                      src={highlight.imageUrl}
+                      alt={highlight.name}
                       className="w-full h-full object-cover"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload="metadata"
-                      style={{ 
-                        willChange: 'auto',
-                        transform: 'translateZ(0)'
-                      }}
-                    >
-                      <source src={highlight.videoUrl} type="video/mp4" />
-                    </video>
+                    />
                     <div className="absolute inset-0 bg-black/20" />
                     <Badge className={`absolute top-3 left-3 text-white text-xs ${highlight.badgeColor}`}>
                       ★ {highlight.rating} ({highlight.reviews})
@@ -202,21 +193,12 @@ const Discover = () => {
                 <CardContent className="p-0">
                   <div className="flex">
                     <div className="relative w-32 h-24 flex-shrink-0">
-                      {store.videoUrl ? (
-                        <video
+                      {store.imageUrl ? (
+                        <img
+                          src={store.imageUrl}
+                          alt={store.name}
                           className="w-full h-full object-cover"
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          preload="metadata"
-                          style={{ 
-                            willChange: 'auto',
-                            transform: 'translateZ(0)'
-                          }}
-                        >
-                          <source src={store.videoUrl} type="video/mp4" />
-                        </video>
+                        />
                       ) : (
                         <div className={`w-full h-full ${store.bgColor} flex items-center justify-center text-white text-3xl`}>
                           {store.logo}
