@@ -61,7 +61,7 @@ const Index = () => {
   };
 
   const categoryProducts = selectedCategory 
-    ? allProducts?.filter(product => product.category === selectedCategory) || []
+    ? allProducts?.filter(product => product.categories?.includes(selectedCategory)) || []
     : [];
 
   return (
