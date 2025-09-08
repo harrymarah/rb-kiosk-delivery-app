@@ -11,7 +11,7 @@ import AsDealsLogo from "@/assets/logos/AsDeal_logo.png";
 import MorriSaveLogo from "@/assets/logos/MorriSave_logo.png";
 import SaneBuryLogo from "@/assets/logos/SaneBury_logo.png";
 import StopRoseLogo from "@/assets/logos/StopRose_logo.png";
-import TesGoLogo from "@/assets/logos/TesGo_logo.png";
+import NoOpLogo from "@/assets/logos/NoOp_logo.png";
 import QuickMartLogo from "@/assets/logos/QuickMart_logo.png";
 
 const HomePage = () => {
@@ -47,9 +47,9 @@ const HomePage = () => {
       functional: false
     },
     {
-      id: "tesgo",
-      name: "TesGo",
-      logo: TesGoLogo,
+      id: "noop",
+      name: "NoOp",
+      logo: NoOpLogo,
       logoType: "image",
       bgColor: "bg-red-500",
       deliveryTime: "25 min",
