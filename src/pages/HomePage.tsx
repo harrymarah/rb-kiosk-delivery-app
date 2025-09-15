@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, MapPin, Filter, Settings } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -28,9 +28,67 @@ import QuickMartLogo from "@/assets/logos/QuickMart_logo.png";
 const HomePage = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const [showInactivityDialog, setShowInactivityDialog] = useState(false);
+  const inactivityTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const redirectTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleReturnToSelector = () => {
     window.location.href = "https://redbullswitch.harrymarah.uk";
+  };
+
+  const resetInactivityTimer = () => {
+    if (inactivityTimerRef.current) {
+      clearTimeout(inactivityTimerRef.current);
+    }
+    if (redirectTimerRef.current) {
+      clearTimeout(redirectTimerRef.current);
+    }
+    setShowInactivityDialog(false);
+    
+    // Set 15 minute inactivity timer
+    inactivityTimerRef.current = setTimeout(() => {
+      setShowInactivityDialog(true);
+      
+      // Auto-redirect after 30 seconds if no response
+      redirectTimerRef.current = setTimeout(() => {
+        handleReturnToSelector();
+      }, 30000);
+    }, 15 * 60 * 1000); // 15 minutes
+  };
+
+  useEffect(() => {
+    const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
+    
+    const resetTimer = () => resetInactivityTimer();
+    
+    // Add event listeners
+    events.forEach(event => {
+      document.addEventListener(event, resetTimer, true);
+    });
+    
+    // Start initial timer
+    resetInactivityTimer();
+    
+    return () => {
+      // Cleanup
+      events.forEach(event => {
+        document.removeEventListener(event, resetTimer, true);
+      });
+      if (inactivityTimerRef.current) {
+        clearTimeout(inactivityTimerRef.current);
+      }
+      if (redirectTimerRef.current) {
+        clearTimeout(redirectTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleStayActive = () => {
+    setShowInactivityDialog(false);
+    if (redirectTimerRef.current) {
+      clearTimeout(redirectTimerRef.current);
+    }
+    resetInactivityTimer();
   };
 
   const supermarkets = [
@@ -374,6 +432,26 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+
+      {/* Inactivity Dialog */}
+      <AlertDialog open={showInactivityDialog} onOpenChange={setShowInactivityDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Session Timeout</AlertDialogTitle>
+            <AlertDialogDescription>
+              You've been inactive for 15 minutes. Would you like to return to the app selector or continue using this app?
+              <br /><br />
+              <span className="text-sm text-muted-foreground">You will be automatically redirected in 30 seconds if no action is taken.</span>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={handleStayActive}>Stay Here</AlertDialogCancel>
+            <AlertDialogAction onClick={handleReturnToSelector}>
+              Return to Selector
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
