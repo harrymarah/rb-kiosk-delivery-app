@@ -1,10 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, MapPin, Filter } from "lucide-react";
+import { Search, MapPin, Filter, Settings } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import BannerAd from "@/components/BannerAd";
 import PromoBanner from "@/components/PromoBanner";
 import AsDealsLogo from "@/assets/logos/AsDeal_logo.png";
@@ -17,6 +28,10 @@ import QuickMartLogo from "@/assets/logos/QuickMart_logo.png";
 const HomePage = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+
+  const handleReturnToSelector = () => {
+    window.location.href = "https://redbullswitch.harrymarah.uk";
+  };
 
   const supermarkets = [
     {
@@ -198,6 +213,27 @@ const HomePage = () => {
           <Button variant="outline" size="icon">
             <Filter className="h-4 w-4" />
           </Button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="ghost" size="icon" className="opacity-30 hover:opacity-60">
+                <Settings className="h-4 w-4" />
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Return to App Selector</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Are you sure you want to return to the Red Bull app selector? This will leave the current application.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={handleReturnToSelector}>
+                  Return to Selector
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
         
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
