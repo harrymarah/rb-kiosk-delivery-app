@@ -53,10 +53,10 @@ const BannerCarousel = ({ className }: BannerCarouselProps) => {
             <PromoBanner
               title={banner.title}
               subtitle={banner.subtitle}
-              className={`${banner.className} max-w-none max-h-none h-36 flex items-center p-5`}
-              contentClassName="px-8"
-              titleClassName="text-lg leading-snug mb-1"
-              subtitleClassName="text-sm"
+              className={`${banner.className} max-w-none max-h-none h-48 flex items-center p-6`}
+              contentClassName="px-7"
+              titleClassName="text-2xl leading-tight mb-2"
+              subtitleClassName="text-base"
             />
           </CarouselItem>
         ))}
