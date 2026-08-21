@@ -130,8 +130,10 @@ All colors MUST be HSL.
   animation: slide-up 0.3s ease-out;
 }
 /* ── iPhone-style device frame ────────────────────────────────────────────
-   Wraps the whole app shell. The frame scales to fill the available
-   viewport height so it still works full-bleed on a portrait kiosk screen. */
+   Wraps the whole app shell. The device scales to fill the available viewport
+   so it fills a large portrait kiosk screen, and the app inside is laid out at
+   a fixed 390px design viewport then scaled up by PhoneFrame — so type and
+   spacing grow with the frame instead of staying phone-sized on a big screen. */
 
 .phone-stage {
   min-height: 100vh;
@@ -146,9 +148,9 @@ All colors MUST be HSL.
 
 .phone-device {
   position: relative;
-  height: min(calc(100dvh - 2rem), 1400px);
+  /* Fill the viewport height, but never let the 9:19.5 body exceed the width. */
+  height: min(calc(100dvh - 2rem), calc((100vw - 2rem) * 19.5 / 9));
   aspect-ratio: 9 / 19.5;
-  max-width: calc(100vw - 2rem);
   padding: 0.75rem;
   border-radius: 3.25rem;
   background: linear-gradient(160deg, hsl(220 8% 38%), hsl(220 10% 14%) 40%, hsl(220 8% 30%));
@@ -167,13 +169,21 @@ All colors MUST be HSL.
   background: hsl(var(--background));
 }
 
+/* Sized and scaled by PhoneFrame; everything inside is in 390px design px. */
+.phone-scaler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+}
+
 /* Safe area between the dynamic island and the home indicator.
    The transform makes this the containing block for the app's
    position: fixed bars, so they pin inside the phone rather than the window. */
 .phone-safe {
   position: absolute;
-  top: 2.9rem;
-  bottom: 1.4rem;
+  top: 47px;
+  bottom: 22px;
   left: 0;
   right: 0;
   transform: translateZ(0);
@@ -186,6 +196,11 @@ All colors MUST be HSL.
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.phone-viewport::-webkit-scrollbar {
+  display: none;
 }
 
 /* Full-height utilities should fill the phone screen, not the browser window. */
@@ -199,9 +214,9 @@ All colors MUST be HSL.
 
 /* ── Keep phone-width layout inside the frame ─────────────────────────────
    Tailwind's sm:/md:/lg:/xl: variants key off the browser viewport, not the
-   phone frame, so on a desktop or kiosk screen they would fire and squash the
-   app's desktop layouts into a phone-width column. Inside the frame the app is
-   always phone-width, so pin these elements to their base (narrow) value. */
+   390px design viewport, so on a desktop or kiosk screen they would fire and
+   squash the app's desktop layouts. Inside the frame the app is always
+   phone-width, so pin these elements to their base (narrow) value. */
 @media (min-width: 640px) {
   .phone-viewport .grid-cols-1[class*=":grid-cols-"] {
     grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -230,11 +245,11 @@ All colors MUST be HSL.
 
 .phone-island {
   position: absolute;
-  top: 0.6rem;
+  top: 11px;
   left: 50%;
   transform: translateX(-50%);
-  width: 32%;
-  height: 1.7rem;
+  width: 120px;
+  height: 30px;
   border-radius: 999px;
   background: hsl(220 10% 4%);
   pointer-events: none;
@@ -243,11 +258,11 @@ All colors MUST be HSL.
 
 .phone-home-indicator {
   position: absolute;
-  bottom: 0.5rem;
+  bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 34%;
-  height: 0.3rem;
+  width: 134px;
+  height: 5px;
   border-radius: 999px;
   background: hsl(var(--foreground) / 0.35);
   pointer-events: none;
@@ -262,33 +277,33 @@ All colors MUST be HSL.
 
 .phone-button--silent {
   left: -3px;
-  top: 7.5rem;
+  top: 14%;
   width: 3px;
-  height: 2rem;
+  height: 3.5%;
 }
 
 .phone-button--volume-up {
   left: -3px;
-  top: 11rem;
+  top: 20%;
   width: 3px;
-  height: 3.5rem;
+  height: 6%;
 }
 
 .phone-button--volume-down {
   left: -3px;
-  top: 15.25rem;
+  top: 27.5%;
   width: 3px;
-  height: 3.5rem;
+  height: 6%;
 }
 
 .phone-button--power {
   right: -3px;
-  top: 12.5rem;
+  top: 23%;
   width: 3px;
-  height: 5.5rem;
+  height: 9%;
 }
 
-/* On very small screens drop the chrome so the app stays usable. */
+/* On a small phone-sized browser window, drop the chrome so the app is usable. */
 @media (max-width: 420px) {
   .phone-stage {
     padding: 0;
@@ -326,12 +341,12 @@ All colors MUST be HSL.
   display: none;
 }
 
-/* The phone frame scales with viewport height, so scale the nav ribbon with it
-   — keeps all six labels (incl. "Reservations") legible without clipping. */
+/* Nav ribbon sits inside the scaled design viewport, so fixed px are correct
+   here — they scale with the frame on a large kiosk screen. */
 .main-nav-icon {
-  font-size: clamp(13px, 1.7vh, 20px);
+  font-size: 17px;
 }
 
 .main-nav-label {
-  font-size: clamp(9px, 1.15vh, 13px);
+  font-size: 10px;
 }
