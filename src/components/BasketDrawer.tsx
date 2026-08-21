@@ -66,13 +66,13 @@ const BasketDrawer = ({ children }: BasketDrawerProps) => {
           </DrawerTitle>
         </DrawerHeader>
         
-        <div className="p-6 max-h-[60vh] overflow-y-auto">
+        <div className="p-4 max-h-[55vh] overflow-y-auto">
           <div className="space-y-4">
             {items.map((item) => (
               <Card key={item.id}>
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-muted rounded-lg overflow-hidden flex-shrink-0">
+                <CardContent className="p-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-14 h-14 bg-muted rounded-lg overflow-hidden flex-shrink-0">
                       <img
                         src={item.image}
                         alt={item.name}
@@ -81,26 +81,25 @@ const BasketDrawer = ({ children }: BasketDrawerProps) => {
                     </div>
                     
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-foreground truncate">{item.name}</h3>
-                      <p className="text-sm text-muted-foreground">{item.price} each</p>
-                    </div>
-                    
-                    <div className="flex items-center gap-2">
+                      <h3 className="font-medium text-sm leading-snug text-foreground line-clamp-2">{item.name}</h3>
+                      <p className="text-xs text-muted-foreground">{item.price} each</p>
+
+                      <div className="flex items-center gap-1.5 mt-2">
                       <Button
                         variant="outline"
                         size="icon"
-                        className="h-8 w-8"
+                        className="h-7 w-7 shrink-0"
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
                       >
                         <Minus className="h-3 w-3" />
                       </Button>
-                      <span className="w-8 text-center text-sm font-medium">
+                      <span className="w-6 text-center text-sm font-medium">
                         {item.quantity}
                       </span>
                       <Button
                         variant="outline"
                         size="icon"
-                        className="h-8 w-8"
+                        className="h-7 w-7 shrink-0"
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
                       >
                         <Plus className="h-3 w-3" />
@@ -108,11 +107,12 @@ const BasketDrawer = ({ children }: BasketDrawerProps) => {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 w-8 text-destructive hover:text-destructive"
+                        className="h-7 w-7 ml-auto shrink-0 text-destructive hover:text-destructive"
                         onClick={() => removeItem(item.id)}
                       >
                         <X className="h-3 w-3" />
                       </Button>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -124,7 +124,7 @@ const BasketDrawer = ({ children }: BasketDrawerProps) => {
           {getRecommendations().length > 0 && (
             <div className="mt-6 pt-4 border-t border-border">
               <h3 className="text-lg font-semibold mb-4">You might also like</h3>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 gap-2">
                 {getRecommendations().map((product) => (
                   <Card key={product.id} className="cursor-pointer hover:shadow-md transition-shadow">
                     <CardContent className="p-3">
@@ -132,7 +132,7 @@ const BasketDrawer = ({ children }: BasketDrawerProps) => {
                         className="space-y-2"
                         onClick={() => navigate(`/product/${product.id}`)}
                       >
-                        <div className="w-full h-32 bg-white rounded overflow-hidden">
+                        <div className="w-full h-24 bg-white rounded overflow-hidden">
                           <img
                             src={product.image}
                             alt={product.name}

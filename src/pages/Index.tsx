@@ -158,7 +158,7 @@ const Index = () => {
               
               
               {/* Products Grid First */}
-              <div className="grid grid-cols-4 gap-6 mb-8">
+              <div className="grid grid-cols-2 gap-3 mb-6">
                  {categoryProducts.map((product) => (
                    <ProductCard
                      key={product.id}
@@ -230,11 +230,11 @@ const Index = () => {
       
       
       {activeTab === "favourites" && (
-        <div className="px-6 py-8">
+        <div className="px-4 py-5">
           <div className="container mx-auto max-w-4xl">
-            <h2 className="text-2xl font-bold text-foreground mb-8 text-center">Your Favourites</h2>
+            <h2 className="text-xl font-bold text-foreground mb-4 text-center">Your Favourites</h2>
             {favItems.length > 0 ? (
-              <div className="grid grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 gap-3">
                  {favItems.map((product) => (
                    <ProductCard
                      key={product.id}
