@@ -200,7 +200,7 @@ const ProductDetail = () => {
                   // Only fallback to placeholder if it's not already a placeholder and not a retry
                   if (!target.src.includes('placeholder') && !target.dataset.retried) {
                     target.dataset.retried = 'true';
-                    target.src = '/placeholder.svg';
+                    target.src = `${import.meta.env.BASE_URL}placeholder.svg`;
                   }
                 }}
                 className="w-full h-full object-contain"

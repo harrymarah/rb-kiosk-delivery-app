@@ -1,5 +1,5 @@
 export const getProxiedImageUrl = (src: string): string => {
-  if (!src) return '/placeholder.svg';
+  if (!src) return `${import.meta.env.BASE_URL}placeholder.svg`;
   
   // Keep local/public assets as-is
   if (!src.startsWith('http')) {

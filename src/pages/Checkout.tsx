@@ -183,7 +183,7 @@ const Checkout = () => {
                             alt={product.name}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                             onError={(e) => {
-                              (e.currentTarget as HTMLImageElement).src = '/placeholder.svg';
+                              (e.currentTarget as HTMLImageElement).src = `${import.meta.env.BASE_URL}placeholder.svg`;
                             }}
                           />
                         </div>

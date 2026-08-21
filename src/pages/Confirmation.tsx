@@ -194,7 +194,7 @@ const Confirmation = () => {
                         src={product.image}
                         alt={product.name}
                         loading="lazy"
-                        onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/placeholder.svg'; }}
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).src = `${import.meta.env.BASE_URL}placeholder.svg`; }}
                         className="w-full h-full object-contain"
                       />
                     </div>

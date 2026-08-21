@@ -110,7 +110,7 @@ const Basket = () => {
                           src={item.image}
                           alt={item.name}
                           className="w-full h-full object-cover"
-                          onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/placeholder.svg'; }}
+                          onError={(e) => { (e.currentTarget as HTMLImageElement).src = `${import.meta.env.BASE_URL}placeholder.svg`; }}
                         />
                       </div>
 
