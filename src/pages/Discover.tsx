@@ -159,7 +159,7 @@ const Discover = () => {
         {/* Highlights Section */}
         <section>
           <h2 className="text-2xl font-bold text-foreground mb-4">Highlights</h2>
-          <div className="flex gap-4 overflow-x-auto pb-2">
+          <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
             {highlights.map((highlight) => (
               <Card key={highlight.id} className="flex-shrink-0 w-72 overflow-hidden cursor-pointer hover:shadow-lg transition-shadow">
                 <CardContent className="p-0">

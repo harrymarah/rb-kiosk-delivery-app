@@ -203,13 +203,15 @@ All colors MUST be HSL.
   display: none;
 }
 
-/* Full-height utilities should fill the phone screen, not the browser window. */
+/* Full-height utilities should fill the phone screen, not the browser window.
+   --phone-viewport-h is set by PhoneFrame; a percentage cannot be used here
+   because the scroll content's parent is auto-height and would collapse. */
 .phone-viewport .min-h-screen {
-  min-height: 100%;
+  min-height: var(--phone-viewport-h, 100%);
 }
 
 .phone-viewport .h-screen {
-  height: 100%;
+  height: var(--phone-viewport-h, 100%);
 }
 
 /* ── Keep phone-width layout inside the frame ─────────────────────────────
@@ -218,7 +220,10 @@ All colors MUST be HSL.
    squash the app's desktop layouts. Inside the frame the app is always
    phone-width, so pin these elements to their base (narrow) value. */
 @media (min-width: 640px) {
-  .phone-viewport .grid-cols-1[class*=":grid-cols-"] {
+  /* Default any responsive grid to a single column, then let an explicit
+     base grid-cols-N below win on specificity. Elements such as
+     `grid lg:grid-cols-3` carry no base class, so they need this fallback. */
+  .phone-viewport [class*=":grid-cols-"] {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
@@ -240,6 +245,12 @@ All colors MUST be HSL.
 
   .phone-viewport .flex-col[class*=":flex-row"] {
     flex-direction: column;
+  }
+
+  /* A responsive col-span would otherwise force extra implicit columns into
+     a grid we have just pinned to one column. */
+  .phone-viewport [class*=":col-span-"] {
+    grid-column: auto;
   }
 }
 

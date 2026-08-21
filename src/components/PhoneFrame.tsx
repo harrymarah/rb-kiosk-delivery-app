@@ -7,6 +7,10 @@ interface PhoneFrameProps {
 /** Design viewport the app is laid out at, in CSS px (iPhone 14/15 class). */
 const DESIGN_WIDTH = 390;
 
+/** Must match .phone-safe top/bottom insets in index.css. */
+const SAFE_TOP = 47;
+const SAFE_BOTTOM = 22;
+
 /**
  * Wraps the whole app shell in an iPhone-style device mockup.
  *
@@ -33,10 +37,19 @@ const PhoneFrame = ({ children }: PhoneFrameProps) => {
       if (!width || !height) return;
 
       const scale = width / DESIGN_WIDTH;
+      const designHeight = height / scale;
+
       scaler.style.width = `${DESIGN_WIDTH}px`;
       // Height in design px so the scaled result exactly fills the screen.
-      scaler.style.height = `${height / scale}px`;
+      scaler.style.height = `${designHeight}px`;
       scaler.style.transform = `scale(${scale})`;
+      // Exposed so `min-h-screen` inside the app can resolve to the phone
+      // screen rather than the browser window. A percentage would collapse
+      // here, because the scroll content's parent is auto-height.
+      scaler.style.setProperty(
+        "--phone-viewport-h",
+        `${designHeight - SAFE_TOP - SAFE_BOTTOM}px`
+      );
     };
 
     applyScale();

@@ -38,8 +38,8 @@ const ProductCard = ({
   };
   return (
     <Card className="group cursor-pointer hover:shadow-lg transition-all duration-200 border border-border h-full flex flex-col" onClick={handleCardClick}>
-      <CardContent className="p-4 flex flex-col flex-1">
-        <div className="relative mb-4">
+      <CardContent className="p-3 flex flex-col flex-1">
+        <div className="relative mb-3">
           <div className="aspect-square bg-white rounded-lg overflow-hidden border border-border/20">
             <img 
               src={getProxiedImageUrl(image)} 
@@ -61,7 +61,7 @@ const ProductCard = ({
           <Button
             variant="ghost"
             size="icon"
-            className="absolute top-2 right-2 h-8 w-8 bg-gray-100/90 hover:bg-gray-200/90 backdrop-blur-sm"
+            className="absolute top-1.5 right-1.5 h-7 w-7 bg-gray-100/90 hover:bg-gray-200/90 backdrop-blur-sm"
             onClick={(e) => {
               e.stopPropagation();
               onToggleFavorite?.();
@@ -71,13 +71,13 @@ const ProductCard = ({
           </Button>
         </div>
         
-        <div className="space-y-2 flex-1 flex flex-col justify-end">
-          <h3 className="font-medium text-foreground line-clamp-2">{name}</h3>
+        <div className="space-y-1.5 flex-1 flex flex-col justify-end">
+          <h3 className="font-medium text-sm leading-snug text-foreground line-clamp-2">{name}</h3>
           
           <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-foreground">{price}</span>
+            <span className="text-base font-bold text-foreground">{price}</span>
             {originalPrice && (
-              <span className="text-sm text-muted-foreground line-through">
+              <span className="text-xs text-muted-foreground line-through">
                 {originalPrice}
               </span>
             )}
@@ -86,27 +86,27 @@ const ProductCard = ({
           {isNewArrival && (
             <div className="flex items-center gap-1">
               <Heart className="h-4 w-4 text-destructive fill-destructive" />
-              <span className="text-sm font-medium text-destructive">New Arrival</span>
+              <span className="text-xs font-medium text-destructive">New Arrival</span>
             </div>
           )}
           
           {offer && !isNewArrival && (
             <div className="flex items-center gap-1">
               <Heart className="h-4 w-4 text-destructive fill-destructive" />
-              <span className="text-sm font-medium text-destructive">{offer}</span>
+              <span className="text-xs font-medium text-destructive">{offer}</span>
             </div>
           )}
           
           {onAddToCart && (
             <Button
               size="sm"
-              className="w-full mt-2"
+              className="w-full mt-1.5 px-2 text-xs"
               onClick={(e) => {
                 e.stopPropagation();
                 onAddToCart();
               }}
             >
-              <ShoppingCart className="h-4 w-4 mr-2" />
+              <ShoppingCart className="h-3.5 w-3.5 mr-1.5 shrink-0" />
               Add to Basket
             </Button>
           )}

@@ -332,7 +332,7 @@ const ProductDetail = () => {
         {/* Usually bought next */}
         {relatedProducts.length > 0 && (
           <div>
-            <h2 className="text-2xl font-bold text-foreground mb-8">Usually bought next</h2>
+            <h2 className="text-xl font-bold text-foreground mb-4">Usually bought next</h2>
             <Carousel
               opts={{
                 align: "start",
@@ -341,7 +341,7 @@ const ProductDetail = () => {
             >
               <CarouselContent>
                 {relatedProducts.map((relatedProduct) => (
-                  <CarouselItem key={relatedProduct.id} className="md:basis-1/3 lg:basis-1/4">
+                  <CarouselItem key={relatedProduct.id} className="basis-1/2 md:basis-1/3 lg:basis-1/4">
                     <div className="p-1">
                        <ProductCard
                          image={relatedProduct.image}
@@ -359,8 +359,8 @@ const ProductDetail = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
+              <CarouselPrevious className="left-1 h-7 w-7" />
+              <CarouselNext className="right-1 h-7 w-7" />
             </Carousel>
           </div>
         )}

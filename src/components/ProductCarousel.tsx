@@ -46,10 +46,8 @@ const ProductCarousel = ({ title, products, favorites = new Set(), onToggleFavor
     return null;
   }
   return (
-    <section className="px-6 py-6">
+    <section className="px-4 py-4">
       <div className="container mx-auto max-w-4xl">
-        <h2 className="text-2xl font-bold text-foreground mb-6">{title}</h2>
-        
         <Carousel
           opts={{
             align: "start",
@@ -57,6 +55,19 @@ const ProductCarousel = ({ title, products, favorites = new Set(), onToggleFavor
           }}
           className="w-full"
         >
+          {/* Arrows sit beside the title so they never cover the cards. */}
+          <div className="flex items-center justify-between gap-2 mb-3">
+            {title ? (
+              <h2 className="text-xl font-bold text-foreground">{title}</h2>
+            ) : (
+              <span />
+            )}
+            <div className="flex items-center gap-1.5 shrink-0">
+              <CarouselPrevious className="static h-7 w-7 translate-y-0" />
+              <CarouselNext className="static h-7 w-7 translate-y-0" />
+            </div>
+          </div>
+
           <CarouselContent className="-ml-2 md:-ml-4">
             {products.map((product) => (
               <CarouselItem key={product.id} className="pl-2 md:pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
@@ -77,8 +88,6 @@ const ProductCarousel = ({ title, products, favorites = new Set(), onToggleFavor
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
         </Carousel>
       </div>
     </section>

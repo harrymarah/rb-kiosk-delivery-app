@@ -102,10 +102,10 @@ const Basket = () => {
 
               return (
                 <Card key={item.id}>
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4">
+                  <CardContent className="p-3">
+                    <div className="flex items-start gap-3">
                       {/* Item Image */}
-                      <div className="w-20 h-20 bg-muted rounded-lg overflow-hidden flex-shrink-0">
+                      <div className="w-16 h-16 bg-muted rounded-lg overflow-hidden flex-shrink-0">
                         <img
                           src={item.image}
                           alt={item.name}
@@ -116,45 +116,46 @@ const Basket = () => {
 
                       {/* Item Details */}
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-foreground truncate">{item.name}</h3>
-                        <p className="text-sm text-muted-foreground">{item.price} each</p>
-                        <p className="text-lg font-bold text-foreground mt-1">
-                          {formatPrice(itemTotal)}
-                        </p>
-                      </div>
+                        <h3 className="font-semibold text-sm leading-snug text-foreground line-clamp-2">{item.name}</h3>
+                        <p className="text-xs text-muted-foreground">{item.price} each</p>
 
-                      {/* Quantity Controls */}
-                      <div className="flex items-center gap-2">
-                        <div className="flex items-center border border-border rounded-md">
+                        {/* Quantity Controls */}
+                        <div className="flex items-center gap-2 mt-2">
+                          <div className="flex items-center border border-border rounded-md">
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
+                              className="h-7 w-7 rounded-none"
+                            >
+                              <Minus className="h-3 w-3" />
+                            </Button>
+                            <span className="px-2 text-sm min-w-[1.75rem] text-center font-medium">
+                              {item.quantity}
+                            </span>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
+                              className="h-7 w-7 rounded-none"
+                            >
+                              <Plus className="h-3 w-3" />
+                            </Button>
+                          </div>
+
+                          <p className="text-base font-bold text-foreground ml-auto">
+                            {formatPrice(itemTotal)}
+                          </p>
+
                           <Button
                             variant="ghost"
                             size="icon"
-                            onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                            className="h-8 w-8 rounded-none"
+                            onClick={() => handleRemoveItem(item.id)}
+                            className="h-8 w-8 shrink-0 text-destructive hover:text-destructive"
                           >
-                            <Minus className="h-3 w-3" />
-                          </Button>
-                          <span className="px-3 py-1 min-w-[2rem] text-center font-medium">
-                            {item.quantity}
-                          </span>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                            className="h-8 w-8 rounded-none"
-                          >
-                            <Plus className="h-3 w-3" />
+                            <Trash2 className="h-3.5 w-3.5" />
                           </Button>
                         </div>
-
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleRemoveItem(item.id)}
-                          className="h-8 w-8 text-destructive hover:text-destructive"
-                        >
-                          <Trash2 className="h-3 w-3" />
-                        </Button>
                       </div>
                     </div>
                   </CardContent>

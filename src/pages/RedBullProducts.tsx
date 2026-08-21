@@ -107,19 +107,19 @@ const RedBullProducts = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center gap-4">
+        <div className="container mx-auto px-3 py-3">
+          <div className="flex items-center gap-1.5">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => navigate(fromPath)}
               className="shrink-0"
             >
-              <ChevronLeft className="h-6 w-6" />
+              <ChevronLeft className="h-5 w-5" />
             </Button>
-            <div>
-              <h1 className="text-2xl font-bold">Red Bull Products</h1>
-              <p className="text-muted-foreground">
+            <div className="min-w-0">
+              <h1 className="text-lg font-bold leading-tight">Red Bull Products</h1>
+              <p className="text-xs text-muted-foreground">
                 Complete collection of Red Bull Energy Drinks
               </p>
             </div>
@@ -128,9 +128,9 @@ const RedBullProducts = () => {
       </header>
 
       {/* Products Grid */}
-      <main className="container mx-auto px-4 py-6">
+      <main className="container mx-auto px-4 py-4">
         {redBullProducts.length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
             {redBullProducts.map((product) => (
                <ProductCard
                  key={product.id}

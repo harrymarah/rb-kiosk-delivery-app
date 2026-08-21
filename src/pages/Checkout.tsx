@@ -176,7 +176,7 @@ const Checkout = () => {
                 {recommendations.map((product) => (
                   <CarouselItem key={product.id} className="pl-2 md:pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
                     <Card className="group cursor-pointer hover:shadow-lg transition-all duration-200 h-full">
-                      <CardContent className="p-4 flex flex-col h-full">
+                      <CardContent className="p-3 flex flex-col h-full">
                         <div className="aspect-square bg-muted rounded-lg overflow-hidden mb-3">
                           <img
                             src={product.image}
@@ -189,10 +189,10 @@ const Checkout = () => {
                         </div>
                         
                         <div className="space-y-2 flex-1 flex flex-col">
-                          <h3 className="font-medium text-foreground line-clamp-2">{product.name}</h3>
+                          <h3 className="font-medium text-sm leading-snug text-foreground line-clamp-2">{product.name}</h3>
                           
                           <div className="flex items-center gap-2">
-                            <span className="text-lg font-bold text-foreground">{product.price}</span>
+                            <span className="text-base font-bold text-foreground">{product.price}</span>
                             {product.originalPrice && (
                               <span className="text-sm text-muted-foreground line-through">
                                 {product.originalPrice}
@@ -224,8 +224,8 @@ const Checkout = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
+              <CarouselPrevious className="left-1 h-7 w-7" />
+              <CarouselNext className="right-1 h-7 w-7" />
             </Carousel>
           </div>
         )}

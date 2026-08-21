@@ -32,8 +32,8 @@ const SearchFilterBar = ({
   const hasActiveFilters = selectedCategory !== "all" || sortBy !== "relevance";
 
   return (
-    <div className="bg-card border border-border rounded-lg p-4 mb-6">
-      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+    <div className="bg-card border border-border rounded-lg p-3 mb-4">
+      <div className="flex flex-col gap-3 items-stretch justify-between">
         <div className="flex items-center gap-2">
           <SlidersHorizontal className="h-4 w-4 text-muted-foreground" />
           <span className="text-sm font-medium text-foreground">Filter & Sort</span>
@@ -44,12 +44,12 @@ const SearchFilterBar = ({
           )}
         </div>
         
-        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+        <div className="flex items-center gap-2 w-full">
           {/* Category Filter */}
-          <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-muted-foreground" />
+          <div className="flex flex-1 min-w-0 items-center gap-1.5">
+            <Filter className="h-4 w-4 shrink-0 text-muted-foreground" />
             <Select value={selectedCategory} onValueChange={onCategoryChange}>
-              <SelectTrigger className="w-[160px]">
+              <SelectTrigger className="w-full min-w-0">
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent>
@@ -65,7 +65,7 @@ const SearchFilterBar = ({
 
           {/* Sort Options */}
           <Select value={sortBy} onValueChange={onSortChange}>
-            <SelectTrigger className="w-[140px]">
+            <SelectTrigger className="flex-1 min-w-0">
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
             <SelectContent>
