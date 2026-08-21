@@ -316,24 +316,24 @@ const HomePage = () => {
             </Button>
           </div>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+          <div className="grid grid-cols-3 gap-3">
             {supermarkets.map((supermarket) => (
               <div
                 key={supermarket.id}
-                className={`text-center cursor-pointer p-4 rounded-lg hover:bg-muted/50 transition-colors ${
+                className={`text-center cursor-pointer p-2 rounded-lg hover:bg-muted/50 transition-colors ${
                   supermarket.functional ? 'hover:opacity-80' : 'opacity-75'
                 }`}
                 onClick={() => handleSupermarketClick(supermarket)}
               >
-                <div className={`w-20 h-20 mx-auto rounded-full ${supermarket.bgColor} flex items-center justify-center text-white text-2xl mb-3 relative overflow-hidden shadow-md`}>
+                <div className={`w-20 h-20 mx-auto rounded-full ${supermarket.bgColor} flex items-center justify-center text-white text-2xl mb-2 relative overflow-hidden shadow-md`}>
                   <img 
                     src={supermarket.logo} 
                     alt={supermarket.name}
                     className="w-full h-full object-cover rounded-full"
                   />
                 </div>
-                <div className="text-sm font-medium text-foreground mb-1">{supermarket.name}</div>
-                <div className="text-sm text-muted-foreground">{supermarket.deliveryTime}</div>
+                <div className="text-xs font-medium leading-tight text-foreground mb-0.5">{supermarket.name}</div>
+                <div className="text-xs text-muted-foreground">{supermarket.deliveryTime}</div>
               </div>
             ))}
           </div>
