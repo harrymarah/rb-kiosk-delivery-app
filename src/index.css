@@ -129,3 +129,209 @@ All colors MUST be HSL.
 .animate-slide-up {
   animation: slide-up 0.3s ease-out;
 }
+/* ── iPhone-style device frame ────────────────────────────────────────────
+   Wraps the whole app shell. The frame scales to fill the available
+   viewport height so it still works full-bleed on a portrait kiosk screen. */
+
+.phone-stage {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: radial-gradient(circle at 50% 0%, hsl(220 16% 24%), hsl(220 20% 12%));
+}
+
+.phone-device {
+  position: relative;
+  height: min(calc(100dvh - 2rem), 1400px);
+  aspect-ratio: 9 / 19.5;
+  max-width: calc(100vw - 2rem);
+  padding: 0.75rem;
+  border-radius: 3.25rem;
+  background: linear-gradient(160deg, hsl(220 8% 38%), hsl(220 10% 14%) 40%, hsl(220 8% 30%));
+  box-shadow:
+    0 0 0 2px hsl(220 10% 8%),
+    0 30px 60px -12px hsl(0 0% 0% / 0.6),
+    0 0 80px hsl(0 0% 0% / 0.35);
+}
+
+.phone-screen {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 2.6rem;
+  background: hsl(var(--background));
+}
+
+/* Safe area between the dynamic island and the home indicator.
+   The transform makes this the containing block for the app's
+   position: fixed bars, so they pin inside the phone rather than the window. */
+.phone-safe {
+  position: absolute;
+  top: 2.9rem;
+  bottom: 1.4rem;
+  left: 0;
+  right: 0;
+  transform: translateZ(0);
+}
+
+/* The scroll container sits inside the safe area so fixed bars don't scroll. */
+.phone-viewport {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Full-height utilities should fill the phone screen, not the browser window. */
+.phone-viewport .min-h-screen {
+  min-height: 100%;
+}
+
+.phone-viewport .h-screen {
+  height: 100%;
+}
+
+/* ── Keep phone-width layout inside the frame ─────────────────────────────
+   Tailwind's sm:/md:/lg:/xl: variants key off the browser viewport, not the
+   phone frame, so on a desktop or kiosk screen they would fire and squash the
+   app's desktop layouts into a phone-width column. Inside the frame the app is
+   always phone-width, so pin these elements to their base (narrow) value. */
+@media (min-width: 640px) {
+  .phone-viewport .grid-cols-1[class*=":grid-cols-"] {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .phone-viewport .grid-cols-2[class*=":grid-cols-"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .phone-viewport .grid-cols-3[class*=":grid-cols-"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .phone-viewport .basis-full[class*=":basis-"] {
+    flex-basis: 100%;
+  }
+
+  .phone-viewport .basis-1\/2[class*=":basis-"] {
+    flex-basis: 50%;
+  }
+
+  .phone-viewport .flex-col[class*=":flex-row"] {
+    flex-direction: column;
+  }
+}
+
+.phone-island {
+  position: absolute;
+  top: 0.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32%;
+  height: 1.7rem;
+  border-radius: 999px;
+  background: hsl(220 10% 4%);
+  pointer-events: none;
+  z-index: 60;
+}
+
+.phone-home-indicator {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34%;
+  height: 0.3rem;
+  border-radius: 999px;
+  background: hsl(var(--foreground) / 0.35);
+  pointer-events: none;
+  z-index: 60;
+}
+
+.phone-button {
+  position: absolute;
+  background: linear-gradient(180deg, hsl(220 8% 42%), hsl(220 10% 22%));
+  border-radius: 2px;
+}
+
+.phone-button--silent {
+  left: -3px;
+  top: 7.5rem;
+  width: 3px;
+  height: 2rem;
+}
+
+.phone-button--volume-up {
+  left: -3px;
+  top: 11rem;
+  width: 3px;
+  height: 3.5rem;
+}
+
+.phone-button--volume-down {
+  left: -3px;
+  top: 15.25rem;
+  width: 3px;
+  height: 3.5rem;
+}
+
+.phone-button--power {
+  right: -3px;
+  top: 12.5rem;
+  width: 3px;
+  height: 5.5rem;
+}
+
+/* On very small screens drop the chrome so the app stays usable. */
+@media (max-width: 420px) {
+  .phone-stage {
+    padding: 0;
+    background: hsl(var(--background));
+  }
+
+  .phone-device {
+    height: 100dvh;
+    max-width: 100vw;
+    width: 100vw;
+    aspect-ratio: auto;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .phone-screen {
+    border-radius: 0;
+  }
+
+  .phone-island,
+  .phone-home-indicator,
+  .phone-button {
+    display: none;
+  }
+}
+
+/* Hide the scrollbar on the top nav ribbon while keeping it scrollable. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* The phone frame scales with viewport height, so scale the nav ribbon with it
+   — keeps all six labels (incl. "Reservations") legible without clipping. */
+.main-nav-icon {
+  font-size: clamp(13px, 1.7vh, 20px);
+}
+
+.main-nav-label {
+  font-size: clamp(9px, 1.15vh, 13px);
+}

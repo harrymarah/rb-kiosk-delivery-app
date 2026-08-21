@@ -4,6 +4,7 @@ import { Search, Heart, User, MapPin, ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import MainNav from "@/components/MainNav";
 
 const Discover = () => {
   const navigate = useNavigate();
@@ -103,6 +104,11 @@ const Discover = () => {
 
   return (
     <div className="min-h-screen bg-background pb-20">
+      {/* Top nav ribbon */}
+      <div className="sticky top-0 z-50 bg-background border-b">
+        <MainNav activeItem="discover" className="border-b-0" />
+      </div>
+
       {/* Header with background image */}
       <div 
         className="relative h-64 bg-cover bg-center"
@@ -262,31 +268,6 @@ const Discover = () => {
         </section>
       </div>
 
-      {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-background border-t px-4 py-2">
-        <div className="flex justify-around">
-          <div className="text-center cursor-pointer" onClick={() => navigate("/")}>
-            <div className="text-muted-foreground mb-1">🏠</div>
-            <span className="text-xs text-muted-foreground">Home</span>
-          </div>
-          <div className="text-center">
-            <div className="text-primary mb-1">🔍</div>
-            <span className="text-xs text-primary font-medium">Discover</span>
-          </div>
-          <div className="text-center">
-            <div className="text-muted-foreground mb-1">🍽️</div>
-            <span className="text-xs text-muted-foreground">Restaurants</span>
-          </div>
-          <div className="text-center">
-            <div className="text-muted-foreground mb-1">🛒</div>
-            <span className="text-xs text-muted-foreground">Groceries</span>
-          </div>
-          <div className="text-center">
-            <div className="text-muted-foreground mb-1">🛍️</div>
-            <span className="text-xs text-muted-foreground">Shopping</span>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

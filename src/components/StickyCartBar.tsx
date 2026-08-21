@@ -18,42 +18,41 @@ export const StickyCartBar = () => {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border shadow-lg z-50 animate-slide-up">
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex items-center justify-between">
+      <div className="container mx-auto px-3 py-2">
+        <div className="flex items-center justify-between gap-2">
           {/* Cart summary */}
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="flex items-center gap-2 min-w-0">
               <div className="relative">
                 <ShoppingCart className="h-5 w-5 text-foreground" />
                 <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
                   {totalItems}
                 </span>
               </div>
-              <div className="text-sm">
-                <span className="font-medium text-foreground">{totalItems} item{totalItems !== 1 ? 's' : ''}</span>
-                <span className="text-muted-foreground mx-1">•</span>
-                <span className="font-bold text-foreground">£{totalPrice.toFixed(2)}</span>
+              <div className="text-xs leading-tight min-w-0">
+                <div className="font-medium text-foreground whitespace-nowrap">{totalItems} item{totalItems !== 1 ? 's' : ''}</div>
+                <div className="font-bold text-foreground whitespace-nowrap">£{totalPrice.toFixed(2)}</div>
               </div>
             </div>
           </div>
 
           {/* Action buttons */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <Button
               variant="outline"
               size="sm"
               onClick={() => navigate('/basket')}
-              className="flex items-center gap-2"
+              className="flex items-center gap-1.5 px-2.5 text-xs"
             >
-              <Eye className="h-4 w-4" />
-              View Basket
+              <Eye className="h-4 w-4 shrink-0" />
+              Basket
             </Button>
             <Button
               size="sm"
               onClick={() => navigate('/checkout')}
-              className="flex items-center gap-2"
+              className="flex items-center gap-1.5 px-2.5 text-xs"
             >
-              <CreditCard className="h-4 w-4" />
+              <CreditCard className="h-4 w-4 shrink-0" />
               Checkout
             </Button>
           </div>

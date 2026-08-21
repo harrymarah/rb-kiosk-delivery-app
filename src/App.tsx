@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { BasketProvider } from "@/contexts/BasketContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { StickyCartBar } from "@/components/StickyCartBar";
+import PhoneFrame from "@/components/PhoneFrame";
 import HomePage from "./pages/HomePage";
 import Discover from "./pages/Discover";
 import Index from "./pages/Index";
@@ -16,6 +17,7 @@ import Checkout from "./pages/Checkout";
 import Confirmation from "./pages/Confirmation";
 import NotFound from "./pages/NotFound";
 import RedBullProducts from "./pages/RedBullProducts";
+import Reservations from "./pages/Reservations";
 
 const queryClient = new QueryClient();
 
@@ -24,25 +26,28 @@ const App = () => (
     <FavoritesProvider>
       <BasketProvider>
         <TooltipProvider>
-        <Toaster />
-        <Sonner />
         <BrowserRouter>
-          <div className="pb-24">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/discover" element={<Discover />} />
-              <Route path="/quickmart" element={<Index />} />
-              <Route path="/basket" element={<Basket />} />
-              <Route path="/product/:id" element={<ProductDetail />} />
-              <Route path="/search" element={<SearchResults />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/confirmation" element={<Confirmation />} />
-              <Route path="/red-bull-products" element={<RedBullProducts />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
-          <StickyCartBar />
+          <PhoneFrame>
+            <Toaster />
+            <Sonner />
+            <div className="pb-24">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/discover" element={<Discover />} />
+                <Route path="/quickmart" element={<Index />} />
+                <Route path="/basket" element={<Basket />} />
+                <Route path="/product/:id" element={<ProductDetail />} />
+                <Route path="/search" element={<SearchResults />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/confirmation" element={<Confirmation />} />
+                <Route path="/red-bull-products" element={<RedBullProducts />} />
+                <Route path="/reservations" element={<Reservations />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+            <StickyCartBar />
+          </PhoneFrame>
         </BrowserRouter>
         </TooltipProvider>
       </BasketProvider>

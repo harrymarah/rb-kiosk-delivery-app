@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import BannerAd from "@/components/BannerAd";
 import PromoBanner from "@/components/PromoBanner";
+import BannerCarousel from "@/components/BannerCarousel";
+import MainNav from "@/components/MainNav";
 import AsDealsLogo from "@/assets/logos/AsDeal_logo.png";
 import MorriSaveLogo from "@/assets/logos/MorriSave_logo.png";
 import SaneBuryLogo from "@/assets/logos/SaneBury_logo.png";
@@ -255,8 +257,11 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="sticky top-0 z-50 bg-background border-b px-4 py-3">
+      {/* Top nav ribbon + header */}
+      <div className="sticky top-0 z-50 bg-background border-b">
+        <MainNav activeItem="home" />
+
+        <div className="px-4 py-3">
         <div className="flex items-center gap-3 mb-3">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
@@ -298,13 +303,14 @@ const HomePage = () => {
           <MapPin className="h-4 w-4" />
           <span>Earlham Street</span>
         </div>
+        </div>
       </div>
 
       <div className="px-4 py-4 space-y-6 max-w-6xl mx-auto">
         {/* Supermarkets Section */}
         <section>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-foreground">Groceries, snacks, drinks and more</h2>
+            <h2 className="text-xl font-bold text-foreground">Groceries, snacks, drinks and more</h2>
             <Button variant="ghost" size="sm" className="text-primary">
               See all →
             </Button>
@@ -340,10 +346,15 @@ const HomePage = () => {
           className="my-8"
         />
 
+        {/* Offer Banners */}
+        <section>
+          <BannerCarousel className="w-full" />
+        </section>
+
         {/* Restaurants Section */}
         <section>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-foreground">Local favorites delivered fast</h2>
+            <h2 className="text-xl font-bold text-foreground">Local favorites delivered fast</h2>
             <Button variant="ghost" size="sm" className="text-primary">
               See all →
             </Button>
@@ -354,7 +365,7 @@ const HomePage = () => {
               <Card key={restaurant.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer h-40">
                 <CardContent className="p-0 h-full">
                   <div className="flex h-full">
-                    <div className="relative w-40 lg:w-44 h-full flex-shrink-0">
+                    <div className="relative w-32 h-full flex-shrink-0">
                       <img
                         src={restaurant.image}
                         alt={restaurant.name}
@@ -368,27 +379,26 @@ const HomePage = () => {
                       </Badge>
                     </div>
                     
-                    <div className="flex-1 p-5 flex flex-col justify-between">
+                    <div className="flex-1 min-w-0 p-4 flex flex-col justify-between">
                       <div>
                         <div className="flex justify-between items-start gap-2 mb-2">
-                          <h3 className="font-semibold text-foreground text-xl">{restaurant.name}</h3>
-                          <div className="text-sm text-muted-foreground font-medium">
+                          <h3 className="font-semibold text-foreground text-base leading-tight">{restaurant.name}</h3>
+                          <div className="text-xs text-muted-foreground font-medium whitespace-nowrap">
                             {restaurant.deliveryTime}
                           </div>
                         </div>
                         
-                        <div className="flex items-center gap-3 mb-3">
+                        <div className="flex items-center flex-wrap gap-x-2 gap-y-1 mb-2">
                           <div className="flex items-center gap-1">
-                            <span className="text-green-600 text-lg">★</span>
-                            <span className="text-sm font-medium">{restaurant.rating}</span>
-                            <span className="text-sm text-muted-foreground">({restaurant.reviews})</span>
+                            <span className="text-green-600">★</span>
+                            <span className="text-xs font-medium">{restaurant.rating}</span>
+                            <span className="text-xs text-muted-foreground">({restaurant.reviews})</span>
                           </div>
-                          <span className="text-muted-foreground">•</span>
-                          <span className="text-sm text-muted-foreground">{restaurant.cuisine}</span>
+                          <span className="text-xs text-muted-foreground">{restaurant.cuisine}</span>
                         </div>
                       </div>
                       
-                      <div className="text-sm text-muted-foreground font-medium">
+                      <div className="text-xs text-muted-foreground font-medium">
                         {restaurant.deliveryFee} delivery
                       </div>
                     </div>
@@ -405,32 +415,6 @@ const HomePage = () => {
           subtitle="Enjoy the dishes you love for less"
           className="mb-12"
         />
-      </div>
-
-      {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-background border-t px-4 py-2">
-        <div className="flex justify-around">
-          <div className="text-center">
-            <div className="text-primary mb-1">🏠</div>
-            <span className="text-xs text-primary font-medium">Home</span>
-          </div>
-          <div className="text-center cursor-pointer" onClick={() => navigate("/discover")}>
-            <div className="text-muted-foreground mb-1">🔍</div>
-            <span className="text-xs text-muted-foreground">Discover</span>
-          </div>
-          <div className="text-center">
-            <div className="text-muted-foreground mb-1">🍽️</div>
-            <span className="text-xs text-muted-foreground">Restaurants</span>
-          </div>
-          <div className="text-center">
-            <div className="text-muted-foreground mb-1">🛒</div>
-            <span className="text-xs text-muted-foreground">Groceries</span>
-          </div>
-          <div className="text-center">
-            <div className="text-muted-foreground mb-1">🛍️</div>
-            <span className="text-xs text-muted-foreground">Shopping</span>
-          </div>
-        </div>
       </div>
 
       {/* Inactivity Dialog */}
