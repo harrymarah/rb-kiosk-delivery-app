@@ -22,9 +22,11 @@ interface ProductCarouselProps {
   }>;
   favorites?: Set<string>;
   onToggleFavorite?: (productId: string) => void;
+  /** Renders a "See All" link beside the title when provided. */
+  onSeeAll?: () => void;
 }
 
-const ProductCarousel = ({ title, products, favorites = new Set(), onToggleFavorite }: ProductCarouselProps) => {
+const ProductCarousel = ({ title, products, favorites = new Set(), onToggleFavorite, onSeeAll }: ProductCarouselProps) => {
   const { addItem } = useBasket();
   const { toast } = useToast();
 
@@ -63,6 +65,14 @@ const ProductCarousel = ({ title, products, favorites = new Set(), onToggleFavor
               <span />
             )}
             <div className="flex items-center gap-1.5 shrink-0">
+              {onSeeAll && (
+                <button
+                  onClick={onSeeAll}
+                  className="mr-1 text-primary hover:text-primary/80 text-sm font-medium whitespace-nowrap"
+                >
+                  See All →
+                </button>
+              )}
               <CarouselPrevious className="static h-7 w-7 translate-y-0" />
               <CarouselNext className="static h-7 w-7 translate-y-0" />
             </div>

@@ -100,27 +100,13 @@ const Index = () => {
             onToggleFavorite={toggleFavoriteById}
           />
           
-          <div className="px-6 py-6">
-            <div className="container mx-auto max-w-4xl">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-foreground">Energy Drinks</h2>
-                <button
-                  onClick={() => setSelectedCategory("energyDrinks")}
-                  className="text-primary hover:text-primary/80 text-sm font-medium"
-                >
-                  See All →
-                </button>
-              </div>
-              <div className="-mx-6">
-                <ProductCarousel 
-                  title="" 
-                  products={products.energyDrinks?.slice(0, 6) || []} 
-                  favorites={favoritesSet}
-                  onToggleFavorite={toggleFavoriteById}
-                />
-              </div>
-            </div>
-          </div>
+          <ProductCarousel
+            title="Energy Drinks"
+            products={products.energyDrinks?.slice(0, 6) || []}
+            favorites={favoritesSet}
+            onToggleFavorite={toggleFavoriteById}
+            onSeeAll={() => setSelectedCategory("energyDrinks")}
+          />
           
           {/* Bottom Banner Advertisement */}
           <div className="px-6">
