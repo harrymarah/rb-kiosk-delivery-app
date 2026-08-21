@@ -6,6 +6,9 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  // Served from the root of the custom domain redbulldev.harrymarah.uk,
+  // so no repo-name base path is needed.
+  base: "/",
   server: {
     host: "::",
     port: 8080,
