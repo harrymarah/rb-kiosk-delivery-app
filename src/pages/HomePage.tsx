@@ -17,7 +17,6 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import BannerAd from "@/components/BannerAd";
-import PromoBanner from "@/components/PromoBanner";
 import BannerCarousel from "@/components/BannerCarousel";
 import MainNav from "@/components/MainNav";
 import AsDealsLogo from "@/assets/logos/AsDeal_logo.png";
@@ -339,13 +338,6 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Promo Banner */}
-        <PromoBanner 
-          title="20% off with Tasty Thursday"
-          subtitle="Enjoy the dishes you love for less"
-          className="my-8"
-        />
-
         {/* Offer Banners */}
         <section>
           <BannerCarousel className="w-full" />
@@ -410,11 +402,7 @@ const HomePage = () => {
         </section>
 
         {/* Bottom Banner */}
-        <BannerAd 
-          title="20% off with Tasty Thursday"
-          subtitle="Enjoy the dishes you love for less"
-          className="mb-12"
-        />
+        <BannerAd className="mb-12" />
       </div>
 
       {/* Inactivity Dialog */}
