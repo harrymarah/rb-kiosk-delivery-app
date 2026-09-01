@@ -7,7 +7,7 @@ const navItems = [
   { id: "restaurants", label: "Restaurants", icon: "🍽️" },
   { id: "groceries", label: "Groceries", icon: "🛒" },
   { id: "shopping", label: "Shopping", icon: "🛍️" },
-  { id: "reservations", label: "Reservations", icon: "📅", path: "/reservations" },
+  { id: "reservations", label: "Reservations", icon: "📅", path: "/reservations", badge: "NEW" },
 ];
 
 interface MainNavProps {
@@ -20,8 +20,10 @@ const MainNav = ({ activeItem, className }: MainNavProps) => {
   const navigate = useNavigate();
 
   return (
-    <nav className={cn("bg-background border-b px-1 py-2", className)}>
-      <div className="flex justify-around overflow-x-auto no-scrollbar">
+    <nav className={cn("bg-background border-b px-1 pt-0.5 pb-2", className)}>
+      {/* overflow-x-auto also clips vertically, so the scroll box carries the
+         top padding the "NEW" badge overhangs into. */}
+      <div className="flex justify-around overflow-x-auto no-scrollbar pt-1.5">
         {navItems.map((item) => {
           const isActive = item.id === activeItem;
           return (
@@ -35,12 +37,19 @@ const MainNav = ({ activeItem, className }: MainNavProps) => {
                 if (item.path && !isActive) navigate(item.path);
               }}
             >
-              <div className={cn("main-nav-icon mb-0.5 leading-none", isActive ? "text-primary" : "text-muted-foreground")}>
-                {item.icon}
+              <div className="relative inline-block">
+                <div className={cn("main-nav-icon mb-0.5 leading-none", isActive ? "text-primary" : "text-muted-foreground")}>
+                  {item.icon}
+                </div>
+                {item.badge && (
+                  <span className="main-nav-badge absolute -top-1 -right-2 rounded-full bg-destructive px-1 font-bold leading-tight text-destructive-foreground">
+                    {item.badge}
+                  </span>
+                )}
               </div>
               <span
                 className={cn(
-                  "main-nav-label leading-tight whitespace-nowrap",
+                  "main-nav-label block leading-tight whitespace-nowrap",
                   isActive ? "text-primary font-medium" : "text-muted-foreground"
                 )}
               >

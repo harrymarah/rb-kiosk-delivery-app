@@ -361,3 +361,8 @@ All colors MUST be HSL.
 .main-nav-label {
   font-size: 10px;
 }
+
+.main-nav-badge {
+  font-size: 7px;
+  letter-spacing: 0.02em;
+}
