@@ -12,7 +12,11 @@ export default {
 	theme: {
 		container: {
 			center: true,
-			padding: '2rem',
+			// The app lays out at a 390px phone viewport, where a 2rem container
+			// gutter cost ~25% of the width - and every `container` here already
+			// sets its own px-*, or sits inside a padded section, so this was
+			// surplus on top of that.
+			padding: '0rem',
 			screens: {
 				'2xl': '1400px'
 			}
