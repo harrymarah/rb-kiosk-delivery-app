@@ -1,7 +1,9 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { getProductImageUrl } from '@/lib/image';
 
 export interface FavoriteItem {
   id: string;
+  offer?: string;
   name: string;
   price: string;
   image: string;
@@ -30,89 +32,44 @@ interface FavoritesProviderProps {
   children: ReactNode;
 }
 
-// Default favorites: Products from the official 'Favourite Products' category
-const defaultFavorites: FavoriteItem[] = [
-  {
-    id: "fav1",
-    name: "Oatly Oat Drink Barista Edition",
-    price: "£2.49",
-    image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Favourite%20Products/12%20Favourites/Image%201%20-%20Oatly%20Oat%20Drink%20Barista%20Edition.jpg",
-    category: "favourites"
-  },
-  {
-    id: "fav2",
-    name: "Heineken Lager Beer Bottles 4x330ml",
-    price: "£5.99",
-    image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Favourite%20Products/12%20Favourites/Image%202%20-%20Heineken%20Lager%20Beer%20Bottles%204x330ml.jpg",
-    category: "favourites"
-  },
-  {
-    id: "fav3",
-    name: "Propercorn Sweet & Salty",
-    price: "£2.99",
-    image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Favourite%20Products/12%20Favourites/Image%203%20-%20Propercorn%20Sweet%20&%20Salty.jpg",
-    category: "favourites"
-  },
-  {
-    id: "fav4",
-    name: "Red Bull Energy Drink 8x250ml",
-    price: "£15.99",
-    image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Favourite%20Products/12%20Favourites/Image%204%20-%20Red%20Bull%20Energy%20Drink%208x250ml.jpg",
-    category: "favourites"
-  },
-  {
-    id: "fav5",
-    name: "Cadbury Dairy Milk Caramel Chocolate Bar",
-    price: "£1.99",
-    image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Favourite%20Products/12%20Favourites/Image%205%20-%20Cadbury%20Dairy%20Milk%20Caramel%20Chocolate%20Bar.jpg",
-    category: "favourites"
-  },
-  {
-    id: "fav6",
-    name: "Goodfella's Stonebaked Thin Pepperoni Pizza",
-    price: "£4.99",
-    image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Favourite%20Products/12%20Favourites/Image%206%20-%20Goodfella's%20Stonebaked%20Thin%20Pepperoni%20Pizza.jpg",
-    category: "favourites"
-  },
-  {
-    id: "fav7",
-    name: "Coca Cola Original 8x330ml",
-    price: "£6.49",
-    image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Favourite%20Products/12%20Favourites/Image%207%20-%20Coca%20Cola%20Original%208x330ml.jpg",
-    category: "favourites"
-  },
-  {
-    id: "fav8",
-    name: "Candy Kittens Wild Strawberry 140g",
-    price: "£3.49",
-    image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Favourite%20Products/12%20Favourites/Image%208%20-%20Candy%20Kittens%20Wild%20Strawberry%20140g.jpg",
-    category: "favourites"
-  },
-  {
-    id: "fav10",
-    name: "Graze Protein Salt & Pepper Sharing Mixed Nuts Snack",
-    price: "£2.99",
-    image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Favourite%20Products/12%20Favourites/Image%2010%20-%20Graze%20Protein%20Salt%20&%20Pepper%20Sharing%20Mixed%20Nuts%20Snack.jpg",
-    category: "favourites"
-  },
-  {
-    id: "fav11",
-    name: "Starbucks Caramel Macchiato Iced Coffee",
-    price: "£3.49",
-    image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Favourite%20Products/12%20Favourites/Image%2011%20-%20Starbucks%20Caramel%20Macchiato%20Iced%20Coffee.jpg",
-    category: "favourites"
-  },
-  {
-    id: "fav12",
-    name: "Walkers Extra Flamin Hot",
-    price: "£1.49",
-    image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Favourite%20Products/12%20Favourites/Image%2012%20-%20Walkers%20Extra%20Flamin%20Hot.jpg",
-    category: "favourites"
-  }
-];
+/**
+ * The old default list hardcoded twelve products from the superseded
+ * catalogue, with image URLs to match; none of those ids survive in the 2026
+ * Q-Comm list. Seed from the catalogue's own "Favourites" category instead, so
+ * the kiosk still opens with favourites populated and they are real products.
+ */
+const seedFavorites = async (): Promise<FavoriteItem[]> => {
+  const response = await fetch(`${import.meta.env.BASE_URL}data/products.json`);
+  if (!response.ok) return [];
+  const data = await response.json();
+  return (data.products || [])
+    .filter((p: any) => p.categories?.includes('favourites'))
+    .sort((a: any, b: any) => (a.ranks?.favourites ?? 99) - (b.ranks?.favourites ?? 99))
+    .map((p: any) => ({
+      id: p.id,
+      name: p.name,
+      price: p.price,
+      image: getProductImageUrl(p.imagePath),
+      category: 'favourites',
+      offer: p.offer,
+    }));
+};
 
 export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({ children }) => {
-  const [favorites, setFavorites] = useState<FavoriteItem[]>(defaultFavorites);
+  const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    seedFavorites()
+      .then((seed) => {
+        // Don't clobber anything the shopper hearted while this was in flight.
+        if (!cancelled) setFavorites((prev) => (prev.length ? prev : seed));
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const addToFavorites = (item: FavoriteItem) => {
     setFavorites(prev => {

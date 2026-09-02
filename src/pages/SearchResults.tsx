@@ -9,7 +9,7 @@ import SearchFilterBar from "@/components/SearchFilterBar";
 import { useProducts } from "@/components/ProductSection";
 import { useBasket } from "@/contexts/BasketContext";
 import { useToast } from "@/hooks/use-toast";
-import { isShopNewProduct } from "@/lib/product-utils";
+import { isNewArrival } from "@/lib/product-utils";
 
 interface Product {
   id: string;
@@ -250,7 +250,7 @@ const SearchResults = () => {
                    onToggleFavorite={() => toggleFavorite(product.id)}
                    onAddToCart={() => handleAddToCart(product)}
                    productId={product.id}
-                   isNewArrival={isShopNewProduct(product.id)}
+                   isNewArrival={isNewArrival(product)}
                  />
               ))}
             </div>

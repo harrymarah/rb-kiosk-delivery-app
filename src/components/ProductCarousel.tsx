@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import ProductCard from "./ProductCard";
 import { useBasket } from "@/contexts/BasketContext";
 import { useToast } from "@/hooks/use-toast";
@@ -11,6 +12,8 @@ import {
 
 interface ProductCarouselProps {
   title: string;
+  /** Category-driver icon shown beside the title. Decorative. */
+  icon?: ReactNode;
   products: Array<{
     id: string;
     name: string;
@@ -26,7 +29,7 @@ interface ProductCarouselProps {
   onSeeAll?: () => void;
 }
 
-const ProductCarousel = ({ title, products, favorites = new Set(), onToggleFavorite, onSeeAll }: ProductCarouselProps) => {
+const ProductCarousel = ({ title, icon, products, favorites = new Set(), onToggleFavorite, onSeeAll }: ProductCarouselProps) => {
   const { addItem } = useBasket();
   const { toast } = useToast();
 
@@ -60,7 +63,10 @@ const ProductCarousel = ({ title, products, favorites = new Set(), onToggleFavor
           {/* Arrows sit beside the title so they never cover the cards. */}
           <div className="flex items-center justify-between gap-2 mb-3">
             {title ? (
-              <h2 className="text-xl font-bold text-foreground">{title}</h2>
+              <h2 className="flex items-center gap-2 text-xl font-bold text-foreground">
+                {icon && <span aria-hidden="true" className="text-primary">{icon}</span>}
+                {title}
+              </h2>
             ) : (
               <span />
             )}

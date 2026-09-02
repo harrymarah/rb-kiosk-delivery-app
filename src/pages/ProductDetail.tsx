@@ -10,7 +10,7 @@ import { useBasket } from "@/contexts/BasketContext";
 import { useToast } from "@/components/ui/use-toast";
 import { OfferDrawer } from "@/components/OfferDrawer";
 import { getProxiedImageUrl } from "@/lib/image";
-import { isShopNewProduct } from "@/lib/product-utils";
+import { isNewArrival } from "@/lib/product-utils";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -41,7 +41,7 @@ interface Product {
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { allProducts, isLoading } = useProducts();
+  const { allProducts, categories, isLoading } = useProducts();
   const { addItem } = useBasket();
   const { toast } = useToast();
   const [product, setProduct] = useState<Product | null>(null);
@@ -169,11 +169,7 @@ const ProductDetail = () => {
                 onClick={() => navigate(`/quickmart?category=${product.category}&tab=explore`)}
                 className="cursor-pointer hover:text-foreground"
               >
-                {product.category === "energyDrinks" ? "Energy Drinks" : 
-                 product.category === "softDrinks" ? "Soft Drinks" :
-                 product.category === "matchReady" ? "Match Ready" :
-                 product.category === "redBull" ? "Red Bull Products" :
-                 product.category === "newProducts" ? "New Products" :
+                {categories.find((c: any) => c.id === product.category)?.name ||
                  product.category.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()).trim()}
               </BreadcrumbLink>
             </BreadcrumbItem>
@@ -353,7 +349,7 @@ const ProductDetail = () => {
                          onToggleFavorite={() => {}}
                          onAddToCart={() => handleAddRelatedToCart(relatedProduct)}
                          productId={relatedProduct.id}
-                         isNewArrival={isShopNewProduct(relatedProduct.id)}
+                         isNewArrival={isNewArrival(relatedProduct)}
                        />
                     </div>
                   </CarouselItem>

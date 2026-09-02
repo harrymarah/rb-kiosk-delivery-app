@@ -10,7 +10,8 @@ import BannerAd from "@/components/BannerAd";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useBasket } from "@/contexts/BasketContext";
 import { useToast } from "@/hooks/use-toast";
-import { isShopNewProduct } from "@/lib/product-utils";
+import { isNewArrival } from "@/lib/product-utils";
+import { getCategoryIcon } from "@/lib/categories";
 
 const Index = () => {
   const [searchParams] = useSearchParams();
@@ -72,42 +73,22 @@ const Index = () => {
       
       {activeTab === "explore" && !selectedCategory && products && (
         <div className="space-y-8">
-          <ProductCarousel 
-            title="Shop new" 
-            products={products.shopNew?.map(product => ({ ...product, isNewArrival: true })) || []} 
-            favorites={favoritesSet}
-            onToggleFavorite={toggleFavoriteById}
-          />
-          
-          <ProductCarousel
-            title="Breakfast" 
-            products={products.breakfast?.slice(0, 6) || []} 
-            favorites={favoritesSet}
-            onToggleFavorite={toggleFavoriteById}
-          />
-          
-          <ProductCarousel
-            title="Get Match Ready" 
-            products={products.matchReady?.slice(0, 6) || []} 
-            favorites={favoritesSet}
-            onToggleFavorite={toggleFavoriteById}
-          />
-          
-          <ProductCarousel 
-            title="Soft Drinks" 
-            products={products.softDrinks?.slice(0, 6) || []} 
-            favorites={favoritesSet}
-            onToggleFavorite={toggleFavoriteById}
-          />
-          
-          <ProductCarousel
-            title="Energy Drinks"
-            products={products.energyDrinks?.slice(0, 6) || []}
-            favorites={favoritesSet}
-            onToggleFavorite={toggleFavoriteById}
-            onSeeAll={() => setSelectedCategory("energyDrinks")}
-          />
-          
+          {categories.map((cat) => {
+            const items = products[cat.id] || [];
+            if (items.length === 0) return null;
+            return (
+              <ProductCarousel
+                key={cat.id}
+                title={cat.name}
+                icon={getCategoryIcon(cat.id)}
+                products={items.slice(0, 6)}
+                favorites={favoritesSet}
+                onToggleFavorite={toggleFavoriteById}
+                onSeeAll={items.length > 6 ? () => setSelectedCategory(cat.id) : undefined}
+              />
+            );
+          })}
+
           {/* Bottom Banner Advertisement */}
           <div className="px-6">
             <div className="container mx-auto max-w-4xl">
@@ -134,12 +115,7 @@ const Index = () => {
                 </button>
               </div>
               <h2 className="text-2xl font-bold text-foreground mb-6 capitalize">
-                {selectedCategory === "energyDrinks" ? "Energy Drinks" : 
-                 selectedCategory === "softDrinks" ? "Soft Drinks" :
-                 selectedCategory === "matchReady" ? "Match Ready" :
-                 selectedCategory === "redBull" ? "Red Bull Products" :
-                 selectedCategory === "newProducts" ? "New Products" :
-                 selectedCategory?.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()).trim() || selectedCategory}
+                {categories.find((c) => c.id === selectedCategory)?.name || selectedCategory}
               </h2>
               
               
@@ -157,58 +133,11 @@ const Index = () => {
                      onToggleFavorite={() => toggleFavoriteById(product.id)}
                       onAddToCart={() => handleAddToCart(product)}
                      productId={product.id}
-                     isNewArrival={isShopNewProduct(product.id)}
+                     isNewArrival={isNewArrival(product)}
                    />
                  ))}
               </div>
               
-              {/* Energy Drinks Category - Advert Block Second */}
-              {selectedCategory === "energyDrinks" && (
-                <div className="mb-4">
-                  <BannerAd 
-                    title="Red Bull Energy Drinks" 
-                    subtitle="Discover the full range of Red Bull products"
-                    className="my-6"
-                  />
-                </div>
-              )}
-              
-              {/* Energy Drinks Category - Featured Products Third (No Title) */}
-              {selectedCategory === "energyDrinks" && (
-                <div className="mb-8 -mt-2">
-                  <ProductCarousel 
-                    title="" 
-                    products={[
-                      {
-                        id: "energy2",
-                        name: "Red Bull Sugar Free Energy Drink 250ml",
-                        price: "£2.49",
-                        image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Red%20Bull%20Products/ALL/18%20-%20Red%20Bull%20Sugar%20Free%20Energy%20Drink%20250ml%20.png"
-                      },
-                      {
-                        id: "energy4",
-                        name: "Red Bull Sugar Free Energy Drink 250ml x4",
-                        price: "£7.99",
-                        image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/6%20Energy%20Drinks/4%20-%20Red%20Bull%20Sugar%20Free%20Energy%20Drink%20250ml%20x4.jpeg"
-                      },
-                      {
-                        id: "rb11",
-                        name: "Red Bull Winter Edition Sugar Free Energy Drink 250ml x 4",
-                        price: "£7.99",
-                        image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Red%20Bull%20Products/ALL/11%20-%20Red%20Bull%20Winter%20Edition%20Sugar%20Free%20Energy%20Drink%20250ml%20x%204.jpg"
-                      },
-                      {
-                        id: "new1",
-                        name: "Red Bull Lilac Edition Sugar Free Energy Drink 4x250ml",
-                        price: "£9.99",
-                        image: "https://ytmpkdrfujdbfkfhnimq.supabase.co/storage/v1/object/public/Food%20Delivery%20Assets/products/Categories/12%20New%20Products/Image%201%20-%20Red%20Bull%20Lilac%20Edition%20Sugar%20Free%20Energy%20Drink%204x250ml.jpg"
-                      }
-                    ]}
-                    favorites={favoritesSet}
-                    onToggleFavorite={toggleFavoriteById}
-                  />
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -231,7 +160,7 @@ const Index = () => {
                      onToggleFavorite={() => toggleFav(product)}
                      onAddToCart={() => handleAddToCart(product)}
                      productId={product.id}
-                     isNewArrival={isShopNewProduct(product.id)}
+                     isNewArrival={isNewArrival(product)}
                    />
                  ))}
               </div>

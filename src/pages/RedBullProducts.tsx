@@ -7,7 +7,7 @@ import { useFavorites } from "@/contexts/FavoritesContext";
 import { useBasket } from "@/contexts/BasketContext";
 import { useToast } from "@/hooks/use-toast";
 import { useProducts } from "@/components/ProductSection";
-import { isShopNewProduct } from "@/lib/product-utils";
+import { isNewArrival } from "@/lib/product-utils";
 
 const RedBullProducts = () => {
   const navigate = useNavigate();
@@ -15,36 +15,20 @@ const RedBullProducts = () => {
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
   const { addItem } = useBasket();
   const { toast } = useToast();
-  const { products: productsData } = useProducts();
+  const { allProducts } = useProducts();
 
   // Get the path where user came from, fallback to /quickmart
   const fromPath = location.state?.fromPath || '/quickmart';
 
-  // Get all Red Bull products from various categories
+  // Every Red Bull line in the catalogue, whichever categories it sits in.
+  // This used to trawl a fixed list of category keys, which silently returned
+  // nothing once the 2026 catalogue replaced that taxonomy.
   const getAllRedBullProducts = () => {
-    if (!productsData) return [];
+    if (!allProducts) return [];
 
-    const allProducts = [
-      ...(productsData.redBull || []),
-      ...(productsData.energyDrinks || []).filter(product => 
-        product.name.toLowerCase().includes('red bull')
-      ),
-      ...(productsData.softDrinks || []).filter(product => 
-        product.name.toLowerCase().includes('red bull')
-      ),
-      ...(productsData.matchReady || []).filter(product => 
-        product.name.toLowerCase().includes('red bull')
-      ),
-      ...(productsData.favourites || []).filter(product => 
-        product.name.toLowerCase().includes('red bull')
-      ),
-      ...(productsData.shopNew || []).filter(product => 
-        product.name.toLowerCase().includes('red bull')
-      ),
-      ...(productsData.beverages || []).filter(product => 
-        product.name.toLowerCase().includes('red bull')
-      ),
-    ];
+    const products = allProducts.filter((product: any) =>
+      product.name?.toLowerCase().includes('red bull')
+    );
 
     // Remove duplicates with enhanced normalization for Red Bull products
     const normalize = (name: string) => {
@@ -60,10 +44,9 @@ const RedBullProducts = () => {
     };
     
     const map = new Map<string, any>();
-    for (const p of allProducts) {
+    for (const p of products) {
       const key = normalize(p.name);
-      const existing = map.get(key);
-      if (!existing || (p.category === 'redBull' && existing.category !== 'redBull')) {
+      if (!map.has(key)) {
         map.set(key, p);
       }
     }
@@ -142,7 +125,7 @@ const RedBullProducts = () => {
                  onToggleFavorite={() => toggleFavoriteById(product.id)}
                  onAddToCart={() => handleAddToCart(product)}
                  productId={product.id}
-                 isNewArrival={isShopNewProduct(product.id)}
+                 isNewArrival={isNewArrival(product)}
                />
             ))}
           </div>

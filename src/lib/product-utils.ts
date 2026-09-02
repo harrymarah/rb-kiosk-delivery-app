@@ -1,12 +1,8 @@
-// List of shop new product IDs
-const SHOP_NEW_PRODUCT_IDS = [
-  'new1', 'new2', 'new3', 'new4', 'new5', 
-  'new7', 'new8', 'new9', 'new10', 'new12'
-];
-
 /**
- * Checks if a product is from the "shop new" category
+ * "New Arrival" is carried on the product itself in the 2026 catalogue (the
+ * "Offer" column of the client's Catalogue information tab), so it no longer
+ * needs a hardcoded id list — the previous SHOP_NEW_PRODUCT_IDS list referred
+ * to the superseded catalogue and matched nothing once it was replaced.
  */
-export const isShopNewProduct = (productId: string): boolean => {
-  return SHOP_NEW_PRODUCT_IDS.includes(productId);
-};
+export const isNewArrival = (product?: { offer?: string } | null): boolean =>
+  product?.offer === 'New Arrival';
