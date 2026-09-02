@@ -39,6 +39,10 @@ All colors MUST be HSL.
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
+    /* Storefront hero, sampled from the Red Bull banner artwork */
+    --storefront: 249 100% 21%;
+    --storefront-tint: 0 80% 96%;
+
     --border: 220 13% 91%;
     --input: 220 13% 91%;
     --ring: 223 87% 44%;

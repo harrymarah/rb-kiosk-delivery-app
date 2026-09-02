@@ -38,9 +38,9 @@ const ProductSection = ({ title, products, favorites = new Set(), onToggleFavori
   return (
     <section className="px-4 py-4">
       <div className="container mx-auto max-w-4xl">
-        <h2 className="text-xl font-bold text-foreground mb-3">{title}</h2>
+        <h2 className="font-display text-xl font-extrabold tracking-tight text-foreground mb-3">{title}</h2>
         
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-3 gap-2">
           {products.map((product) => (
              <ProductCard
                key={product.id}

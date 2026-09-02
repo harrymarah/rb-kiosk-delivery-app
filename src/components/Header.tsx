@@ -7,7 +7,7 @@ import { useBasket } from "@/contexts/BasketContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import BasketDrawer from "./BasketDrawer";
 import FavoritesDrawer from "./FavoritesDrawer";
-import heroBanner from "@/assets/hero-banner-long.png";
+import heroBanner from "@/assets/hero-banner-storefront.png";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -28,12 +28,9 @@ const Header = () => {
   };
 
   return (
-    <header className="min-h-[168px] relative overflow-hidden bg-cover bg-center bg-no-repeat overflow-visible" style={{ backgroundImage: `url(${heroBanner})` }}>
-      {/* Subtle overlay for better button visibility */}
-      <div className="absolute inset-0 bg-black/20"></div>
-
-      <div className="relative z-10 container mx-auto px-4 py-5 h-full flex flex-col justify-center">
-        <div className="flex items-center justify-between gap-2 mb-4">
+    <header className="min-h-[200px] relative overflow-hidden bg-cover bg-center bg-no-repeat overflow-visible bg-storefront" style={{ backgroundImage: `url(${heroBanner})` }}>
+      <div className="relative z-10 container mx-auto px-4 py-4 h-full flex flex-col justify-center">
+        <div className="flex items-center justify-between gap-2 mb-2">
           <div className="flex items-center flex-1 min-w-0">
             <SearchBar />
           </div>
@@ -78,10 +75,10 @@ const Header = () => {
 
         <div className="text-center flex-1 flex items-center justify-center">
           <div>
-            <h1 className="text-3xl font-light text-brand-yellow mb-1 tracking-wider">
+            <h1 className="font-display text-4xl font-extrabold text-brand-yellow mb-0.5 tracking-tight">
               QuickMart
             </h1>
-            <p className="text-base font-light text-white tracking-wide">
+            <p className="font-display text-base font-semibold text-white/90 tracking-tight">
               Earlham Street
             </p>
           </div>

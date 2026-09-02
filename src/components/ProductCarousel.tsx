@@ -63,7 +63,7 @@ const ProductCarousel = ({ title, icon, products, favorites = new Set(), onToggl
           {/* Arrows sit beside the title so they never cover the cards. */}
           <div className="flex items-center justify-between gap-2 mb-3">
             {title ? (
-              <h2 className="flex items-center gap-2 text-xl font-bold text-foreground">
+              <h2 className="flex items-center gap-2 font-display text-xl font-extrabold tracking-tight text-foreground">
                 {icon && <span aria-hidden="true" className="text-primary">{icon}</span>}
                 {title}
               </h2>
@@ -86,7 +86,7 @@ const ProductCarousel = ({ title, icon, products, favorites = new Set(), onToggl
 
           <CarouselContent className="-ml-2 md:-ml-4">
             {products.map((product) => (
-              <CarouselItem key={product.id} className="pl-2 md:pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
+              <CarouselItem key={product.id} className="pl-2 md:pl-4 basis-1/3">
                 <div className="h-full">
                   <ProductCard
                     image={product.image}

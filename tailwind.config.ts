@@ -20,8 +20,14 @@ export default {
 		extend: {
 			fontFamily: {
 				'sans': ['Lato', 'system-ui', 'sans-serif'],
+				// Storefront headings: a bolder, more modern grotesque than Lato.
+				'display': ['Archivo', 'Lato', 'system-ui', 'sans-serif'],
 			},
 			colors: {
+				storefront: {
+					DEFAULT: 'hsl(var(--storefront))',
+					tint: 'hsl(var(--storefront-tint))'
+				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

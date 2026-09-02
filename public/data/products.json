@@ -47,7 +47,9 @@
       ],
       "ranks": {
         "offers": 1
-      }
+      },
+      "originalPrice": "£6.25",
+      "discountPercent": 5
     },
     {
       "id": "buzzballz-berry-cherry-limeade-200ml",
@@ -140,7 +142,9 @@
       ],
       "ranks": {
         "offers": 2
-      }
+      },
+      "originalPrice": "£5.75",
+      "discountPercent": 17
     },
     {
       "id": "evian-natural-bottled-mineral-still-water-6-x-1-5l",
@@ -251,7 +255,9 @@
         "newIn": 5,
         "healthWellness": 3
       },
-      "offer": "New Arrival"
+      "offer": "New Arrival",
+      "originalPrice": "£6.00",
+      "discountPercent": 4
     },
     {
       "id": "red-bull-energy-drink-cherry-edition-4-x-250ml",
@@ -280,7 +286,9 @@
       ],
       "ranks": {
         "offers": 3
-      }
+      },
+      "originalPrice": "£10.95",
+      "discountPercent": 32
     },
     {
       "id": "budweiser-lager-beer-12-x-300ml",
@@ -376,7 +384,9 @@
       "ranks": {
         "favourites": 5,
         "offers": 5
-      }
+      },
+      "originalPrice": "£2.35",
+      "discountPercent": 19
     },
     {
       "id": "hip-pop-4-x-330ml-yellow-sun-lemonade-cans",
@@ -429,7 +439,9 @@
       ],
       "ranks": {
         "offers": 6
-      }
+      },
+      "originalPrice": "£11.00",
+      "discountPercent": 18
     },
     {
       "id": "pot-noodle-chicken-mushroom-instant-noodles-king-pot-114g",

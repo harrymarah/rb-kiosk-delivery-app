@@ -4,7 +4,7 @@ const WelcomeSection = () => {
   return (
     <section className="bg-background px-4 py-5">
       <div className="container mx-auto max-w-4xl">
-        <h2 className="text-xl font-bold text-foreground mb-4">
+        <h2 className="font-display text-xl font-extrabold tracking-tight text-foreground mb-4">
           Welcome to QuickMart, Earlham Street
         </h2>
 
