@@ -49,7 +49,8 @@
         "offers": 1
       },
       "originalPrice": "£6.25",
-      "discountPercent": 5
+      "discountPercent": 5,
+      "originalPriceSource": "2026 .com list"
     },
     {
       "id": "buzzballz-berry-cherry-limeade-200ml",
@@ -144,7 +145,8 @@
         "offers": 2
       },
       "originalPrice": "£5.75",
-      "discountPercent": 17
+      "discountPercent": 17,
+      "originalPriceSource": "2026 .com list"
     },
     {
       "id": "evian-natural-bottled-mineral-still-water-6-x-1-5l",
@@ -257,7 +259,8 @@
       },
       "offer": "New Arrival",
       "originalPrice": "£6.00",
-      "discountPercent": 4
+      "discountPercent": 4,
+      "originalPriceSource": "2026 .com list"
     },
     {
       "id": "red-bull-energy-drink-cherry-edition-4-x-250ml",
@@ -288,7 +291,8 @@
         "offers": 3
       },
       "originalPrice": "£10.95",
-      "discountPercent": 32
+      "discountPercent": 32,
+      "originalPriceSource": "2026 .com list"
     },
     {
       "id": "budweiser-lager-beer-12-x-300ml",
@@ -341,7 +345,10 @@
       "ranks": {
         "offers": 4,
         "mostPopular": 7
-      }
+      },
+      "originalPrice": "£13.50",
+      "discountPercent": 15,
+      "originalPriceSource": "estimated"
     },
     {
       "id": "red-bull-energy-drink-4-x-250ml",
@@ -370,7 +377,10 @@
         "newIn": 8,
         "healthWellness": 4
       },
-      "offer": "New Arrival"
+      "offer": "New Arrival",
+      "originalPrice": "£6.00",
+      "discountPercent": 17,
+      "originalPriceSource": "estimated"
     },
     {
       "id": "happy-egg-free-range-eggs-medium-6-pack",
@@ -386,7 +396,8 @@
         "offers": 5
       },
       "originalPrice": "£2.35",
-      "discountPercent": 19
+      "discountPercent": 19,
+      "originalPriceSource": "2026 .com list"
     },
     {
       "id": "hip-pop-4-x-330ml-yellow-sun-lemonade-cans",
@@ -441,7 +452,8 @@
         "offers": 6
       },
       "originalPrice": "£11.00",
-      "discountPercent": 18
+      "discountPercent": 18,
+      "originalPriceSource": "2026 .com list"
     },
     {
       "id": "pot-noodle-chicken-mushroom-instant-noodles-king-pot-114g",
@@ -501,7 +513,10 @@
       ],
       "ranks": {
         "offers": 9
-      }
+      },
+      "originalPrice": "£3.25",
+      "discountPercent": 18,
+      "originalPriceSource": "estimated"
     },
     {
       "id": "heinz-curry-tomato-ketchup-570g",
@@ -513,7 +528,10 @@
       ],
       "ranks": {
         "offers": 10
-      }
+      },
+      "originalPrice": "£7.00",
+      "discountPercent": 14,
+      "originalPriceSource": "estimated"
     },
     {
       "id": "nightingale-farms-cherry-tomatoes-250g",
