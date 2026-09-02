@@ -2,14 +2,14 @@ import { Star, Truck, ReceiptPoundSterling } from 'lucide-react'
 
 const WelcomeSection = () => {
   return (
-    <section className="bg-background px-4 py-5">
+    <section className="bg-background px-4 py-3">
       <div className="container mx-auto max-w-4xl">
-        <h2 className="font-display text-xl font-extrabold tracking-tight text-foreground mb-4">
+        <h2 className="font-display text-xl font-medium tracking-tight text-foreground mb-2">
           Welcome to QuickMart, Earlham Street
         </h2>
 
-        <div className="flex flex-col gap-2.5 mb-2">
-          <div className="flex items-center gap-2.5">
+        <div className="flex flex-col gap-1.5">
+          <div className="flex items-center gap-2">
             <Star className="h-5 w-5 shrink-0 text-primary fill-primary" />
             <div>
               <span className="text-sm font-bold text-primary">4.8</span>
@@ -17,7 +17,7 @@ const WelcomeSection = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2">
             <Truck className="h-5 w-5 shrink-0 text-primary" />
             <div>
               <span className="text-sm text-foreground">Deliver in</span>
@@ -27,7 +27,7 @@ const WelcomeSection = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2">
             <ReceiptPoundSterling className="h-5 w-5 shrink-0 text-primary" />
             <div>
               <span className="text-sm text-foreground">Minimum order</span>
